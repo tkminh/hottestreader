@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".MainActivity" >
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent" >
+        <RadioGroup
+            android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            >
+            <RadioButton
+                android:id="@+id/turnInstant"
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:text="Instant"
+                />
+            <RadioButton
+                android:id="@+id/turnSlide"
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:text="Slide"
+                />
+            <RadioButton
+                android:id="@+id/turnScroll"
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:text="Scroll"
+                />
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>
