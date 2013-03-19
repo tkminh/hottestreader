@@ -11,11 +11,14 @@
         android:id="@+id/btnBrowse"
         android:text="Select an epub file"
         android:onClick="openFileChooser"
+        android:layout_alignParentTop="true"
         />
 
     <TableLayout  
         android:layout_width="fill_parent" 
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnBrowse"
+        android:id="@+id/tblAdView">
         <TableRow>
             <com.google.ads.AdView
 		        android:id="@+id/adView"
@@ -32,7 +35,7 @@
     <ListView 
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/btnBrowse"
+        android:layout_below="@id/tblAdView"
         android:choiceMode="singleChoice"
         android:id="@+id/bookList"
         ></ListView>

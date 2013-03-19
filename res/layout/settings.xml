@@ -5,10 +5,18 @@
     tools:context=".MainActivity" >
     <LinearLayout 
         android:layout_width="match_parent"
-    	android:layout_height="match_parent" >
+    	android:layout_height="match_parent"
+    	android:orientation="vertical" >
+    	<TextView 
+    	    android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            android:text="@string/turnPageEffect"
+            android:layout_margin="10dp"
+    	    />
         <RadioGroup
             android:layout_width="match_parent" 
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             >
             <RadioButton
                 android:id="@+id/turnInstant"
@@ -27,6 +35,38 @@
                 android:layout_width="match_parent" 
                 android:layout_height="wrap_content"
                 android:text="Scroll"
+                />
+        </RadioGroup>
+        <TextView 
+    	    android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            android:text="@string/selectFont"
+            android:layout_margin="10dp"
+    	    />
+        <RadioGroup
+            android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            >
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:text="Arial"
+                />
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:text="Tahoma"
+                />
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:text="Times New Roman"
+                />
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:text="Verdana"
                 />
         </RadioGroup>
     </LinearLayout>
