@@ -37,6 +37,8 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/tblAdView"
         android:choiceMode="singleChoice"
+        android:divider="@layout/listdivider"
+        android:dividerHeight="5dp"
         android:id="@+id/bookList"
         ></ListView>
 </RelativeLayout>

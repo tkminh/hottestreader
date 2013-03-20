@@ -53,6 +53,7 @@ public class BookListAdapter extends BaseAdapter {
 			holder.imageView = (ImageView)convertView.findViewById(R.id.img_bookList_item_thumnail);
 			holder.tvTitle=(TextView)convertView.findViewById(R.id.tv_booklist_item_title);
 			holder.tvAuthor=(TextView)convertView.findViewById(R.id.tv_booklist_item_author);
+			holder.imgMore= (ImageView)convertView.findViewById(R.id.imgMore);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -77,5 +78,6 @@ public class BookListAdapter extends BaseAdapter {
 		ImageView imageView;
 		TextView tvTitle;
 		TextView tvAuthor;
+		ImageView imgMore;
 	}
 }
