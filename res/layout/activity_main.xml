@@ -22,12 +22,17 @@
     
     
 	
-	<LinearLayout 
+	<RelativeLayout 
 	    android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/listTitle"
-	        android:background="@layout/background"
+	        
 	    >
+	    <ImageView 
+	         android:layout_width="fill_parent"
+	        android:layout_height="110dp"
+	        android:background="@drawable/listtopbg"
+	        />
 	    <ListView 
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
@@ -37,7 +42,7 @@
 	        android:divider="@layout/listdivider"
 	        android:cacheColorHint="#00000000"
 	        ></ListView>
-   </LinearLayout>
+   </RelativeLayout>
 	    
     <TableLayout  
         android:layout_width="fill_parent" 
