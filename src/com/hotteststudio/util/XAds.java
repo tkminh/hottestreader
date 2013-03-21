@@ -22,8 +22,9 @@ public class XAds {
 			
 			public void onReceiveAd(Ad arg0) {
 				// TODO Auto-generated method stub
-				adView.setPadding(5, 5, 5, 5);
-		        adView.setBackgroundColor(Color.parseColor("#a54bff"));
+				adView.setPadding(2, 0, 2, 0);
+		        //adView.setBackgroundColor(Color.parseColor("#a54bff"));
+				adView.setBackgroundColor(Color.BLACK);
 		        Log.d("quang cao","received");
 			}
 			

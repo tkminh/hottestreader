@@ -5,20 +5,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <Button 
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:id="@+id/btnBrowse"
-        android:text="Select an epub file"
-        android:onClick="openFileChooser"
-        android:layout_alignParentTop="true"
-        />
-
+    
+	<LinearLayout 
+	    android:layout_width="match_parent"
+    	android:layout_height="70dp"
+    	android:id="@+id/listTitle"
+    	android:background="@drawable/listtitle"
+	    >
+	    <ImageView 
+	        android:layout_width="match_parent"
+    		android:layout_height="30dp"
+    		android:layout_margin="20dp"
+    		android:background="@drawable/title"
+	        />
+	</LinearLayout>
+    
+    
+	
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/listTitle"
+	        android:background="@layout/background"
+	    >
+	    <ListView 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:choiceMode="singleChoice"
+	        android:dividerHeight="10dp"
+	        android:id="@+id/bookList"
+	        android:divider="@layout/listdivider"
+	        android:cacheColorHint="#00000000"
+	        ></ListView>
+   </LinearLayout>
+	    
     <TableLayout  
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnBrowse"
+        android:layout_alignParentBottom="true"
         android:id="@+id/tblAdView">
+        
+        <TableRow>
+            <Button 
+	        android:layout_width="fill_parent"
+	        android:layout_height="50dp"
+	        android:id="@+id/btnBrowse"
+	        android:text="Select an epub file"
+	        android:onClick="openFileChooser"
+	        
+	        />
+        </TableRow>
+        
         <TableRow>
             <com.google.ads.AdView
 		        android:id="@+id/adView"
@@ -31,14 +68,4 @@
 			</com.google.ads.AdView>
         </TableRow>
     </TableLayout>
-    
-    <ListView 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/tblAdView"
-        android:choiceMode="singleChoice"
-        android:divider="@layout/listdivider"
-        android:dividerHeight="5dp"
-        android:id="@+id/bookList"
-        ></ListView>
 </RelativeLayout>
