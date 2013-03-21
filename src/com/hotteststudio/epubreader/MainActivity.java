@@ -1,7 +1,12 @@
 package com.hotteststudio.epubreader;
 
+import group.pals.android.lib.ui.filechooser.FileChooserActivity;
+import group.pals.android.lib.ui.filechooser.io.localfile.LocalFile;
+import group.pals.android.lib.ui.filechooser.services.IFileProvider;
+
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +14,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,6 +45,8 @@ public class MainActivity extends Activity {
 	public BookListAdapter bookAdapater;
 	
 	public AdView adView;
+	
+	private static final int _ReqChooseFile = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,23 +122,29 @@ public class MainActivity extends Activity {
 	}
 	
 	private void showFileChooser() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
-        intent.setType("file/*"); 
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-    
-        try {
-            startActivityForResult(
-                    Intent.createChooser(intent, "Select an epub file"),
-                    FILE_SELECT_CODE);
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
-        }
+		Intent intent = new Intent(getApplicationContext(), FileChooserActivity.class);
+		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/"));
+		intent.putExtra(FileChooserActivity._MultiSelection, false);
+		intent.putExtra(FileChooserActivity._RegexFilenameFilter, "(?si).*\\.(epub)$");
+		startActivityForResult(intent, _ReqChooseFile);
+		
+//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
+//        intent.setType("file/*"); 
+//        intent.addCategory(Intent.CATEGORY_OPENABLE);
+//    
+//        try {
+//            startActivityForResult(
+//                    Intent.createChooser(intent, "Select an epub file"),
+//                    FILE_SELECT_CODE);
+//        } catch (android.content.ActivityNotFoundException ex) {
+//            Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
+//        }
     }
 	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case FILE_SELECT_CODE:      
+            /*case FILE_SELECT_CODE:      
             	try {
 		            if (resultCode == RESULT_OK) {  
 		                // Get the Uri of the selected file 
@@ -149,6 +163,37 @@ public class MainActivity extends Activity {
 		                }
 		                //Log.d("po tay", "File Name: " + file.getParent() + " > " + file.getAbsolutePath());
 		            }        
+            	} catch (Exception e) {
+            		e.printStackTrace();
+            	}
+            break;*/
+            case _ReqChooseFile:
+            	try {
+		            if (resultCode == RESULT_OK) {  
+		            	/*
+		                 * you can use two flags included in data
+		                 */
+		                IFileProvider.FilterMode filterMode = (IFileProvider.FilterMode)
+		                    data.getSerializableExtra(FileChooserActivity._FilterMode);
+		                boolean saveDialog = data.getBooleanExtra(FileChooserActivity._SaveDialog, false);
+
+		                /*
+		                 * a list of files will always return,
+		                 * if selection mode is single, the list contains one file
+		                 */
+		                List<LocalFile> files = (List<LocalFile>)data.getSerializableExtra(FileChooserActivity._Results);
+		                
+		                for (File file : files) {
+		                	//File file = new File(path);
+			                if (file.getName().endsWith(".epub")) {
+		            			Intent reader = new Intent(this,Reader.class);
+		            			reader.putExtra("epubPath", file.getPath());
+		            			this.startActivity(reader);
+			                } else {
+			                	Toast.makeText(this, "Error: Wrong format file.", Toast.LENGTH_LONG).show();
+			                }
+		                }
+		            }
             	} catch (Exception e) {
             		e.printStackTrace();
             	}
