@@ -4,10 +4,10 @@
     <item>
         <shape>
             <solid android:color="#490000" />
-            <size android:height="9dp" />
+            <size android:height="5dp" />
         </shape>
     </item>
-    <item android:top="9dp">
+    <item android:top="5dp">
         <shape>
         	 <solid android:color="#bd0000"/>
         	 <size android:height="1dp" />

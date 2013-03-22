@@ -307,6 +307,14 @@ public class GenBookHTML {
 			Log.d("mm", "@@@ " + finalPath + str);
 		}
 		
+		Elements elesXHref = doc.getElementsByTag("image");
+		for (Element element : elesXHref) {
+			String str = element.attr("xlink:href");
+			str = str.substring(str.lastIndexOf("/"));
+			element.attr("src", finalPath + str);
+			Log.d("mm", "@@@ " + finalPath + str);
+		}
+		
 		return html;
 	}
 	
@@ -329,9 +337,12 @@ public class GenBookHTML {
 	        	
 	        	content = content.replace("alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (finalPath + folderName + "/") );
 	        	
-	        	//Document doc = Jsoup.parse(content);
-			    //String content2 = doc.getElementsByTag("body").html();
+	        	Document doc = Jsoup.parse(content);
+			    String content2 = doc.getElementsByTag("body").html();
 	        	
+			    // xu li charset, css o day 
+			    // <meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>
+			    
 	        	arrSrc.add(href);
 	        	arrTitle.add(title);
 	        	// remove later
@@ -351,8 +362,8 @@ public class GenBookHTML {
 	    			
 	    			
 	    			BufferedWriter writer = new BufferedWriter(f);
-	    			writer.write(content); // do xu li cai vu remove the html thua`
-	    			//writer.write(content2);
+	    			//writer.write(content); // do xu li cai vu remove the html thua`
+	    			writer.write(content2);
 	    			writer.close();
 
 	    		} catch (Exception e) {

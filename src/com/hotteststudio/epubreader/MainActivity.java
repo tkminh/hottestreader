@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
 	
 	private void showFileChooser() {
 		Intent intent = new Intent(getApplicationContext(), FileChooserActivity.class);
-		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/"));
+		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/sdcard/"));
 		intent.putExtra(FileChooserActivity._MultiSelection, false);
 		intent.putExtra(FileChooserActivity._RegexFilenameFilter, "(?si).*\\.(epub)$");
 		startActivityForResult(intent, _ReqChooseFile);
