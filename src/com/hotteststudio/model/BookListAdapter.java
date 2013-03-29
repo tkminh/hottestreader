@@ -64,6 +64,7 @@ public class BookListAdapter extends BaseAdapter {
 			holder.tvTitle.setText(entry.title);
 			String temp = entry.path.substring(entry.path.lastIndexOf("/")+1);
 			String fileName = XCommon.getRootPath() + temp.replaceAll(".epub", "")  + "/Images/" + entry.coverImg;
+			//String fileName = XCommon.getRootPath() + temp.replaceAll(".epub", "")  + "/" + entry.coverImg;
 			holder.imageView.setImageBitmap(BitmapFactory.decodeFile(fileName));
 			
 			Log.d("fak","file: " + fileName);

@@ -20,7 +20,7 @@
             android:layout_width="40dp"
             android:layout_height="120dp"
             android:layout_alignParentRight="true"
-            
+            android:id="@+id/layout_imgMore"
             >
 		    <ImageView
 		        android:id="@+id/imgMore"
@@ -42,7 +42,7 @@
 	        android:layout_marginLeft="10dp"
 	        
 	        android:layout_toRightOf="@id/img_bookList_item_thumnail" 
-	        android:layout_toLeftOf="@id/imgMore"
+	        android:layout_toLeftOf="@id/layout_imgMore"
 	        android:layout_marginRight="10dp"
 	        >
 

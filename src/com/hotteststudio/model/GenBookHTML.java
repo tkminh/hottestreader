@@ -421,6 +421,8 @@ public class GenBookHTML {
 		
 		if (metadata.getCoverImage() != null)
 		bm.coverImg = metadata.getCoverImage().getHref();
+		bm.coverImg = bm.coverImg.substring(bm.coverImg.lastIndexOf("/")+1);
+		//Log.i("hihi",">> " + bm.coverImg);
 		
 		if (metadata.getAuthors().size()>0)
 		bm.author = metadata.getAuthors().get(0).getFirstname() + " " + metadata.getAuthors().get(0).getLastname();
