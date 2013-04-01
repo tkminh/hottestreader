@@ -60,6 +60,7 @@ public class XAds {
 				public void run() {
 					AdRequest request = new AdRequest();
 					request.setTesting(true);
+					request.addTestDevice("5AA908BF9DFBF93EB786BD3F55E43AD7");
 					adView.loadAd(request);
 					handle.postDelayed(this, 10000);
 				}

@@ -9,11 +9,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Identifier;
 import nl.siegmann.epublib.domain.MediaType;
@@ -25,6 +20,12 @@ import nl.siegmann.epublib.domain.SpineReference;
 import nl.siegmann.epublib.domain.TOCReference;
 import nl.siegmann.epublib.epub.EpubReader;
 import nl.siegmann.epublib.service.MediatypeService;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -79,7 +80,8 @@ public class GenBookHTML {
 		protected Void doInBackground(Void... params) {
 			loadImage();
 			extractHTML();
-			finalHTML = new StringBuilder(genHTML());
+			//finalHTML = new StringBuilder(genHTML());
+			finalHTML = genEbookHTML();
 			finalHTML = new StringBuilder(decodeHTML(finalHTML.toString()));
 			saveToFile();
 			return null;
@@ -410,6 +412,94 @@ public class GenBookHTML {
 	    }
 	  }
 	
+	
+	// xu li epub file o day
+	
+	public StringBuilder genEbookHTML() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<head>"); 
+		sb.append("<meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>");
+		sb.append("\n<script src=\"file:///android_asset/monocore.js\"></script>");
+		sb.append("\n<script src=\"file:///android_asset/rangy-core.js\"></script>");
+		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monocore.css\" />");
+		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monoctrl.css\" />");
+		sb.append("\n<style type=\"text/css\">");
+		sb.append("#reader { background-color: #CCC; }");
+		sb.append("body * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important;}");
+	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}");
+	    sb.append("body h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
+	    sb.append("p {margin-top: 1em !important;}");
+	    
+	    sb.append("</style>");
+	    
+	    sb.append("<script type=\"text/javascript\">");
+	    sb.append("Monocle.DEBUG = true;Monocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader'); });");
+	    sb.append("</script>");
+
+	    sb.append("</head>");
+	    sb.append( "<body><div id=\"reader\">");
+	    sb.append( fullContent() );
+	    sb.append( "</div></body>");	
+			    
+		return sb;
+	}
+	
+	public StringBuilder fullContent() {
+		StringBuilder temp = new StringBuilder();
+		try {
+			int i = 0;
+			for (SpineReference bookSection : spine.getSpineReferences()) {
+				i++; 
+			    Resource res = bookSection.getResource();
+			    
+			   
+			    StringBuilder content = new StringBuilder();
+			    content.append(new String(res.getData(), "UTF-8"));
+	        	
+			    replaceAll(content, "%20", " ");
+			    replaceAll(content, "alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (XCommon.getRootPath() + folderName + "/"));
+			    
+			    // xu li vu chi lay body content
+			    Document doc = Jsoup.parse(content.toString());
+			    StringBuilder content2 = new StringBuilder( doc.getElementsByTag("body").html() );
+			   
+	        	StringBuilder nameid = new StringBuilder();
+	        	nameid.append(res.getHref());
+			    replaceAll(nameid, "/", "");
+			    replaceAll(nameid, " ", "");
+			    replaceAll(nameid, ".xhtml", "");
+			    replaceAll(nameid, ".html", "");
+			    replaceAll(nameid, ".htm", "");
+			    replaceAll(nameid, ".", "");
+			    Log.d("here", ">>" + nameid);
+			    
+	        	temp.append("<div class='chapter-container'>");
+	        	
+	        		//temp.append("<a href='#' id='" + nameid + "'></a><a href='#'></a>");
+	        		temp.append(content);
+	        		//Log.d("minh content " + nameid, ">>" + content2);
+	        		//temp.append("hjhjhjh<br/><br/><br/><br/><br/><br/>"); // xu li vu chi lay body content
+	        	temp.append("</div>");
+	        	Log.d("string >>" + i , ">>>" + temp.length());
+	        	//Log.d("ssss " + i, "chapterid :::: " + res.getHref());
+			}
+			Log.d("final string >>" , ">>>" + temp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return temp;
+	}
+	
+	private void replaceAll(StringBuilder builder, String from, String to)
+	{
+	    int index = builder.indexOf(from);
+	    while (index != -1)
+	    {
+	        builder.replace(index, index + from.length(), to);
+	        index += to.length(); 
+	        index = builder.indexOf(from, index);
+	    }
+	}
 	
 	// lay ve thong tin metadata cua sach
 	public EpubInfo getBookInfo() {
