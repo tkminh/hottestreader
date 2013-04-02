@@ -454,28 +454,47 @@ public class GenBookHTML {
 		//StringBuilder content = fullContent();
 		
 		sb.append("<head>"); 
-		sb.append("<meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>");
+		sb.append("\n<meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>");
 		sb.append("\n<script src=\"file:///android_asset/monocore.js\"></script>");
 		sb.append("\n<script src=\"file:///android_asset/monoctrl.js\"></script>");
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monocore.css\" />");
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monoctrl.css\" />");
 		sb.append("\n<style type=\"text/css\">");
-		sb.append("#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; }");
+		sb.append("\n#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; }");
 		sb.append(styleChapter);
-		sb.append("body * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important;}");
+		sb.append("\nbody * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important;}");
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}");
-	    sb.append("body h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
-	    sb.append("p {margin-top: 1em !important;}");
+	    sb.append("\nbody h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
+	    sb.append("\np {margin-top: 1em !important;}");
 	    
-	    sb.append("</style>");
+	    sb.append("\n</style>");
 	    
-	    sb.append("<script type=\"text/javascript\">");
-	    sb.append("var bookData = Monocle.bookDataFromIds([" + bookData  + "]);");
-	    sb.append("Monocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider }); });");
-	    sb.append("</script>");
+	    sb.append("\n<script type=\"text/javascript\">");
+	    sb.append("\nvar scrubber;");
+	    sb.append("\nvar toc;");
+	    sb.append("\nvar magnifier;");
+	    sb.append("\n");
+	    sb.append("\nvar bookData = Monocle.bookDataFromIds([" + bookData  + "]);");
+	    //sb.append("\nMonocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider }); });");
+	    sb.append("\nMonocle.Events.listen(window,'load',function () {");
+	    sb.append("\nvar placeSaver = new Monocle.Controls.PlaceSaver('placesaver');");
+	    sb.append("\nMonocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider , place: placeSaver.savedPlace() } , ");
+	    sb.append("\nfunction (rdr) {");
+	    sb.append("\nwindow.reader1 = rdr;");
+	    sb.append("\nmagnifier = new Monocle.Controls.Magnifier(rdr);");
+	    sb.append("\nrdr.addControl(magnifier, 'standard', { hidden: true });");
+	    sb.append("\nscrubber = new Monocle.Controls.Scrubber(rdr);");
+	    sb.append("\nrdr.addControl(scrubber, 'standard', { hidden: true });");
+	    sb.append("\ntoc = Monocle.Controls.Contents(rdr);");
+	    sb.append("\nrdr.addControl(toc, 'modal', { hidden: true });");
+	    sb.append("\nrdr.addControl(placeSaver, 'invisible');");
+	    sb.append("\n");
+	    sb.append("\n});");
+	    sb.append("\n);");
+	    sb.append("\n</script>");
 
-	    sb.append("</head>");
-	    sb.append( "<body><div id=\"reader\"></div>\n");
+	    sb.append("\n</head>");
+	    sb.append( "\n<body>\n<div id=\"reader\"></div>\n");
 	    
 	    saveTextToFile(sb.toString(), true);
 	    fullContent();
