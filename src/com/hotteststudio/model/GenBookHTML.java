@@ -43,9 +43,10 @@ public class GenBookHTML {
 	
 	// content of epub
 	public StringBuilder finalHTML;
-	public String allcontent = "";
-	public String bookData = "";
+	public String allcontent = "";	
 	public String folderName = "";
+	public String styleChapter = "";
+	public String bookData = "";
 	
 	public ArrayList<String> arrSrc;
 	public ArrayList<String> arrTitle;
@@ -303,10 +304,15 @@ public class GenBookHTML {
 		Document doc = Jsoup.parse(html);
 		Elements eles = doc.getElementsByTag("img");
 		for (Element element : eles) {
-			String str = element.attr("src");
-			str = str.substring(str.lastIndexOf("/"));
-			element.attr("src", finalPath + str);
-			Log.d("mm", "@@@ " + finalPath + str);
+			try {
+				String str = element.attr("src");
+				Log.d("mm$$", "xxx " + str);
+				str = str.substring(str.lastIndexOf("/"));
+				element.attr("src", finalPath + str);
+				Log.d("mm", "@@@ " + finalPath + str);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		Elements elesXHref = doc.getElementsByTag("image");
@@ -417,14 +423,17 @@ public class GenBookHTML {
 	
 	public StringBuilder genEbookHTML() {
 		StringBuilder sb = new StringBuilder();
+		StringBuilder content = fullContent();
+		
 		sb.append("<head>"); 
 		sb.append("<meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>");
 		sb.append("\n<script src=\"file:///android_asset/monocore.js\"></script>");
-		sb.append("\n<script src=\"file:///android_asset/rangy-core.js\"></script>");
+		sb.append("\n<script src=\"file:///android_asset/monoctrl.js\"></script>");
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monocore.css\" />");
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monoctrl.css\" />");
 		sb.append("\n<style type=\"text/css\">");
-		sb.append("#reader { background-color: #CCC; }");
+		sb.append("#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; background-color: #CCC; }");
+		sb.append(styleChapter);
 		sb.append("body * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important;}");
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}");
 	    sb.append("body h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
@@ -433,13 +442,14 @@ public class GenBookHTML {
 	    sb.append("</style>");
 	    
 	    sb.append("<script type=\"text/javascript\">");
-	    sb.append("Monocle.DEBUG = true;Monocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader'); });");
+	    sb.append("var bookData = Monocle.bookDataFromIds([" + bookData  + "]);");
+	    sb.append("Monocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider }); });");
 	    sb.append("</script>");
 
 	    sb.append("</head>");
-	    sb.append( "<body><div id=\"reader\">");
-	    sb.append( fullContent() );
-	    sb.append( "</div></body>");	
+	    sb.append( "<body><div id=\"reader\"></div>");
+	    sb.append( content );
+	    sb.append( "</body>");	
 			    
 		return sb;
 	}
@@ -450,6 +460,7 @@ public class GenBookHTML {
 			int i = 0;
 			for (SpineReference bookSection : spine.getSpineReferences()) {
 				i++; 
+				
 			    Resource res = bookSection.getResource();
 			    
 			   
@@ -473,20 +484,25 @@ public class GenBookHTML {
 			    replaceAll(nameid, ".", "");
 			    Log.d("here", ">>" + nameid);
 			    
-	        	temp.append("<div class='chapter-container'>");
+			    String strChapID = "chap" + i;
+	        	temp.append("<div id=\"" + strChapID  + "\" class='chapter-container'>");
 	        	
 	        		//temp.append("<a href='#' id='" + nameid + "'></a><a href='#'></a>");
-	        		temp.append(content);
+	        		//temp.append(content);
 	        		//Log.d("minh content " + nameid, ">>" + content2);
-	        		//temp.append("hjhjhjh<br/><br/><br/><br/><br/><br/>"); // xu li vu chi lay body content
+	        		temp.append("hjhjhjh<br/><br/><br/><br/><br/><br/>"); // xu li vu chi lay body content
 	        	temp.append("</div>");
 	        	Log.d("string >>" + i , ">>>" + temp.length());
+	        	styleChapter = styleChapter + "#" + strChapID + ",";
+	        	bookData = bookData + "'" + strChapID + "', ";
 	        	//Log.d("ssss " + i, "chapterid :::: " + res.getHref());
 			}
 			Log.d("final string >>" , ">>>" + temp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		styleChapter = styleChapter + "#chapID {display: none;}";
 		return temp;
 	}
 	
