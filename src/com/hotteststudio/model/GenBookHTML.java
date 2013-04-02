@@ -460,7 +460,7 @@ public class GenBookHTML {
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monocore.css\" />");
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monoctrl.css\" />");
 		sb.append("\n<style type=\"text/css\">");
-		sb.append("#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; background-color: #CCC; }");
+		sb.append("#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; }");
 		sb.append(styleChapter);
 		sb.append("body * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important;}");
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}");
@@ -475,13 +475,13 @@ public class GenBookHTML {
 	    sb.append("</script>");
 
 	    sb.append("</head>");
-	    sb.append( "<body><div id=\"reader\"></div>");
+	    sb.append( "<body><div id=\"reader\"></div>\n");
 	    
 	    saveTextToFile(sb.toString(), true);
 	    fullContent();
 	    //sb.append( content );
 	    //sb.append( "</body>");	
-	    saveTextToFile("</body>", true);	
+	    saveTextToFile("\n</body>", true);	
 	    
 		return sb;
 	}
@@ -534,16 +534,18 @@ public class GenBookHTML {
 			    //Log.d("here", ">>" + nameid);
 			    StringBuilder strData = new StringBuilder();
 			    String strChapID = "chap" + i;
-			    strData.append("<div id=\"" + strChapID  + "\" class='chapter-container'>");
-	        	strData.append(decodeHTML(content2.toString()));
+			    //strData.append("\n<div id=\"" + strChapID  + "\" class='chapter-container'>");
+			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container'>\n", true);
+	        	//strData.append(decodeHTML(content2.toString()));
 	        	//strData.append(content2);
 	        		
-			    strData.append("</div>");
+			    //strData.append("\n</div>");
 	        	//Log.d("string >>" + i , ">>>" + temp.length());
 	        	//styleChapter = styleChapter + "#" + strChapID + ",";
 	        	//bookData = bookData + "'" + strChapID + "', ";
 	        	//Log.d("ssss " + i, "chapterid :::: " + res.getHref());
-	        	saveTextToFile(strData.toString(), true);
+	        	saveTextToFile(decodeHTML(content2.toString()), true);
+	        	saveTextToFile("\n</div>", true);
 			}
 			Log.d("final string >>" , ">>>" + temp);
 		} catch (Exception e) {
