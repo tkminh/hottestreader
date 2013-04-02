@@ -47,6 +47,7 @@ public class GenBookHTML {
 	public String folderName = "";
 	public String styleChapter = "";
 	public String bookData = "";
+	public String finalPathFile = "";
 	
 	public ArrayList<String> arrSrc;
 	public ArrayList<String> arrTitle;
@@ -67,6 +68,9 @@ public class GenBookHTML {
 			arrSrc = new ArrayList<String>();
 			arrTitle = new ArrayList<String>();
 			
+			finalPathFile = XCommon.getRootPath() + folderName + "/epubtemp.html";
+			
+			
 			LoadEpub load = new LoadEpub();
 			load.execute();
 			
@@ -79,12 +83,20 @@ public class GenBookHTML {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			loadImage();
-			//extractHTML();
-			//finalHTML = new StringBuilder(genHTML());
-			finalHTML = genEbookHTML();
-			finalHTML = new StringBuilder(decodeHTML(finalHTML.toString()));
-			saveToFile();
+			try {
+				
+				loadImage();
+				//extractHTML();
+				getChapterConfig();
+				
+				//finalHTML = new StringBuilder(genHTML());
+				genEbookHTML();
+				//finalHTML = genEbookHTML();
+				//finalHTML = new StringBuilder(decodeHTML(finalHTML.toString()));
+				//saveToFile();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return null;
 		}
 
@@ -92,7 +104,7 @@ public class GenBookHTML {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			Reader.progressDialog.dismiss();
-			Reader.webview.loadUrl("file://" + XCommon.getRootPath() + folderName + "/epubtemp.html");
+			Reader.webview.loadUrl("file://" + finalPathFile);
 			
 			saveToRecentList();
 		}
@@ -419,11 +431,27 @@ public class GenBookHTML {
 	  }
 	
 	
+	public void saveTextToFile(String text, boolean append) {
+		try {
+			File f = new File(finalPathFile);
+			if (f.exists() == false) {
+				f.createNewFile();
+			}
+			FileWriter fw = new FileWriter(f, append);
+			BufferedWriter writer = new BufferedWriter(fw);
+			writer.write(text);
+			writer.flush();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// xu li epub file o day
 	
 	public StringBuilder genEbookHTML() {
 		StringBuilder sb = new StringBuilder();
-		StringBuilder content = fullContent();
+		//StringBuilder content = fullContent();
 		
 		sb.append("<head>"); 
 		sb.append("<meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>");
@@ -448,11 +476,32 @@ public class GenBookHTML {
 
 	    sb.append("</head>");
 	    sb.append( "<body><div id=\"reader\"></div>");
-	    sb.append( content );
-	    sb.append( "</body>");	
-			    
+	    
+	    saveTextToFile(sb.toString(), true);
+	    fullContent();
+	    //sb.append( content );
+	    //sb.append( "</body>");	
+	    saveTextToFile("</body>", true);	
+	    
 		return sb;
 	}
+	
+	private void getChapterConfig() {
+		try {
+			int i = 0;
+			for (SpineReference bookSection : spine.getSpineReferences()) {
+				i++; 
+				String strChapID = "chap" + i;
+				styleChapter = styleChapter + "#" + strChapID + ",";
+	        	bookData = bookData + "'" + strChapID + "', ";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		styleChapter = styleChapter + "#chapID {display: none;}";
+	}
+	
+	
 	
 	public StringBuilder fullContent() {
 		StringBuilder temp = new StringBuilder();
@@ -460,7 +509,6 @@ public class GenBookHTML {
 			int i = 0;
 			for (SpineReference bookSection : spine.getSpineReferences()) {
 				i++; 
-				
 			    Resource res = bookSection.getResource();
 			    
 			   
@@ -472,39 +520,37 @@ public class GenBookHTML {
 			    
 			    // xu li vu chi lay body content
 			    Document doc = Jsoup.parse(content.toString());
-			    StringBuilder content2 = new StringBuilder(  );
+			    StringBuilder content2 = new StringBuilder();
 			    content2.append(doc.getElementsByTag("body").html());
 			    
-	        	StringBuilder nameid = new StringBuilder();
-	        	nameid.append(res.getHref());
-			    replaceAll(nameid, "/", "");
-			    replaceAll(nameid, " ", "");
-			    replaceAll(nameid, ".xhtml", "");
-			    replaceAll(nameid, ".html", "");
-			    replaceAll(nameid, ".htm", "");
-			    replaceAll(nameid, ".", "");
-			    Log.d("here", ">>" + nameid);
-			    
+//	        	StringBuilder nameid = new StringBuilder();
+//	        	nameid.append(res.getHref());
+//			    replaceAll(nameid, "/", "");
+//			    replaceAll(nameid, " ", "");
+//			    replaceAll(nameid, ".xhtml", "");
+//			    replaceAll(nameid, ".html", "");
+//			    replaceAll(nameid, ".htm", "");
+//			    replaceAll(nameid, ".", "");
+			    //Log.d("here", ">>" + nameid);
+			    StringBuilder strData = new StringBuilder();
 			    String strChapID = "chap" + i;
-	        	temp.append("<div id=\"" + strChapID  + "\" class='chapter-container'>");
-	        	
-	        		//temp.append("<a href='#' id='" + nameid + "'></a><a href='#'></a>");
-	        		Log.d("fak string >>" , ">>>" + content2.length());
-	        		temp.append(content2);
-	        		//Log.d("minh content " + nameid, ">>" + content2);
-	        		//temp.append("hjhjhjh<br/><br/><br/><br/><br/><br/>"); // xu li vu chi lay body content
-	        	temp.append("</div>");
-	        	Log.d("string >>" + i , ">>>" + temp.length());
-	        	styleChapter = styleChapter + "#" + strChapID + ",";
-	        	bookData = bookData + "'" + strChapID + "', ";
+			    strData.append("<div id=\"" + strChapID  + "\" class='chapter-container'>");
+	        	strData.append(decodeHTML(content2.toString()));
+	        	//strData.append(content2);
+	        		
+			    strData.append("</div>");
+	        	//Log.d("string >>" + i , ">>>" + temp.length());
+	        	//styleChapter = styleChapter + "#" + strChapID + ",";
+	        	//bookData = bookData + "'" + strChapID + "', ";
 	        	//Log.d("ssss " + i, "chapterid :::: " + res.getHref());
+	        	saveTextToFile(strData.toString(), true);
 			}
 			Log.d("final string >>" , ">>>" + temp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		styleChapter = styleChapter + "#chapID {display: none;}";
+		//styleChapter = styleChapter + "#chapID {display: none;}";
 		return temp;
 	}
 	

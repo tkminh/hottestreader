@@ -37,10 +37,15 @@ public class XCommon {
 	
 	public static void saveTextToFile(String file, String text, boolean append) {
 		try {
-			String localfile = getRootPath() + file;
-			FileWriter f = new FileWriter(new File(localfile), append);
-			BufferedWriter writer = new BufferedWriter(f);
+			String localfile = getRootPath() + file; 
+			File f = new File(localfile);
+			if (f.exists() == false) {
+				f.createNewFile();
+			}
+			FileWriter fw = new FileWriter(f, append);
+			BufferedWriter writer = new BufferedWriter(fw);
 			writer.write(text);
+			writer.flush();
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
