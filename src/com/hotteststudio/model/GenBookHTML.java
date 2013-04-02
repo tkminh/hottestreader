@@ -80,7 +80,7 @@ public class GenBookHTML {
 		@Override
 		protected Void doInBackground(Void... params) {
 			loadImage();
-			extractHTML();
+			//extractHTML();
 			//finalHTML = new StringBuilder(genHTML());
 			finalHTML = genEbookHTML();
 			finalHTML = new StringBuilder(decodeHTML(finalHTML.toString()));
@@ -472,8 +472,9 @@ public class GenBookHTML {
 			    
 			    // xu li vu chi lay body content
 			    Document doc = Jsoup.parse(content.toString());
-			    StringBuilder content2 = new StringBuilder( doc.getElementsByTag("body").html() );
-			   
+			    StringBuilder content2 = new StringBuilder(  );
+			    content2.append(doc.getElementsByTag("body").html());
+			    
 	        	StringBuilder nameid = new StringBuilder();
 	        	nameid.append(res.getHref());
 			    replaceAll(nameid, "/", "");
@@ -488,9 +489,10 @@ public class GenBookHTML {
 	        	temp.append("<div id=\"" + strChapID  + "\" class='chapter-container'>");
 	        	
 	        		//temp.append("<a href='#' id='" + nameid + "'></a><a href='#'></a>");
-	        		//temp.append(content);
+	        		Log.d("fak string >>" , ">>>" + content2.length());
+	        		temp.append(content2);
 	        		//Log.d("minh content " + nameid, ">>" + content2);
-	        		temp.append("hjhjhjh<br/><br/><br/><br/><br/><br/>"); // xu li vu chi lay body content
+	        		//temp.append("hjhjhjh<br/><br/><br/><br/><br/><br/>"); // xu li vu chi lay body content
 	        	temp.append("</div>");
 	        	Log.d("string >>" + i , ">>>" + temp.length());
 	        	styleChapter = styleChapter + "#" + strChapID + ",";
