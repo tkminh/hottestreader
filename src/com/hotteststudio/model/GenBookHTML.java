@@ -598,6 +598,20 @@ public class GenBookHTML {
 			        	if (element.getElementsByTag("img")!=null && element.getElementsByTag("img").size()<1)
 			        		element.remove();
 			        }
+			        
+			    }
+			    
+			    // change image
+			    for (Element element : doc.select("img")) {
+			    	if (element.hasAttr("xlink:href")) {
+			    		String imgPath = element.attr("xlink:href");
+			    		try {
+			    			imgPath = imgPath.substring(imgPath.lastIndexOf("/")+1);
+			    		} catch (Exception e) {
+			    			e.printStackTrace();
+			    		}
+			    		element.attr("src", "images/" + imgPath);
+			    	}
 			    }
 			    
 			    content2.append(doc.getElementsByTag("body").html());
