@@ -56,6 +56,12 @@ public class GenBookHTML {
 	public ArrayList<String> arrLinkChapter;
 	public Setting setting;
 	
+	public long start;
+	public long end;
+	
+	public BufferedWriter writer;
+	public FileWriter fw;
+	
 	public GenBookHTML(InputStream file, String _folderName) {
 		try {
 			epub = new EpubReader();
@@ -84,7 +90,12 @@ public class GenBookHTML {
 			if (f.exists()) {
 				f.delete();
 			}
+			f.createNewFile();
 			
+			fw = new FileWriter(f, true);
+			int bufSize = 4*(int)(Math.pow(1024, 2));
+			writer = new BufferedWriter(fw,bufSize);
+
 			LoadEpub load = new LoadEpub();
 			load.execute();
 			
@@ -98,15 +109,15 @@ public class GenBookHTML {
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
-				
 				loadImage();
-				//extractHTML();
 				getChapterConfig();
 				//styleChapter = styleChapter + "#chapID {display: none;}";
 				
 				Log.d("hihi", arrChapter.size() + " & " + bookData.split(",").length);
 				
 				genEbookHTML();
+				
+				saveToRecentList();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -118,8 +129,12 @@ public class GenBookHTML {
 			super.onPostExecute(result);
 			Reader.progressDialog.dismiss();
 			Reader.webview.loadUrl("file://" + finalPathFile);
-			
-			saveToRecentList();
+			try {
+				writer.flush();
+				writer.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -439,29 +454,25 @@ public class GenBookHTML {
 	      String s = tocReference.getCompleteHref().replace("/", "");
 	      arrLinkChapter.add(s);
 	      
-	      // update
-	      /*String chapId = XCommon.deAccent(tocString.toString().replace(" ", ""));
-	      styleChapter = styleChapter + "#" + chapId + ",";
-	      bookData = bookData + "'" + chapId + "', ";
-	      Log.d("chap ne>>",styleChapter);
-	      Log.d("bookData ne>>",bookData);*/
-	      
 	      logTableOfContents(tocReference.getChildren(), depth + 1);
 	    }
 	  }
 	
 	
-	public void saveTextToFile(String text, boolean append) {
+	public void saveTextToFile(String text) {
 		try {
+			if (writer==null) return;
+			/*
 			File f = new File(finalPathFile);
 			if (f.exists() == false) {
 				f.createNewFile();
 			}
-			FileWriter fw = new FileWriter(f, append);
-			BufferedWriter writer = new BufferedWriter(fw);
+			fw = new FileWriter(f, append);
+			int bufSize = 4*(int)(Math.pow(1024, 2));
+			writer = new BufferedWriter(fw,bufSize);*/
 			writer.write(text);
-			writer.flush();
-			writer.close();
+			//writer.flush();
+			//writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -533,10 +544,14 @@ public class GenBookHTML {
 	    sb.append("\n</head>");
 	    sb.append( "\n<body>\n<div id=\"reader\"></div>\n");
 	    
-	    saveTextToFile(sb.toString(), true);
+	    saveTextToFile(sb.toString());
+	    
+	    start = System.currentTimeMillis();
 	    fullContent();
-	
-	    saveTextToFile("\n</body>", true);	
+	    end = System.currentTimeMillis();
+	    Log.d("timer", "step 3: " + (end - start) / 1000f + " seconds");
+
+	    saveTextToFile("\n</body>");	
 	    
 		return sb;
 	}
@@ -549,17 +564,8 @@ public class GenBookHTML {
 				String strChapID = "chap" + i;
 				styleChapter = styleChapter + "#" + strChapID + ",";
 	        	bookData = bookData + "'" + strChapID + "', ";
-	        	Log.d("GenChapter",bookSection.toString());
+	        	Log.d("GenChapter",bookSection.getResource().getHref());
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		styleChapter = styleChapter + "#chapID {display: none;}";
-	}
-	
-	private void getChapterConfig2() {
-		try {
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -572,6 +578,7 @@ public class GenBookHTML {
 		try {
 			int i = 0;
 			for (SpineReference bookSection : spine.getSpineReferences()) {
+				//start = System.currentTimeMillis();
 				i++; 
 			    Resource res = bookSection.getResource();
 			    
@@ -586,6 +593,7 @@ public class GenBookHTML {
 			    Document doc = Jsoup.parse(content.toString());
 			    StringBuilder content2 = new StringBuilder();
 			    
+			    /*
 			    // remove style co san
 			    Elements els = doc.select("style");
 			    for(Element e: els){
@@ -600,6 +608,7 @@ public class GenBookHTML {
 			        }
 			        
 			    }
+			    */
 			    
 			    // change image
 			    for (Element element : doc.select("img")) {
@@ -616,6 +625,9 @@ public class GenBookHTML {
 			    
 			    content2.append(doc.getElementsByTag("body").html());
 			    
+			    //end = System.currentTimeMillis();
+	        	//Log.d("timer", "A step " + i + ": " + (end - start) / 1000f + " seconds");
+			    
 //	        	StringBuilder nameid = new StringBuilder();
 //	        	nameid.append(res.getHref());
 //			    replaceAll(nameid, "/", "");
@@ -625,16 +637,22 @@ public class GenBookHTML {
 //			    replaceAll(nameid, ".htm", "");
 //			    replaceAll(nameid, ".", "");
 			    //Log.d("here", ">>" + nameid);
+	        	
+	        	//start = System.currentTimeMillis();
+	        	
 			    StringBuilder strData = new StringBuilder();
 			    String style = "text-align:justify !important;" +
 			    				"font-size:" + setting.fontSize + "px !important;" +
 			    				"line-height:2 !important; font-weight:normal !important;"
 			    		;
 			    String strChapID = "chap" + i;
-			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container' style='" + style +"' >\n", true);
+			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container' style='" + style +"' >\n");
 	        	
-	        	saveTextToFile(decodeHTML(content2.toString()), true);
-	        	saveTextToFile("\n</div>", true);
+	        	saveTextToFile(decodeHTML(content2.toString()));
+	        	saveTextToFile("\n</div>");
+	        	
+	        	//end = System.currentTimeMillis();
+	        	//Log.d("timer", "B step " + i + ": " + (end - start) / 1000f + " seconds");
 			}
 			Log.d("final string >>" , ">>>" + temp);
 		} catch (Exception e) {
@@ -671,6 +689,7 @@ public class GenBookHTML {
 		
 		if (metadata.getAuthors().size()>0)
 		bm.author = metadata.getAuthors().get(0).getFirstname() + " " + metadata.getAuthors().get(0).getLastname();
+		else bm.author = "";
 		
 		if (metadata.getPublishers().size()>0)
 		bm.publisher = metadata.getPublishers().get(0).toString();

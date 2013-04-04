@@ -60,13 +60,18 @@ public class BookListAdapter extends BaseAdapter {
 		
 		EpubInfo entry = arrEpubs.get(position);
 		try {
-			holder.tvAuthor.setText(entry.author);
-			holder.tvTitle.setText(entry.title);
+			
 			String temp = entry.path.substring(entry.path.lastIndexOf("/")+1);
-			temp = XCommon.deAccent(temp);
+			temp = XCommon.deAccent(temp.replace(" ", ""));
 			String fileName = XCommon.getRootPath() + temp.replaceAll(".epub", "")  + "/Images/" + entry.coverImg;
 			//String fileName = XCommon.getRootPath() + temp.replaceAll(".epub", "")  + "/" + entry.coverImg;
 			holder.imageView.setImageBitmap(BitmapFactory.decodeFile(fileName));
+			holder.tvAuthor.setText(entry.author);
+			if (entry.title.length()>0) {
+				holder.tvTitle.setText(entry.title);
+			} else {
+				holder.tvTitle.setText(entry.path.lastIndexOf("/")+1);
+			}
 			
 			Log.d("fak","file: " + fileName);
 		} catch (Exception e) {
