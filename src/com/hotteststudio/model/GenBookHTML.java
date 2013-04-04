@@ -470,7 +470,9 @@ public class GenBookHTML {
 			fw = new FileWriter(f, append);
 			int bufSize = 4*(int)(Math.pow(1024, 2));
 			writer = new BufferedWriter(fw,bufSize);*/
+			
 			writer.write(text);
+			
 			//writer.flush();
 			//writer.close();
 		} catch (Exception e) {
@@ -582,7 +584,7 @@ public class GenBookHTML {
 		try {
 			int i = 0;
 			for (SpineReference bookSection : spine.getSpineReferences()) {
-				//start = System.currentTimeMillis();
+				
 				i++; 
 			    res = bookSection.getResource();
 			    
@@ -635,7 +637,7 @@ public class GenBookHTML {
 			    }
 			    //*/
 			    
-			    content2.append(doc.getElementsByTag("body").html());
+			    //content2.append(doc.getElementsByTag("body").html());
 			    
 			    //end = System.currentTimeMillis();
 	        	//Log.d("timer", "A step " + i + ": " + (end - start) / 1000f + " seconds");
@@ -651,7 +653,7 @@ public class GenBookHTML {
 			    //Log.d("here", ">>" + nameid);
 	        	
 	        	//start = System.currentTimeMillis();
-	        	
+			    long tstart = System.currentTimeMillis();
 			    String style = "text-align:justify !important;" +
 			    				"font-size:" + setting.fontSize + "px !important;" +
 			    				"line-height:2 !important; font-weight:normal !important;"
@@ -659,9 +661,10 @@ public class GenBookHTML {
 			    String strChapID = "chap" + i;
 			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container' style='" + style +"' >\n");
 	        	
-	        	saveTextToFile(decodeHTML(content2.toString()));
+	        	saveTextToFile(doc.getElementsByTag("body").html());
 	        	saveTextToFile("\n</div>");
-	        	
+	        	long tend = System.currentTimeMillis();
+			    Log.d("timer", "step x: " + (tend - tstart) / 1000f + " seconds");
 	        	//end = System.currentTimeMillis();
 	        	//Log.d("timer", "B step " + i + ": " + (end - start) / 1000f + " seconds");
 			}
