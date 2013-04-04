@@ -1,7 +1,7 @@
 package com.hotteststudio.model;
 
 public class Setting {
-	public int fontSize = 30;
+	public int fontSize = 20;
 	
 	
 	public String getFlipper(int type) {
