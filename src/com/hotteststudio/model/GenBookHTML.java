@@ -283,6 +283,7 @@ public class GenBookHTML {
 					tempfile = tempfile.substring(tempfile.lastIndexOf("/"));
 				} catch (Exception e) {
 					e.printStackTrace();
+					Log.d("saveImage",">>> " + tempfile);
 				}
 				//tempfile = tempfile.replaceAll("/", "");
 				File file = new File(localfile, tempfile);
@@ -511,6 +512,10 @@ public class GenBookHTML {
 	    sb.append("\n} else {window.reader1.showControl(scrubber);");
 	    sb.append("\nwindow.reader1.showControl(magnifier);}}");
 	    sb.append("\n");
+	    sb.append("\nfunction goToChapter(chapterId) {");
+	    sb.append("\nwindow.reader1.moveTo(window.reader1.properties.book.locusOfChapter(chapterId));");
+	    sb.append("\n}");
+	    sb.append("\n");
 	    sb.append("\n");
 	  
 	    
@@ -535,6 +540,7 @@ public class GenBookHTML {
 				String strChapID = "chap" + i;
 				styleChapter = styleChapter + "#" + strChapID + ",";
 	        	bookData = bookData + "'" + strChapID + "', ";
+	        	Log.d("GenChapter",bookSection.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
