@@ -575,23 +575,28 @@ public class GenBookHTML {
 	
 	public StringBuilder fullContent() {
 		StringBuilder temp = new StringBuilder();
+		StringBuilder content;
+		StringBuilder content2;
+		Document doc;
+		Resource res;
 		try {
 			int i = 0;
 			for (SpineReference bookSection : spine.getSpineReferences()) {
 				//start = System.currentTimeMillis();
 				i++; 
-			    Resource res = bookSection.getResource();
+			    res = bookSection.getResource();
 			    
 			   
-			    StringBuilder content = new StringBuilder();
+			    content = new StringBuilder();
 			    content.append(new String(res.getData(), "UTF-8"));
 	        	
 			    replaceAll(content, "%20", " ");
 			    replaceAll(content, "alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (XCommon.getRootPath() + folderName + "/"));
+			    //replaceAll(content, "xlink:href", "src");
 			    
 			    // xu li vu chi lay body content
-			    Document doc = Jsoup.parse(content.toString());
-			    StringBuilder content2 = new StringBuilder();
+			    doc = Jsoup.parse(content.toString());
+			    content2 = new StringBuilder();
 			    
 			    /*
 			    // remove style co san
@@ -610,6 +615,7 @@ public class GenBookHTML {
 			    }
 			    */
 			    
+			    
 			    // change image
 			    for (Element element : doc.select("img")) {
 			    	if (element.hasAttr("xlink:href")) {
@@ -620,8 +626,14 @@ public class GenBookHTML {
 			    			e.printStackTrace();
 			    		}
 			    		element.attr("src", "images/" + imgPath);
-			    	}
+			    	} 
+			    	/*else {
+			    		String imgPath = element.attr("src");
+			    		element.attr("src", "file://" + XCommon.getRootPath() + folderName + "/" + imgPath.substring(imgPath.lastIndexOf("/")+1));
+			    		//replaceAll(content, "alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (XCommon.getRootPath() + folderName + "/"));
+			    	}*/
 			    }
+			    //*/
 			    
 			    content2.append(doc.getElementsByTag("body").html());
 			    
@@ -640,7 +652,6 @@ public class GenBookHTML {
 	        	
 	        	//start = System.currentTimeMillis();
 	        	
-			    StringBuilder strData = new StringBuilder();
 			    String style = "text-align:justify !important;" +
 			    				"font-size:" + setting.fontSize + "px !important;" +
 			    				"line-height:2 !important; font-weight:normal !important;"
