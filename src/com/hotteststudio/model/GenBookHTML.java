@@ -53,6 +53,7 @@ public class GenBookHTML {
 	public ArrayList<String> arrTitle;
 	public ArrayList<String> arrChapter;
 	public ArrayList<String> arrLinkChapter;
+	public Setting setting;
 	
 	public GenBookHTML(InputStream file, String _folderName) {
 		try {
@@ -62,6 +63,7 @@ public class GenBookHTML {
 			arrChapter = new ArrayList<String>();
 			arrLinkChapter = new ArrayList<String>();
 			logTableOfContents(book.getTableOfContents().getTocReferences(), 0);
+			setting = new Setting();
 			
 			folderName = _folderName;
 			
@@ -70,6 +72,11 @@ public class GenBookHTML {
 			
 			finalPathFile = XCommon.getRootPath() + folderName + "/epubtemp.html";
 			
+			// xoa file nay neu da ton tai;
+			File f = new File(finalPathFile);
+			if (f.exists()) {
+				f.delete();
+			}
 			
 			LoadEpub load = new LoadEpub();
 			load.execute();
@@ -466,7 +473,8 @@ public class GenBookHTML {
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}");
 	    sb.append("\nbody h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
 	    sb.append("\np {margin-top: 1em !important;}");
-	    
+	    sb.append("\na,ins {text-decoration:none !important;}");
+	    sb.append("\nspan {text-align:justify !important;}");
 	    sb.append("\n</style>");
 	    
 	    sb.append("\n<script type=\"text/javascript\">");
@@ -478,7 +486,7 @@ public class GenBookHTML {
 	    //sb.append("\nMonocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider }); });");
 	    sb.append("\nMonocle.Events.listen(window,'load',function () {");
 	    sb.append("\nvar placeSaver = new Monocle.Controls.PlaceSaver('placesaver');");
-	    sb.append("\nMonocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider , place: placeSaver.savedPlace() } , ");
+	    sb.append("\nMonocle.Reader('reader',bookData, { flipper: " + setting.getFlipper(1) + " , place: placeSaver.savedPlace() } , ");
 	    sb.append("\nfunction (rdr) {");
 	    sb.append("\nwindow.reader1 = rdr;");
 	    sb.append("\nmagnifier = new Monocle.Controls.Magnifier(rdr);");
@@ -490,7 +498,7 @@ public class GenBookHTML {
 	    sb.append("\nrdr.addControl(placeSaver, 'invisible');");
 	    sb.append("\n");
 	    sb.append("\n});");
-	    sb.append("\n);");
+	    sb.append("\n});");
 	    sb.append("\n</script>");
 
 	    sb.append("\n</head>");
@@ -540,6 +548,10 @@ public class GenBookHTML {
 			    // xu li vu chi lay body content
 			    Document doc = Jsoup.parse(content.toString());
 			    StringBuilder content2 = new StringBuilder();
+			    Elements els = doc.select("style");
+			    for(Element e: els){
+			        e.remove();
+			    }
 			    content2.append(doc.getElementsByTag("body").html());
 			    
 //	        	StringBuilder nameid = new StringBuilder();
@@ -552,17 +564,13 @@ public class GenBookHTML {
 //			    replaceAll(nameid, ".", "");
 			    //Log.d("here", ">>" + nameid);
 			    StringBuilder strData = new StringBuilder();
+			    String style = "text-align:justify !important;" +
+			    				"font-size:" + setting.fontSize + "px !important;" +
+			    				"line-height:2 !important; font-weight:normal !important;"
+			    		;
 			    String strChapID = "chap" + i;
-			    //strData.append("\n<div id=\"" + strChapID  + "\" class='chapter-container'>");
-			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container'>\n", true);
-	        	//strData.append(decodeHTML(content2.toString()));
-	        	//strData.append(content2);
-	        		
-			    //strData.append("\n</div>");
-	        	//Log.d("string >>" + i , ">>>" + temp.length());
-	        	//styleChapter = styleChapter + "#" + strChapID + ",";
-	        	//bookData = bookData + "'" + strChapID + "', ";
-	        	//Log.d("ssss " + i, "chapterid :::: " + res.getHref());
+			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container' style='" + style +"' >\n", true);
+	        	
 	        	saveTextToFile(decodeHTML(content2.toString()), true);
 	        	saveTextToFile("\n</div>", true);
 			}
