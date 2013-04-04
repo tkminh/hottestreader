@@ -84,6 +84,8 @@ public class Reader extends Activity {
 			File epubfile = new File(EPUB_PATH);
 			EBOOK_FILE = epubfile.getName();
 			EBOOK_FOLDER = EBOOK_FILE.replace(".epub", "");
+			EBOOK_FOLDER = XCommon.deAccent(EBOOK_FOLDER);
+			EBOOK_FOLDER = EBOOK_FOLDER.replace(" ", "");
 			
 			String folderPath = XCommon.getRootPath() + EBOOK_FOLDER;
 			//String filePath = XCommon.getRootPath() + EBOOK_FILE;

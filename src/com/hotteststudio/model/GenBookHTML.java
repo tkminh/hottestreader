@@ -43,6 +43,7 @@ public class GenBookHTML {
 	
 	// content of epub
 	public StringBuilder finalHTML;
+	public String resultHTML = "epubtemp.html";
 	public String allcontent = "";	
 	public String folderName = "";
 	public String styleChapter = "";
@@ -67,10 +68,16 @@ public class GenBookHTML {
 			
 			folderName = _folderName;
 			
+			try {
+				resultHTML = XCommon.deAccent(folderName) + ".html";
+			} catch (Exception ee) {
+				Log.d("GenBookHTML","Convert file name error: " + ee);
+			}
+			
 			arrSrc = new ArrayList<String>();
 			arrTitle = new ArrayList<String>();
 			
-			finalPathFile = XCommon.getRootPath() + folderName + "/epubtemp.html";
+			finalPathFile = XCommon.getRootPath() + folderName + "/" + resultHTML;
 			
 			// xoa file nay neu da ton tai;
 			File f = new File(finalPathFile);
@@ -96,11 +103,7 @@ public class GenBookHTML {
 				//extractHTML();
 				getChapterConfig();
 				
-				//finalHTML = new StringBuilder(genHTML());
 				genEbookHTML();
-				//finalHTML = genEbookHTML();
-				//finalHTML = new StringBuilder(decodeHTML(finalHTML.toString()));
-				//saveToFile();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -242,7 +245,7 @@ public class GenBookHTML {
 	
 	public void saveToFile() {
 		try {
-			String localfile = XCommon.getRootPath() + folderName + "/epubtemp.html";
+			String localfile = XCommon.getRootPath() + folderName + "/" + resultHTML;
 			FileWriter f = new FileWriter(new File(localfile), false);
 			BufferedWriter writer = new BufferedWriter(f);
 			writer.write(finalHTML.toString());
@@ -499,6 +502,18 @@ public class GenBookHTML {
 	    sb.append("\n");
 	    sb.append("\n});");
 	    sb.append("\n});");
+	    
+	    // add some support js here
+	    sb.append("\nfunction showProgressbar() {");
+	    sb.append("\nif (window.reader1.showingControl(scrubber)==true) {");
+	    sb.append("\nwindow.reader1.hideControl(scrubber);");
+	    sb.append("\nwindow.reader1.hideControl(magnifier);");
+	    sb.append("\n} else {window.reader1.showControl(scrubber);");
+	    sb.append("\nwindow.reader1.showControl(magnifier);}}");
+	    sb.append("\n");
+	    sb.append("\n");
+	  
+	    
 	    sb.append("\n</script>");
 
 	    sb.append("\n</head>");
@@ -506,8 +521,7 @@ public class GenBookHTML {
 	    
 	    saveTextToFile(sb.toString(), true);
 	    fullContent();
-	    //sb.append( content );
-	    //sb.append( "</body>");	
+	
 	    saveTextToFile("\n</body>", true);	
 	    
 		return sb;
@@ -548,10 +562,20 @@ public class GenBookHTML {
 			    // xu li vu chi lay body content
 			    Document doc = Jsoup.parse(content.toString());
 			    StringBuilder content2 = new StringBuilder();
+			    
+			    // remove style co san
 			    Elements els = doc.select("style");
 			    for(Element e: els){
 			        e.remove();
 			    }
+			    
+			    // remove empty tags
+			    for (Element element : doc.select("*")) {
+			        if (!element.hasText() && element.isBlock()) {
+			            element.remove();
+			        }
+			    }
+			    
 			    content2.append(doc.getElementsByTag("body").html());
 			    
 //	        	StringBuilder nameid = new StringBuilder();
