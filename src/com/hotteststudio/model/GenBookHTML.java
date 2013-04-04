@@ -102,6 +102,9 @@ public class GenBookHTML {
 				loadImage();
 				//extractHTML();
 				getChapterConfig();
+				//styleChapter = styleChapter + "#chapID {display: none;}";
+				
+				Log.d("hihi", arrChapter.size() + " & " + bookData.split(",").length);
 				
 				genEbookHTML();
 			} catch (Exception e) {
@@ -283,7 +286,7 @@ public class GenBookHTML {
 					tempfile = tempfile.substring(tempfile.lastIndexOf("/"));
 				} catch (Exception e) {
 					e.printStackTrace();
-					Log.d("saveImage",">>> " + tempfile);
+					Log.d("fak saveImage",">>> " + tempfile);
 				}
 				//tempfile = tempfile.replaceAll("/", "");
 				File file = new File(localfile, tempfile);
@@ -435,7 +438,13 @@ public class GenBookHTML {
 	      arrChapter.add(tocString.toString());
 	      String s = tocReference.getCompleteHref().replace("/", "");
 	      arrLinkChapter.add(s);
-	      //Log.d(">>",tocString.toString() + ">>"+tocReference.getCompleteHref());
+	      
+	      // update
+	      /*String chapId = XCommon.deAccent(tocString.toString().replace(" ", ""));
+	      styleChapter = styleChapter + "#" + chapId + ",";
+	      bookData = bookData + "'" + chapId + "', ";
+	      Log.d("chap ne>>",styleChapter);
+	      Log.d("bookData ne>>",bookData);*/
 	      
 	      logTableOfContents(tocReference.getChildren(), depth + 1);
 	    }
@@ -490,7 +499,7 @@ public class GenBookHTML {
 	    //sb.append("\nMonocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider }); });");
 	    sb.append("\nMonocle.Events.listen(window,'load',function () {");
 	    sb.append("\nvar placeSaver = new Monocle.Controls.PlaceSaver('placesaver');");
-	    sb.append("\nMonocle.Reader('reader',bookData, { flipper: " + setting.getFlipper(1) + " , place: placeSaver.savedPlace() } , ");
+	    sb.append("\nMonocle.Reader('reader',bookData, { flipper: " + setting.getFlipper(2) + " , place: placeSaver.savedPlace() } , ");
 	    sb.append("\nfunction (rdr) {");
 	    sb.append("\nwindow.reader1 = rdr;");
 	    sb.append("\nmagnifier = new Monocle.Controls.Magnifier(rdr);");
@@ -548,6 +557,14 @@ public class GenBookHTML {
 		styleChapter = styleChapter + "#chapID {display: none;}";
 	}
 	
+	private void getChapterConfig2() {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		styleChapter = styleChapter + "#chapID {display: none;}";
+	}
 	
 	
 	public StringBuilder fullContent() {
@@ -578,7 +595,8 @@ public class GenBookHTML {
 			    // remove empty tags
 			    for (Element element : doc.select("*")) {
 			        if (!element.hasText() && element.isBlock()) {
-			            element.remove();
+			        	if (element.getElementsByTag("img")!=null && element.getElementsByTag("img").size()<1)
+			        		element.remove();
 			        }
 			    }
 			    
