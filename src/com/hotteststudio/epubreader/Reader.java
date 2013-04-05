@@ -79,13 +79,14 @@ public class Reader extends Activity {
 	}
 	
 	public void onMenuClick() {
-		if (isShowControl) {
-			showControl();
-			isShowControl = false;
-		} else {
-			hideControl();
-			isShowControl = true;
-		}
+		webview.loadUrl("javascript:showProgressbar();");
+//		if (isShowControl) {
+//			showControl();
+//			isShowControl = false;
+//		} else {
+//			hideControl();
+//			isShowControl = true;
+//		}
 	}
 	
 	public void init() {
@@ -144,19 +145,19 @@ public class Reader extends Activity {
 	}
 	
 	public void setChapter() {
-		bookChapterAdapter = new BookChapterAdapter(this,genbook.arrBookChapter);
-		listChapter.setAdapter(bookChapterAdapter);
-		listChapter.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> av, View v, int position, long id) {
-				Object o = listChapter.getItemAtPosition(position);
-				BookChapter bc = (BookChapter)o;
-				//webview.loadUrl("javascript:goToChapter('" + bc.chapId + "');");
-				webview.loadUrl("javascript:alert('" + bc.chapId + "');");
-				//Toast.makeText(getApplicationContext(), "Chapter id " + bc.chapId, Toast.LENGTH_LONG).show();
-				hideControl();
-			}
-		});
+		if (bookChapterAdapter==null) {
+			bookChapterAdapter = new BookChapterAdapter(this,genbook.arrBookChapter);
+			listChapter.setAdapter(bookChapterAdapter);
+			listChapter.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+					Object o = listChapter.getItemAtPosition(position);
+					BookChapter bc = (BookChapter)o;
+					webview.loadUrl("javascript:goToChapter('" + bc.chapId + "');");
+					hideControl();
+				}
+			});
+		}
 	}
 	
 	public void hideControl() {

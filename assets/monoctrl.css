@@ -124,8 +124,8 @@ div.monelem_controls_scrubber_bubble {
   min-width: 20%;
   max-width: 30%;
   bottom: 2.5em;
-  background: rgba(0, 0, 0, 0.9);
-  color: #CCC;
+  background: rgba(0, 0, 0, 0.0);
+  color: #ddd;
   font: bold 12px Lucida Grande, Tahoma, Helvetica, Arial, sans-serif;
   white-space: nowrap;
   text-overflow: ellipsis;

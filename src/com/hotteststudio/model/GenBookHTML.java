@@ -527,9 +527,9 @@ public class GenBookHTML {
 	    sb.append("\nfunction showProgressbar() {");
 	    sb.append("\nif (window.reader1.showingControl(scrubber)==true) {");
 	    sb.append("\nwindow.reader1.hideControl(scrubber);");
-	    sb.append("\nwindow.reader1.hideControl(magnifier);");
+	    sb.append("\n");
 	    sb.append("\n} else {window.reader1.showControl(scrubber);");
-	    sb.append("\nwindow.reader1.showControl(magnifier);}}");
+	    sb.append("\n}}");
 	    sb.append("\n");
 	    sb.append("\nfunction goToChapter(chapterId) {");
 	    sb.append("\nwindow.reader1.moveTo(window.reader1.properties.book.locusOfChapter(chapterId));");
