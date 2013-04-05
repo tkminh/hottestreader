@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.opengl.Visibility;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -79,14 +80,13 @@ public class Reader extends Activity {
 	}
 	
 	public void onMenuClick() {
-		webview.loadUrl("javascript:showProgressbar();");
-//		if (isShowControl) {
-//			showControl();
-//			isShowControl = false;
-//		} else {
-//			hideControl();
-//			isShowControl = true;
-//		}
+		if (isShowControl) {
+			showControl();
+			isShowControl = false;
+		} else {
+			hideControl();
+			isShowControl = true;
+		}
 	}
 	
 	public void init() {
@@ -115,6 +115,7 @@ public class Reader extends Activity {
 			@Override  
 		     public void onPageFinished(WebView view, String url) {
 		         super.onPageFinished(view, url);
+		         Log.d("Load epub", "Successful");
 		         setChapter();
 		     }  
 		});
@@ -153,7 +154,8 @@ public class Reader extends Activity {
 				public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 					Object o = listChapter.getItemAtPosition(position);
 					BookChapter bc = (BookChapter)o;
-					webview.loadUrl("javascript:goToChapter('" + bc.chapId + "');");
+					//webview.loadUrl("javascript:goToChapter('" + bc.chapId + "');");
+					webview.loadUrl("javascript:window.reader1.moveTo({ componentId: '" + bc.chapId + "'});");
 					hideControl();
 				}
 			});

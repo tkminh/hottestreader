@@ -1,8 +1,12 @@
 package com.hotteststudio.model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,7 +69,9 @@ public class BookListAdapter extends BaseAdapter {
 			temp = XCommon.deAccent(temp.replace(" ", ""));
 			String fileName = XCommon.getRootPath() + temp.replaceAll(".epub", "")  + "/Images/" + entry.coverImg;
 			//String fileName = XCommon.getRootPath() + temp.replaceAll(".epub", "")  + "/" + entry.coverImg;
-			holder.imageView.setImageBitmap(BitmapFactory.decodeFile(fileName));
+			Bitmap bitmap = decodeFile(new File(fileName));
+			holder.imageView.setImageBitmap(bitmap);
+			//holder.imageView.setImageBitmap(BitmapFactory.decodeFile(fileName));
 			holder.tvAuthor.setText(entry.author);
 			if (entry.title.length()>0) {
 				holder.tvTitle.setText(entry.title);
@@ -86,5 +92,28 @@ public class BookListAdapter extends BaseAdapter {
 		TextView tvTitle;
 		TextView tvAuthor;
 		ImageView imgMore;
+	}
+	
+	private Bitmap decodeFile(File f){
+	    try {
+	        //Decode image size
+	        BitmapFactory.Options o = new BitmapFactory.Options();
+	        o.inJustDecodeBounds = true;
+	        BitmapFactory.decodeStream(new FileInputStream(f),null,o);
+
+	        //The new size we want to scale to
+	        final int REQUIRED_SIZE=70;
+
+	        //Find the correct scale value. It should be the power of 2.
+	        int scale=1;
+	        while(o.outWidth/scale/2>=REQUIRED_SIZE && o.outHeight/scale/2>=REQUIRED_SIZE)
+	            scale*=2;
+
+	        //Decode with inSampleSize
+	        BitmapFactory.Options o2 = new BitmapFactory.Options();
+	        o2.inSampleSize=scale;
+	        return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+	    } catch (FileNotFoundException e) {}
+	    return null;
 	}
 }
