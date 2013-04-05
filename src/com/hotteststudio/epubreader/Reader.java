@@ -2,25 +2,30 @@ package com.hotteststudio.epubreader;
 
 import java.io.File;
 import java.io.FileInputStream;
-
-import nl.siegmann.epublib.epub.Main;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.opengl.Visibility;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings.RenderPriority;
 import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
-import com.hotteststudio.model.EpubInfo;
+import com.hotteststudio.model.BookChapter;
+import com.hotteststudio.model.BookChapterAdapter;
 import com.hotteststudio.model.GenBookHTML;
 import com.hotteststudio.model.JSInterface;
 import com.hotteststudio.util.XCommon;
-import com.thoughtworks.xstream.XStream;
 
 public class Reader extends Activity {
 	
@@ -37,6 +42,11 @@ public class Reader extends Activity {
 	public String EBOOK_FILE;
 	public String EBOOK_FOLDER;
 	
+	public BookChapterAdapter bookChapterAdapter;
+	public ListView listChapter;
+	
+	public boolean isShowControl = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,7 +57,40 @@ public class Reader extends Activity {
 		loadEbookContent();
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			onMenuClick();
+			return true;
+		}
+		return super.onKeyUp(keyCode, event);
+	}	
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Toast.makeText(this, "Quit ?", Toast.LENGTH_LONG).show();
+	}
+	
+	public void onMenuClick() {
+		if (isShowControl) {
+			showControl();
+			isShowControl = false;
+		} else {
+			hideControl();
+			isShowControl = true;
+		}
+	}
+	
 	public void init() {
+		listChapter = (ListView)findViewById(R.id.listChapter);
+		
 		webview = (WebView)findViewById(R.id.webview);
 		
 		jsi = new JSInterface(this, webview);
@@ -71,6 +114,7 @@ public class Reader extends Activity {
 			@Override  
 		     public void onPageFinished(WebView view, String url) {
 		         super.onPageFinished(view, url);
+		         setChapter();
 		     }  
 		});
 		
@@ -80,7 +124,6 @@ public class Reader extends Activity {
 	
 	public void loadEbookContent() {
 		try {
-			Log.d("zz","fak dm");
 			File epubfile = new File(EPUB_PATH);
 			EBOOK_FILE = epubfile.getName();
 			EBOOK_FOLDER = EBOOK_FILE.replace(".epub", "");
@@ -88,26 +131,42 @@ public class Reader extends Activity {
 			EBOOK_FOLDER = EBOOK_FOLDER.replace(" ", "");
 			
 			String folderPath = XCommon.getRootPath() + EBOOK_FOLDER;
-			//String filePath = XCommon.getRootPath() + EBOOK_FILE;
 			File fol = new File(folderPath);
 			fol.mkdir();
 			
 			FileInputStream file = new FileInputStream(EPUB_PATH);
 			genbook = new GenBookHTML(file, EBOOK_FOLDER);
-			
-			// tam thoi bo~ dong o duoi
-			//webview.loadUrl("file://" + folderPath + "/epubtemp.html");
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void justClick(View v) {
-		webview.loadUrl("javascript:showTOC();");
-		//Log.d("aaa","fak");
+	public void setChapter() {
+		bookChapterAdapter = new BookChapterAdapter(this,genbook.arrBookChapter);
+		listChapter.setAdapter(bookChapterAdapter);
+		listChapter.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+				Object o = listChapter.getItemAtPosition(position);
+				BookChapter bc = (BookChapter)o;
+				//webview.loadUrl("javascript:goToChapter('" + bc.chapId + "');");
+				webview.loadUrl("javascript:alert('" + bc.chapId + "');");
+				//Toast.makeText(getApplicationContext(), "Chapter id " + bc.chapId, Toast.LENGTH_LONG).show();
+				hideControl();
+			}
+		});
 	}
 	
+	public void hideControl() {
+		listChapter.setVisibility(View.GONE);
+		webview.setVisibility(View.VISIBLE);
+	}
 	
+	public void showControl() {
+		listChapter.setVisibility(View.VISIBLE);
+		webview.setVisibility(View.GONE);
+	}
 	
 }

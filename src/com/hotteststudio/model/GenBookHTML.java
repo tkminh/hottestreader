@@ -52,10 +52,12 @@ public class GenBookHTML {
 	public String bookData = "";
 	public String finalPathFile = "";
 	
-	public ArrayList<String> arrSrc;
-	public ArrayList<String> arrTitle;
-	public ArrayList<String> arrChapter;
-	public ArrayList<String> arrLinkChapter;
+//	public ArrayList<String> arrSrc;
+//	public ArrayList<String> arrTitle;
+//	public ArrayList<String> arrChapter;
+//	public ArrayList<String> arrLinkChapter;
+//	
+	public ArrayList<BookChapter> arrBookChapter;
 	public Setting setting;
 	
 	public long start;
@@ -69,8 +71,9 @@ public class GenBookHTML {
 			epub = new EpubReader();
 			book = epub.readEpub(file);
 			spine = book.getSpine();
-			arrChapter = new ArrayList<String>();
-			arrLinkChapter = new ArrayList<String>();
+			//arrChapter = new ArrayList<String>();
+			//arrLinkChapter = new ArrayList<String>();
+			arrBookChapter = new ArrayList<BookChapter>();
 			logTableOfContents(book.getTableOfContents().getTocReferences(), 0);
 			setting = new Setting();
 			
@@ -82,8 +85,8 @@ public class GenBookHTML {
 				Log.d("GenBookHTML","Convert file name error: " + ee);
 			}
 			
-			arrSrc = new ArrayList<String>();
-			arrTitle = new ArrayList<String>();
+			//arrSrc = new ArrayList<String>();
+			//arrTitle = new ArrayList<String>();
 			
 			finalPathFile = XCommon.getRootPath() + folderName + "/" + resultHTML;
 			
@@ -115,7 +118,7 @@ public class GenBookHTML {
 				getChapterConfig();
 				//styleChapter = styleChapter + "#chapID {display: none;}";
 				
-				Log.d("hihi", arrChapter.size() + " & " + bookData.split(",").length);
+				//Log.d("hihi", arrChapter.size() + " & " + bookData.split(",").length);
 				
 				genEbookHTML();
 				
@@ -231,20 +234,20 @@ public class GenBookHTML {
 	public String genContents() {
 		String content = "getContents: function () {return [";
 		int t = 0;
-		for (int i = 0; i< arrSrc.size(); i++) {
-			String strChap = "";
-			
-			//Log.d("huhu",arrSrc.get(i) + " - - " +arrLinkChapter.get(t));
-			if (arrSrc.get(i).equals( arrLinkChapter.get(t)) ) {
-				strChap = arrChapter.get(t);
-				strChap = strChap.replace("\"", "'");
-				t++;
-			} else {
-				strChap = "Info " + i;
-			}
-			
-			content = content + "{title:\"" + strChap + "\",src: \"" + arrSrc.get(i) + "\"},";
-		}
+//		for (int i = 0; i< arrSrc.size(); i++) {
+//			String strChap = "";
+//			
+//			//Log.d("huhu",arrSrc.get(i) + " - - " +arrLinkChapter.get(t));
+//			if (arrSrc.get(i).equals( arrLinkChapter.get(t)) ) {
+//				strChap = arrChapter.get(t);
+//				strChap = strChap.replace("\"", "'");
+//				t++;
+//			} else {
+//				strChap = "Info " + i;
+//			}
+//			
+//			content = content + "{title:\"" + strChap + "\",src: \"" + arrSrc.get(i) + "\"},";
+//		}
 		content = content + "]},";
 		
 		return content;
@@ -252,10 +255,10 @@ public class GenBookHTML {
 	
 	public String genComponents() {
 		String components = "getComponents: function () {return [";
-		for (String src : arrSrc) {
-			components = components + "'" + src +"',";
-		}
-		components = components + "];},";
+//		for (String src : arrSrc) {
+//			components = components + "'" + src +"',";
+//		}
+//		components = components + "];},";
 		return components;
 	}
 	
@@ -394,8 +397,8 @@ public class GenBookHTML {
 			    // xu li charset, css o day 
 			    // <meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>
 			    
-	        	arrSrc.add(href);
-	        	arrTitle.add(title);
+	        	//arrSrc.add(href);
+	        	//arrTitle.add(title);
 	        	// remove later
 	        	i++;
 	        	try {
@@ -445,17 +448,19 @@ public class GenBookHTML {
 	      return;
 	    }
 	    for (TOCReference tocReference : tocReferences) {
-	      StringBuilder tocString = new StringBuilder();
-	      for (int i = 0; i < depth; i++) {
-	        tocString.append("\t");
-	      }
-	      tocString.append(tocReference.getTitle());
+//	      StringBuilder tocString = new StringBuilder();
+//	      for (int i = 0; i < depth; i++) {
+//	        tocString.append("\t");
+//	      }
+//	      tocString.append(tocReference.getTitle());
 	      //Log.d("epublib chapter", tocReference.getCompleteHref());
 	      //arrChapters.add(new BookChapter(tocReference.getCompleteHref(), tocString.toString(), 0));
-	      arrChapter.add(tocString.toString());
-	      String s = tocReference.getCompleteHref().replace("/", "");
-	      arrLinkChapter.add(s);
+//	      arrChapter.add(tocString.toString());
+//	      String s = tocReference.getCompleteHref().replace("/", "");
+//	      arrLinkChapter.add(s);
 	      
+	      arrBookChapter.add(new BookChapter("",tocReference.getCompleteHref(),tocReference.getTitle()));
+	      //Log.d("GenChapterTOC","TOC: " + tocReference.getCompleteHref() + " - " + tocReference.getTitle() + " - " + tocString.toString());
 	      logTableOfContents(tocReference.getChildren(), depth + 1);
 	    }
 	  }
@@ -464,19 +469,9 @@ public class GenBookHTML {
 	public void saveTextToFile(String text) {
 		try {
 			if (writer==null) return;
-			/*
-			File f = new File(finalPathFile);
-			if (f.exists() == false) {
-				f.createNewFile();
-			}
-			fw = new FileWriter(f, append);
-			int bufSize = 4*(int)(Math.pow(1024, 2));
-			writer = new BufferedWriter(fw,bufSize);*/
-			
+
 			writer.write(text);
-			
-			//writer.flush();
-			//writer.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -568,7 +563,8 @@ public class GenBookHTML {
 				String strChapID = "chap" + i;
 				styleChapter = styleChapter + "#" + strChapID + ",";
 	        	bookData = bookData + "'" + strChapID + "', ";
-	        	Log.d("GenChapter",bookSection.getResource().getHref());
+	        	updateListBookChapter(bookSection.getResource().getHref(),strChapID);
+	        	//Log.d("GenChapterTOC","Spine: " + bookSection.getResource().getHref());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -576,9 +572,18 @@ public class GenBookHTML {
 		styleChapter = styleChapter + "#chapID {display: none;}";
 	}
 	
+	private void updateListBookChapter(String href, String chapId) {
+		for (BookChapter bc : arrBookChapter) {
+			if (bc.chapLink.equals(href)) {
+				bc.chapId = chapId;
+				break;
+			}
+		}
+	}
 	
-	public StringBuilder fullContent() {
-		StringBuilder temp = new StringBuilder();
+	
+	public void fullContent() {
+		//StringBuilder temp = new StringBuilder();
 		StringBuilder content;
 		Resource res;
 		Pattern pattern=Pattern.compile(".*?<body.*?>(.*?)</body>.*?",Pattern.DOTALL);
@@ -588,8 +593,7 @@ public class GenBookHTML {
 				
 				i++; 
 			    res = bookSection.getResource();
-			    
-			   
+
 			    content = new StringBuilder();
 			    content.append(new String(res.getData(), "UTF-8"));
 	        	
@@ -624,16 +628,12 @@ public class GenBookHTML {
 	        	saveTextToFile(strContent);
 	        	saveTextToFile("\n</div>");
 	        	
-	        	//end = System.currentTimeMillis();
-	        	//Log.d("timer", "B step " + i + ": " + (end - start) / 1000f + " seconds");
+	        
 			}
-			Log.d("final string >>" , ">>>" + temp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//styleChapter = styleChapter + "#chapID {display: none;}";
-		return temp;
+		//return temp;
 	}
 	
 	private void replaceAll(StringBuilder builder, String from, String to)
