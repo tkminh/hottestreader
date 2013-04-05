@@ -115,6 +115,7 @@ public class Reader extends Activity {
 			@Override  
 		     public void onPageFinished(WebView view, String url) {
 		         super.onPageFinished(view, url);
+		         progressDialog.dismiss();
 		         Log.d("Load epub", "Successful");
 		         setChapter();
 		     }  
@@ -155,7 +156,7 @@ public class Reader extends Activity {
 					Object o = listChapter.getItemAtPosition(position);
 					BookChapter bc = (BookChapter)o;
 					//webview.loadUrl("javascript:goToChapter('" + bc.chapId + "');");
-					//webview.loadUrl("javascript:window.reader1.moveTo({ componentId: '" + bc.chapId + "'});");
+					webview.loadUrl("javascript:window.reader1.moveTo({ componentId: '" + bc.chapId + "'});");
 					hideControl();
 				}
 			});

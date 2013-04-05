@@ -116,10 +116,6 @@ public class GenBookHTML {
 			try {
 				loadImage();
 				getChapterConfig();
-				//styleChapter = styleChapter + "#chapID {display: none;}";
-				
-				//Log.d("hihi", arrChapter.size() + " & " + bookData.split(",").length);
-				
 				genEbookHTML();
 				
 				saveToRecentList();
@@ -132,14 +128,16 @@ public class GenBookHTML {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			Reader.progressDialog.dismiss();
-			Reader.webview.loadUrl("file://" + finalPathFile);
+			
 			try {
 				writer.flush();
 				writer.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			//Reader.progressDialog.dismiss();
+			Reader.webview.loadUrl("file://" + finalPathFile);
 		}
 		
 	}
