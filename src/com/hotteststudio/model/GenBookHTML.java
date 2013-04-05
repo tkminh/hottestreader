@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Identifier;
@@ -578,9 +580,8 @@ public class GenBookHTML {
 	public StringBuilder fullContent() {
 		StringBuilder temp = new StringBuilder();
 		StringBuilder content;
-		StringBuilder content2;
-		Document doc;
 		Resource res;
+		Pattern pattern=Pattern.compile(".*?<body.*?>(.*?)</body>.*?",Pattern.DOTALL);
 		try {
 			int i = 0;
 			for (SpineReference bookSection : spine.getSpineReferences()) {
@@ -594,54 +595,9 @@ public class GenBookHTML {
 	        	
 			    replaceAll(content, "%20", " ");
 			    replaceAll(content, "alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (XCommon.getRootPath() + folderName + "/"));
-			    //replaceAll(content, "xlink:href", "src");
-			    
-			    // xu li vu chi lay body content
-			    doc = Jsoup.parse(content.toString());
-			    content2 = new StringBuilder();
-			    
-			    /*
-			    // remove style co san
-			    Elements els = doc.select("style");
-			    for(Element e: els){
-			        e.remove();
-			    }
-			    
-			    // remove empty tags
-			    for (Element element : doc.select("*")) {
-			        if (!element.hasText() && element.isBlock()) {
-			        	if (element.getElementsByTag("img")!=null && element.getElementsByTag("img").size()<1)
-			        		element.remove();
-			        }
-			        
-			    }
-			    */
-			    
-			    
-			    // change image
-			    for (Element element : doc.select("img")) {
-			    	if (element.hasAttr("xlink:href")) {
-			    		String imgPath = element.attr("xlink:href");
-			    		try {
-			    			imgPath = imgPath.substring(imgPath.lastIndexOf("/")+1);
-			    		} catch (Exception e) {
-			    			e.printStackTrace();
-			    		}
-			    		element.attr("src", "images/" + imgPath);
-			    	} 
-			    	/*else {
-			    		String imgPath = element.attr("src");
-			    		element.attr("src", "file://" + XCommon.getRootPath() + folderName + "/" + imgPath.substring(imgPath.lastIndexOf("/")+1));
-			    		//replaceAll(content, "alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (XCommon.getRootPath() + folderName + "/"));
-			    	}*/
-			    }
-			    //*/
-			    
-			    //content2.append(doc.getElementsByTag("body").html());
-			    
-			    //end = System.currentTimeMillis();
-	        	//Log.d("timer", "A step " + i + ": " + (end - start) / 1000f + " seconds");
-			    
+			    replaceAll(content, "xlink:href", "src");
+
+			   
 //	        	StringBuilder nameid = new StringBuilder();
 //	        	nameid.append(res.getHref());
 //			    replaceAll(nameid, "/", "");
@@ -651,20 +607,23 @@ public class GenBookHTML {
 //			    replaceAll(nameid, ".htm", "");
 //			    replaceAll(nameid, ".", "");
 			    //Log.d("here", ">>" + nameid);
-	        	
-	        	//start = System.currentTimeMillis();
-			    long tstart = System.currentTimeMillis();
+
 			    String style = "text-align:justify !important;" +
 			    				"font-size:" + setting.fontSize + "px !important;" +
 			    				"line-height:2 !important; font-weight:normal !important;"
 			    		;
 			    String strChapID = "chap" + i;
 			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container' style='" + style +"' >\n");
-	        	
-	        	saveTextToFile(doc.getElementsByTag("body").html());
+
+			    Matcher matcher=pattern.matcher(content.toString());
+			    String strContent = "";
+			    if(matcher.matches()) {
+			    	strContent = matcher.group(1); 
+			    }
+			    
+	        	saveTextToFile(strContent);
 	        	saveTextToFile("\n</div>");
-	        	long tend = System.currentTimeMillis();
-			    Log.d("timer", "step x: " + (tend - tstart) / 1000f + " seconds");
+	        	
 	        	//end = System.currentTimeMillis();
 	        	//Log.d("timer", "B step " + i + ": " + (end - start) / 1000f + " seconds");
 			}
