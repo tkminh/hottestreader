@@ -155,7 +155,7 @@ public class Reader extends Activity {
 					Object o = listChapter.getItemAtPosition(position);
 					BookChapter bc = (BookChapter)o;
 					//webview.loadUrl("javascript:goToChapter('" + bc.chapId + "');");
-					webview.loadUrl("javascript:window.reader1.moveTo({ componentId: '" + bc.chapId + "'});");
+					//webview.loadUrl("javascript:window.reader1.moveTo({ componentId: '" + bc.chapId + "'});");
 					hideControl();
 				}
 			});

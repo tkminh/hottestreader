@@ -501,7 +501,7 @@ public class GenBookHTML {
 	    sb.append("\n</style>");
 	    
 	    sb.append("\n<script type=\"text/javascript\">");
-	    sb.append("\nMonocle.DEBUG = true;\nvar scrubber;");
+	    sb.append("\nvar scrubber;");
 	    sb.append("\nvar toc;");
 	    sb.append("\nvar magnifier;");
 	    sb.append("\n");
