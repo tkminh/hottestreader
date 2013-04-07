@@ -252,23 +252,10 @@ public class MainActivity extends Activity {
 		Log.d("aaa","resume activity " + xmlContent);
 		if (xmlContent.length()>1) {
 			settings = loadXML(xmlContent);
-		} else {
-			//settings = new UserSettings(); 
-		}
+		} 
 		
-		Log.d("aaa","resume activity " + settings.arrRecentEpub.size());
-		/*
-		runOnUiThread(new Runnable() {
-			
-			@Override
-			public void run() {
-				bookAdapater = new BookListAdapter(MainActivity.this,settings.arrRecentEpub);
-				bookAdapater.notifyDataSetChanged();
-				listBook.invalidateViews();
-			}
-		});
-		*/
-		
+		//Log.d("aaa","resume activity " + settings.arrRecentEpub.size());
+
 		bookAdapater = new BookListAdapter(MainActivity.this,settings.arrRecentEpub);
 		bookAdapater.notifyDataSetChanged();
 		listBook.invalidateViews();

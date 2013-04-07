@@ -58,7 +58,7 @@ public class GenBookHTML {
 //	public ArrayList<String> arrLinkChapter;
 //	
 	public ArrayList<BookChapter> arrBookChapter;
-	public Setting setting;
+	public Setting settingConfig;
 	
 	public long start;
 	public long end;
@@ -75,7 +75,7 @@ public class GenBookHTML {
 			//arrLinkChapter = new ArrayList<String>();
 			arrBookChapter = new ArrayList<BookChapter>();
 			logTableOfContents(book.getTableOfContents().getTocReferences(), 0);
-			setting = new Setting();
+			settingConfig = new Setting();
 			
 			folderName = _folderName;
 			
@@ -479,6 +479,10 @@ public class GenBookHTML {
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monocore.css\" />");
 		sb.append("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monoctrl.css\" />");
 		sb.append("\n<style type=\"text/css\">");
+		sb.append("\n@font-face {font-family: 'Arial'; src:url('file:///android_asset/fonts/Arial_1.ttf') format('truetype'); font-weight: normal; font-style: normal;}");
+		sb.append("\n@font-face {font-family: 'Tahoma'; src:url('file:///android_asset/fonts/tahoma.ttf') format('truetype'); font-weight: normal; font-style: normal;}");
+		sb.append("\n@font-face {font-family: 'TimesNewRoman'; src:url('file:///android_asset/fonts/TIMES.TTF') format('truetype'); font-weight: normal; font-style: normal;}");
+		sb.append("\n@font-face {font-family: 'Verdana'; src:url('file:///android_asset/fonts/verdana.ttf') format('truetype'); font-weight: normal; font-style: normal;}");
 		sb.append("\n#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; }");
 		sb.append(styleChapter);
 		sb.append("\nbody * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important;}");
@@ -498,7 +502,7 @@ public class GenBookHTML {
 	    //sb.append("\nMonocle.Events.listen(window,'load',function () { window.reader = Monocle.Reader('reader',bookData, { flipper: Monocle.Flippers.Slider }); });");
 	    sb.append("\nMonocle.Events.listen(window,'load',function () {");
 	    sb.append("\nvar placeSaver = new Monocle.Controls.PlaceSaver('placesaver');");
-	    sb.append("\nMonocle.Reader('reader',bookData, { flipper: " + setting.getFlipper(2) + " , place: placeSaver.savedPlace() } , ");
+	    sb.append("\nMonocle.Reader('reader',bookData, { flipper: " + settingConfig.getFlipper() + " , place: placeSaver.savedPlace() } , ");
 	    sb.append("\nfunction (rdr) {");
 	    sb.append("\nwindow.reader1 = rdr;");
 	    sb.append("\nmagnifier = new Monocle.Controls.Magnifier(rdr);");
@@ -590,20 +594,10 @@ public class GenBookHTML {
 			    replaceAll(content, "alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (XCommon.getRootPath() + folderName + "/"));
 			    replaceAll(content, "xlink:href", "src");
 
-			   
-//	        	StringBuilder nameid = new StringBuilder();
-//	        	nameid.append(res.getHref());
-//			    replaceAll(nameid, "/", "");
-//			    replaceAll(nameid, " ", "");
-//			    replaceAll(nameid, ".xhtml", "");
-//			    replaceAll(nameid, ".html", "");
-//			    replaceAll(nameid, ".htm", "");
-//			    replaceAll(nameid, ".", "");
-			    //Log.d("here", ">>" + nameid);
-
 			    String style = "text-align:justify !important;" +
-			    				"font-size:" + setting.fontSize + "px !important;" +
-			    				"line-height:2 !important; font-weight:normal !important;"
+			    				"font-size:" + settingConfig.getFontSize() + "px !important;" +
+			    				"line-height:" + settingConfig.getLineSpacing() + " !important; font-weight:normal !important;" +
+			    				"font-family: '" + settingConfig.getFontType() + "' !important; "
 			    		;
 			    String strChapID = "chap" + i;
 			    saveTextToFile("\n<div id=\"" + strChapID  + "\" class='chapter-container' style='" + style +"' >\n");

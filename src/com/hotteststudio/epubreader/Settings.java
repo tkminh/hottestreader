@@ -178,6 +178,10 @@ public class Settings extends Activity {
 	public void save() {
 		settings.brightness = sbBrightness.getProgress();
 		settings.fontSize = sbFontSize.getProgress();
+		settings.flipper = getIndexCheckedFromRadioGroup(rgPageTurn);
+		settings.screenOrientation = getIndexCheckedFromRadioGroup(rgScreenType);
+		settings.fontType = getIndexCheckedFromRadioGroup(rgFontType);
+		settings.lineSpacing = getIndexCheckedFromRadioGroup(rgLineSpacing);
 		
 		String strXML = MainActivity.xmlHandler.xstream.toXML(settings);
 		XCommon.saveTextToFile(XCommon.XML_FILE, strXML, false);
