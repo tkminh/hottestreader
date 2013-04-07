@@ -2,12 +2,12 @@ package com.hotteststudio.epubreader;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,7 +19,6 @@ import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -48,6 +47,8 @@ public class Reader extends Activity {
 	public ListView listChapter;
 	
 	public boolean isShowControl = false;
+	
+	public AlertDialog.Builder builder;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +80,31 @@ public class Reader extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		super.onBackPressed();
-		Toast.makeText(this, "Quit ?", Toast.LENGTH_LONG).show();
+		showQuitDialog();
+	}
+	
+	public void showQuitDialog() {
+		if (builder==null) {
+	    	builder = new AlertDialog.Builder(this);
+	    	builder.setTitle("Ohhh Nooo !!!");
+	        builder.setMessage("Do you really wanna out, Honey ?");
+	
+	        builder.setPositiveButton("Ok, back soon !", new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		dialog.dismiss();
+	        		finish();
+	        	}
+	        });
+	        
+	        builder.setNegativeButton("Absolutely not !", new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	                // Do nothing
+	                dialog.dismiss();
+	            }
+	        });
+		}
+		
+		builder.create().show();
 	}
 	
 	public void onMenuClick() {

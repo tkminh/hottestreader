@@ -20,29 +20,22 @@
 	        />
 	</LinearLayout>
     
-    <TableLayout  
+    <LinearLayout 
         android:layout_width="match_parent" 
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:orientation="vertical"
         android:id="@+id/tblAdView">
         
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <Button 
+        <Button 
 		        android:layout_width="match_parent"
 		        android:layout_height="50dp"
 		        android:id="@+id/btnBrowse"
 		        android:text="@string/selectEpub"
 		        android:onClick="openFileChooser"
 	        />
-        </TableRow>
         
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+        
             <com.google.ads.AdView
 		        android:id="@+id/adView"
 		        android:layout_width="fill_parent"
@@ -52,8 +45,8 @@
 		        ads:loadAdOnCreate="true" >
 			    
 			</com.google.ads.AdView>
-        </TableRow>
-    </TableLayout>
+        
+    </LinearLayout>
 	
 	<RelativeLayout 
 	    android:layout_width="fill_parent"
