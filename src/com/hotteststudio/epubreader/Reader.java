@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.pm.ActivityInfo;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +55,9 @@ public class Reader extends Activity {
 		this.setContentView(R.layout.activity_reader);
 		EPUB_PATH = this.getIntent().getExtras().getString("epubPath");
 		
+		if (MainActivity.settings.screenOrientation==1) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
 		init();
 		loadEbookContent();
 	}
