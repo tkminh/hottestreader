@@ -1,8 +1,10 @@
 package com.hotteststudio.util;
 
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
@@ -61,7 +63,9 @@ public class XAds {
 					AdRequest request = new AdRequest();
 					request.setTesting(true);
 					request.addTestDevice("5AA908BF9DFBF93EB786BD3F55E43AD7");
-					adView.loadAd(request);
+					if (adView.getVisibility()==View.VISIBLE) {
+						adView.loadAd(request);
+					}
 					handle.postDelayed(this, 10000);
 				}
 			};

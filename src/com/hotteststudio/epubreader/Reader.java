@@ -2,6 +2,8 @@ package com.hotteststudio.epubreader;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -22,10 +25,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.google.ads.AdView;
 import com.hotteststudio.model.BookChapter;
 import com.hotteststudio.model.BookChapterAdapter;
 import com.hotteststudio.model.GenBookHTML;
 import com.hotteststudio.model.JSInterface;
+import com.hotteststudio.util.XAds;
 import com.hotteststudio.util.XCommon;
 
 public class Reader extends Activity {
@@ -50,6 +55,16 @@ public class Reader extends Activity {
 	
 	public AlertDialog.Builder builder;
 	
+	public TimerTask showAdsTask;
+	public Timer timer;
+	public Handler handler;
+	public final int DELAY = 10000;
+	public final int PERIOD = 20000;
+	public final int SHOWTIME = 100; //600
+	public int count;
+	
+	public AdView adView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,6 +76,7 @@ public class Reader extends Activity {
 		}
 		init();
 		loadEbookContent();
+		showAds();
 	}
 	
 	@Override
@@ -92,6 +108,7 @@ public class Reader extends Activity {
 	        builder.setPositiveButton("Ok, back soon !", new DialogInterface.OnClickListener() {
 	        	public void onClick(DialogInterface dialog, int which) {
 	        		dialog.dismiss();
+	        		if (timer!=null) timer.cancel();
 	        		finish();
 	        	}
 	        });
@@ -151,6 +168,10 @@ public class Reader extends Activity {
 		
 		webview.setWebChromeClient(new WebChromeClient());
 
+		
+		adView = (AdView) findViewById(R.id.adViewReader);
+		XAds xads = new XAds(adView);
+    	xads.loadAds();
 	}
 	
 	public void loadEbookContent() {
@@ -200,5 +221,39 @@ public class Reader extends Activity {
 		listChapter.setVisibility(View.VISIBLE);
 		webview.setVisibility(View.GONE);
 	}
+	
+	public void showAds() {
+		timer = new Timer();
+		handler = new Handler();
+		showAdsTask = new TimerTask() {
+			
+			@Override
+			public void run() {
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						//Toast.makeText(Reader.this, "Fach Fack", Toast.LENGTH_SHORT).show();
+						count++;
+						Log.d("ADS",">> " + count);
+						// show ads
+						if (count>=SHOWTIME) {
+							count=0;
+							adView.setVisibility(View.VISIBLE);
+							Log.d("ADS","Show");
+						} 
+						// close ads
+						else {
+							adView.setVisibility(View.GONE);
+							Log.d("ADS","Hide");
+						}
+					}
+				});
+			}
+			
+		};
+		timer.schedule(showAdsTask, DELAY, PERIOD);
+	}
+	
 	
 }
