@@ -98,7 +98,7 @@ public class GenBookHTML {
 			f.createNewFile();
 			
 			fw = new FileWriter(f, true);
-			int bufSize = 4*(int)(Math.pow(1024, 2));
+			int bufSize = (int)(Math.pow(1024, 2));
 			writer = new BufferedWriter(fw,bufSize);
 
 			LoadEpub load = new LoadEpub();
@@ -136,7 +136,6 @@ public class GenBookHTML {
 				e.printStackTrace();
 			}
 			
-			//Reader.progressDialog.dismiss();
 			Reader.webview.loadUrl("file://" + finalPathFile);
 		}
 		

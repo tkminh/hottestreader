@@ -235,7 +235,7 @@ public class MainActivity extends Activity {
 		return null;
 	}
 	
-	public String getXMLSettings() {
+	public static String getXMLSettings() {
 		try {
 			return XCommon.getFileContent(XCommon.XML_FILE);
 		} catch (Exception e) {
@@ -294,4 +294,6 @@ public class MainActivity extends Activity {
 				return false;
 		}
 	}
+	
+	
 }
