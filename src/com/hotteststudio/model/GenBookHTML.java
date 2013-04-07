@@ -446,19 +446,11 @@ public class GenBookHTML {
 	      return;
 	    }
 	    for (TOCReference tocReference : tocReferences) {
-//	      StringBuilder tocString = new StringBuilder();
-//	      for (int i = 0; i < depth; i++) {
-//	        tocString.append("\t");
-//	      }
-//	      tocString.append(tocReference.getTitle());
-	      //Log.d("epublib chapter", tocReference.getCompleteHref());
-	      //arrChapters.add(new BookChapter(tocReference.getCompleteHref(), tocString.toString(), 0));
-//	      arrChapter.add(tocString.toString());
-//	      String s = tocReference.getCompleteHref().replace("/", "");
-//	      arrLinkChapter.add(s);
-	      
-	      arrBookChapter.add(new BookChapter("",tocReference.getCompleteHref(),tocReference.getTitle()));
-	      //Log.d("GenChapterTOC","TOC: " + tocReference.getCompleteHref() + " - " + tocReference.getTitle() + " - " + tocString.toString());
+	      String title = tocReference.getTitle();
+	      if (title.length()<1) {
+	    	  title = tocReference.getCompleteHref();
+	      }
+	      arrBookChapter.add(new BookChapter("",tocReference.getCompleteHref(), title));
 	      logTableOfContents(tocReference.getChildren(), depth + 1);
 	    }
 	  }
@@ -652,6 +644,9 @@ public class GenBookHTML {
 		getUUID();
 		if (metadata.getTitles().size()>0)
 		bm.title = metadata.getTitles().get(0).toString();
+		if (bm.title.length()<1) {
+			bm.title = folderName;
+		}
 		
 		if (metadata.getCoverImage() != null)
 		bm.coverImg = metadata.getCoverImage().getHref();
@@ -681,7 +676,7 @@ public class GenBookHTML {
 		EpubInfo e = getBookInfo();
 		e.path = Reader.EPUB_PATH;
 		
-		// xu li trung epubuuid
+		// xu li trung epub uuid thi se update
 		for (EpubInfo ei : MainActivity.settings.arrRecentEpub) {
 			if (ei.uuid.equals(e.uuid) && ei.path.equals(e.path)) {
 				return;
