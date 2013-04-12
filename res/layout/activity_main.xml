@@ -31,8 +31,9 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="50dp"
 		        android:id="@+id/btnBrowse"
-		        android:text="@string/selectEpub"
+		        android:gravity="center"
 		        android:onClick="openFileChooser"
+		        android:background="@drawable/button"
 	        />
         
         
