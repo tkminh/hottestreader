@@ -35,6 +35,7 @@ import com.hotteststudio.util.XCommon;
 
 public class MainActivity extends Activity {
 
+	public static final int _readerResult = 1;
 	public static final int FILE_SELECT_CODE = 0;
 	public static String xmlContent = "";
 	
@@ -120,21 +121,11 @@ public class MainActivity extends Activity {
 		intent.putExtra(FileChooserActivity._RegexFilenameFilter, "(?si).*\\.(epub)$");
 		startActivityForResult(intent, _ReqChooseFile);
 		
-//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
-//        intent.setType("file/*"); 
-//        intent.addCategory(Intent.CATEGORY_OPENABLE);
-//    
-//        try {
-//            startActivityForResult(
-//                    Intent.createChooser(intent, "Select an epub file"),
-//                    FILE_SELECT_CODE);
-//        } catch (android.content.ActivityNotFoundException ex) {
-//            Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
-//        }
     }
 	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//Log.d("minh debug",">> " + requestCode);
         switch (requestCode) {
             /*case FILE_SELECT_CODE:      
             	try {
@@ -159,6 +150,9 @@ public class MainActivity extends Activity {
             		e.printStackTrace();
             	}
             break;*/
+        	case _readerResult:
+        		reloadListBook();
+        		break;
             case _ReqChooseFile:
             	try {
 		            if (resultCode == RESULT_OK) {  
@@ -180,7 +174,8 @@ public class MainActivity extends Activity {
 			                if (file.getName().endsWith(".epub")) {
 		            			Intent reader = new Intent(this,Reader.class);
 		            			reader.putExtra("epubPath", file.getPath());
-		            			this.startActivity(reader);
+		            			//this.startActivity(reader);
+		            			startActivityForResult(reader, _readerResult);
 			                } else {
 			                	Toast.makeText(this, "Error: Wrong format file.", Toast.LENGTH_LONG).show();
 			                }
@@ -240,14 +235,18 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
+		reloadListBook();
+	}
+
+	public void reloadListBook() {
 		xmlContent = getXMLSettings();
-		Log.d("aaa","resume activity " + xmlContent);
+		Log.d("minh debug","resume activity " + xmlContent);
 		if (xmlContent.length()>1) {
 			settings = loadXML(xmlContent);
 		} 
 		
 		//Log.d("aaa","resume activity " + settings.arrRecentEpub.size());
-
+		
 		bookAdapater = new BookListAdapter(MainActivity.this,settings.arrRecentEpub);
 		bookAdapater.notifyDataSetChanged();
 		listBook.invalidateViews();

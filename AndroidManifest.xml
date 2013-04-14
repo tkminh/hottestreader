@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <activity
-            android:name="com.hotteststudio.epubreader.MainActivity"
+            android:name="com.hotteststudio.epubreader.SplashActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:label="@string/app_name" >
             <intent-filter>
@@ -33,6 +33,11 @@
                 <data android:mimeType="application/epub" />
             </intent-filter>
         </activity>
+         <activity
+            android:name="com.hotteststudio.epubreader.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:label="@string/app_name" >
+         </activity>
         <activity 
             android:name="com.hotteststudio.epubreader.Reader" 
             android:windowSoftInputMode="stateHidden"         
