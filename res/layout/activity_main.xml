@@ -33,7 +33,7 @@
 		        android:id="@+id/btnBrowse"
 		        android:gravity="center"
 		        android:onClick="openFileChooser"
-		        android:background="@drawable/button"
+		        android:background="@drawable/browse"
 	        />
         
         
