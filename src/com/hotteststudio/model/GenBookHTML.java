@@ -483,7 +483,7 @@ public class GenBookHTML {
 		sb.append("\n@font-face {font-family: 'Tahoma'; src:url('file:///android_asset/fonts/tahoma.ttf') format('truetype'); font-weight: normal; font-style: normal;}");
 		sb.append("\n@font-face {font-family: 'TimesNewRoman'; src:url('file:///android_asset/fonts/TIMES.TTF') format('truetype'); font-weight: normal; font-style: normal;}");
 		sb.append("\n@font-face {font-family: 'Verdana'; src:url('file:///android_asset/fonts/verdana.ttf') format('truetype'); font-weight: normal; font-style: normal;}");
-		sb.append("\n#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; background-color:#fff; opacity:0.5; }");
+		sb.append("\n#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; }");
 		sb.append(styleChapter);
 		sb.append("\nbody * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important; }");
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}"); 
@@ -537,6 +537,7 @@ public class GenBookHTML {
 
 	    sb.append("\n</head>");
 	    sb.append("\n<body>");
+	    sb.append("\n<div id=\"mask\"></div>\n");
 	    sb.append("\n<div id=\"reader\"></div>\n");
 	    
 	    saveTextToFile(sb.toString());
@@ -600,7 +601,7 @@ public class GenBookHTML {
 			    String style = "text-align:justify !important;" +
 			    				"font-size:" + settingConfig.getFontSize() + "px !important;" +
 			    				"line-height:" + settingConfig.getLineSpacing() + " !important; font-weight:normal !important;" +
-			    				"font-family: '" + settingConfig.getFontType() + "' !important; " 
+			    				"font-family: " + settingConfig.getFontType() + " !important; " 
 			    				//"color: #00a8ff !important; "
 			    		;
 			    String strChapID = "chap" + i;
