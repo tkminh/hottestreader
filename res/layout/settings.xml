@@ -223,6 +223,44 @@
                 android:text="2.5"
                 />
         </RadioGroup>
+        
+		<TextView 
+		    android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            android:text="@string/selectBackground"
+            android:layout_margin="10dp"
+		    />
+		<RadioGroup
+            android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/rg_lineSpacing"
+            >
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:id="@+id/rg_ls_small"
+                android:text="Sky"
+                />
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:id="@+id/rg_ls_normal"
+                android:text="Sea"
+                />
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:id="@+id/rg_ls_large"
+                android:text="Wind"
+                />
+            <RadioButton
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:id="@+id/rg_ls_exlarge"
+                android:text="Rain"
+                />
+        </RadioGroup>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

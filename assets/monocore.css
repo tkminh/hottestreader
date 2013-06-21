@@ -16,11 +16,10 @@ div.monelem_container {
 
 /* The div that mimics a leaf of paper in a book. */
 div.monelem_page {
-  background: white;
   top: 0;
   left: 0;
-  bottom: 3px;
-  right: 5px;
+  bottom: 0px;
+  right: 0px;
 
 }
 

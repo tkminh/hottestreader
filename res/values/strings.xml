@@ -9,6 +9,7 @@
 	<string name="selectEpub">Select an epub file</string>
 	<string name="selectScreenBrightness">Select screen brightness</string>
 	<string name="selectFontSize">Select font size</string>
+	<string name="selectBackground">Select background</string>
 	<string name="selectLineSpacing">Select Line spacing</string>
 	<string name="selectScreenOrientation">Select Screen Orientation</string>    
 	<string name="msg_save_setting">Setting was save successfully</string>
