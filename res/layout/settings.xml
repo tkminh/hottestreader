@@ -1,10 +1,12 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity" >
     <RelativeLayout 
+        android:id="@+id/settingTopLayout"
+        android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         
@@ -26,13 +28,37 @@
         
     </RelativeLayout>
     
-    <RelativeLayout
+     <RelativeLayout 
+        android:id="@+id/settingBottomLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+        >
+        <ImageView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentTop="true"
+        	android:layout_marginTop="10dp"
+        	android:layout_marginBottom="10dp"
+        	android:layout_marginLeft="15dp"
+        	android:layout_marginRight="15dp"
+        	android:background="@drawable/adv2"
+        	android:scaleType="centerInside"
+            />
+        
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_below="@id/settingTopLayout"
+        android:layout_above="@id/settingBottomLayout"
         android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
 		android:background="@drawable/bg_details"
          >
     <ImageView 
+        android:id="@+id/leftLayout"
         android:layout_width="wrap_content"
        	android:layout_height="wrap_content"
 		android:layout_marginTop="15dp"
@@ -44,12 +70,14 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="30dp"
+		android:layout_marginRight="20dp"
 		android:layout_alignParentRight="true">
 	    <LinearLayout 
 	        android:layout_width="match_parent"
 	    	android:layout_height="match_parent"
+	    	android:background="@drawable/bg_mask_dark"
 	    	android:paddingTop="20dp"
-	    	android:paddingLeft="40dp"
+	    	
 	    	android:orientation="vertical" >
 	    	<TextView 
 			    android:layout_width="match_parent" 
@@ -273,5 +301,8 @@
 			
 	    </LinearLayout>
     </ScrollView>
-    </RelativeLayout>
-</LinearLayout>
+    
+    </LinearLayout>
+    
+   
+</RelativeLayout>

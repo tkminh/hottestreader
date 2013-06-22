@@ -268,6 +268,10 @@ public class MainActivity extends Activity {
 				Intent setting = new Intent(MainActivity.this,Settings.class);
     			startActivity(setting);
 				return true;
+			case R.id.menu_themesettings:
+				Intent settingTheme = new Intent(MainActivity.this,ThemeSettings.class);
+    			startActivity(settingTheme);
+				return true;
 			default: 
 				return false;
 		}

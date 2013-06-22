@@ -2,7 +2,8 @@
 <resources>
 	<string name="app_version">Version 2.7</string>
     <string name="app_name">Hottest Reader</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_settings">Settings Configuration</string>
+    <string name="menu_themesettings">Theme Settings</string>
     <string name="hello_world">Hello world!</string>
 	<string name="turnPageEffect">Page turn effect</string>
 	<string name="selectFont">Select Font</string>
@@ -13,7 +14,6 @@
 	<string name="selectLineSpacing">Select Line spacing</string>
 	<string name="selectScreenOrientation">Select Screen Orientation</string>    
 	<string name="msg_save_setting">Setting was save successfully</string>
-	
 	<style name="CustomSeekBar1" parent="android:Widget.SeekBar">
 	   <item name="android:progressDrawable">@drawable/custom_seekbar</item>
 	   <item name="android:thumbOffset">0dip</item>

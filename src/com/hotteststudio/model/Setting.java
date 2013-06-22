@@ -9,11 +9,12 @@ public class Setting {
 	}
 	
 	public String getFlipper() {
-		if (MainActivity.settings.flipper == 0)
-			return "Monocle.Flippers.Instant";
-		if (MainActivity.settings.flipper == 1)
-			return "Monocle.Flippers.Scroller";
-		return "Monocle.Flippers.Slider";
+//		if (MainActivity.settings.flipper == 0)
+//			return "Monocle.Flippers.Instant";
+//		if (MainActivity.settings.flipper == 1)
+//			return "Monocle.Flippers.Scroller";
+//		return "Monocle.Flippers.Slider";
+		return "Monocle.Flippers.Instant";
 	}
 	
 	public int getFontSize() {
