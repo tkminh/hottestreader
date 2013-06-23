@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class MainActivity extends Activity {
 	public static XMLHandler xmlHandler;
 	public static UserSettings settings;
 	
-	public ListView listBook;
+	public GridView listBook;
 	public BookListAdapter bookAdapater;
 	
 	public AdView adView;
@@ -84,7 +85,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void initGui() {
-		listBook = (ListView)findViewById(R.id.bookList);
+		listBook = (GridView)findViewById(R.id.bookList);
 		bookAdapater = new BookListAdapter(this,settings.arrRecentEpub);
 		listBook.setAdapter(bookAdapater);
 		listBook.setOnItemClickListener(new OnItemClickListener() {
@@ -106,9 +107,9 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		adView = (AdView) findViewById(R.id.adView);
-    	XAds xads = new XAds(adView);
-    	xads.loadAds();
+		//adView = (AdView) findViewById(R.id.adView);
+//    	XAds xads = new XAds(adView);
+//    	xads.loadAds();
 	}
 	
 	public void openFileChooser(View v) {
