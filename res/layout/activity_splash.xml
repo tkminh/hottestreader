@@ -19,7 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/splash_image"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/version" />
    
@@ -38,7 +37,7 @@
         android:layout_height="wrap_content" 
         android:layout_marginTop="3dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/loading_icon"
+        android:src="@drawable/rolling"
         android:layout_below="@+id/loading"/>
     
 

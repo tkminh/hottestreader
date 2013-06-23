@@ -6,34 +6,66 @@
     tools:context=".MainActivity" >
 
     
-	<LinearLayout 
-	    android:layout_width="match_parent"
-    	android:layout_height="70dp"
-    	android:id="@+id/listTitle"
-    	android:background="@drawable/listtitle"
-	    >
-	    <ImageView 
-	        android:layout_width="match_parent"
-    		android:layout_height="30dp"
-    		android:layout_margin="20dp"
-    		android:background="@drawable/title"
-	        />
-	</LinearLayout>
+	<RelativeLayout 
+        android:id="@+id/mainTopLayout"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+        >
+        <ImageView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentTop="true"
+        	android:background="@drawable/bg_setting"
+            />
+        <ImageView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentLeft="true"
+        	android:src="@drawable/logo_details"
+        	android:layout_centerVertical="true"
+        	android:scaleType="fitXY"
+            />
+        
+    </RelativeLayout>
+    
+	<RelativeLayout 
+        android:id="@+id/mainBottomLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+        >
+        <ImageView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentTop="true"
+        	android:layout_marginTop="10dp"
+        	android:layout_marginBottom="10dp"
+        	android:layout_marginLeft="15dp"
+        	android:layout_marginRight="15dp"
+        	android:background="@drawable/adv1"
+        	android:scaleType="centerInside"
+            />
+        
+    </RelativeLayout>
     
     <LinearLayout 
+        
         android:layout_width="match_parent" 
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
+        android:layout_below="@id/mainTopLayout"
+        android:orientation="horizontal"
         android:id="@+id/tblAdView">
         
         <Button 
-		        android:layout_width="match_parent"
-		        android:layout_height="50dp"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
 		        android:id="@+id/btnBrowse"
-		        android:gravity="center"
+		        android:gravity="right"
 		        android:onClick="openFileChooser"
-		        android:background="@drawable/browse"
+		        android:background="@drawable/btn_choose"
 	        />
         
         
@@ -42,6 +74,7 @@
 		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content"
 		        ads:adSize="BANNER"
+		        android:visibility="gone"
 		        ads:adUnitId="a1512d725538489"
 		        ads:loadAdOnCreate="true" >
 			    
@@ -49,27 +82,32 @@
         
     </LinearLayout>
 	
-	<RelativeLayout 
+	<LinearLayout 
 	    android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/listTitle"
-        android:layout_above="@id/tblAdView"
-	    >
-	    <ImageView 
-	         android:layout_width="fill_parent"
-	        android:layout_height="110dp"
-	        android:background="@drawable/listtopbg"
-	        />
-	    <ListView 
+        android:layout_below="@id/mainTopLayout"
+        android:layout_above="@id/mainBottomLayout"
+        android:orientation="horizontal"
+		android:background="@drawable/bg_details" >
+        <ImageView 
+	        android:id="@+id/mainleftLayout"
+	        android:layout_width="wrap_content"
+	       	android:layout_height="wrap_content"
+			android:layout_marginTop="15dp"
+	       	android:src="@drawable/ti_books_library"
+	       	
+	       	android:adjustViewBounds="true"
+        />
+        <ListView
+	        android:id="@+id/bookList"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:choiceMode="singleChoice"
-	        android:dividerHeight="6dp"
-	        android:id="@+id/bookList"
-	        android:divider="@layout/listdivider"
+	        android:layout_alignParentBottom="true"
 	        android:cacheColorHint="#00000000"
-	        ></ListView>
-   </RelativeLayout>
+	        android:choiceMode="singleChoice"
+	        android:divider="@layout/listdivider"
+	        android:dividerHeight="6dp" />
+   </LinearLayout>
 	    
     
 </RelativeLayout>
