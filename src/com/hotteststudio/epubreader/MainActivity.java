@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.ads.AdView;
+import com.hotteststudio.constant.Default;
 import com.hotteststudio.model.BookListAdapter;
 import com.hotteststudio.model.EpubInfo;
 import com.hotteststudio.model.UserSettings;
@@ -278,4 +279,8 @@ public class MainActivity extends Activity {
 	}
 	
 	
+	// buy books
+	public void clickAds(View v) {
+		XCommon.openBrowser(this, Default.URL_BOOK);
+	}
 }

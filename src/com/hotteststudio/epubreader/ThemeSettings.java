@@ -1,7 +1,11 @@
 package com.hotteststudio.epubreader;
 
+import com.hotteststudio.constant.Default;
+import com.hotteststudio.util.XCommon;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 
 public class ThemeSettings extends Activity {
 
@@ -19,5 +23,10 @@ public class ThemeSettings extends Activity {
 	
 	public void save() {
 		
+	}
+	
+	// buy books
+	public void clickAds(View v) {
+		XCommon.openBrowser(this, Default.URL_BOOK);
 	}
 }

@@ -9,6 +9,8 @@ import java.text.Normalizer;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import com.hotteststudio.constant.Default;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -79,6 +81,12 @@ public class XCommon {
 		if (!ff.exists())
 		ff.mkdirs();
 		return f;
+	}
+	
+	public static void openBrowser(Context c, String url) {
+		Intent i = new Intent(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(Default.URL_BOOK));
+		c.startActivity(i);
 	}
 	
 	public static String getFileContent(String fileName) {

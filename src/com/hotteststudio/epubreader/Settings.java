@@ -11,6 +11,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
+import com.hotteststudio.constant.Default;
 import com.hotteststudio.model.UserSettings;
 import com.hotteststudio.model.XMLHandler;
 import com.hotteststudio.util.XCommon;
@@ -203,5 +204,10 @@ public class Settings extends Activity {
 	
 	public void setCheckIndexForRadioGroup(RadioGroup radioButtonGroup,int id) {
 		radioButtonGroup.check(id);
+	}
+	
+	// buy books
+	public void clickAds(View v) {
+		XCommon.openBrowser(this, Default.URL_BOOK);
 	}
 }
