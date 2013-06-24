@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 	
 	public int height; 
 	public int width;
-	public BitmapDrawable bmap;
+	
 	
 	private static final int _ReqChooseFile = 0;
 	public static boolean isShowBookDetail = false;
@@ -101,72 +101,31 @@ public class MainActivity extends Activity {
 		height = metrics.heightPixels;
 		width = metrics.widthPixels;
 		
-		bmap = (BitmapDrawable) this.getResources().getDrawable(R.drawable.header);
-		float bmapWidth = bmap.getBitmap().getWidth();
-		float bmapHeight = bmap.getBitmap().getHeight();
-		
-		float wRatio = width / bmapWidth;
-		float hRatio = height / bmapHeight;
-		 
-		float ratioMultiplier = wRatio;
-		// Untested conditional though I expect this might work for landscape mode
-		if (hRatio < wRatio) {
-			ratioMultiplier = hRatio;
-		}
-		 
-		int newBmapWidth = (int) (bmapWidth*ratioMultiplier);
-		int newBmapHeight = (int) (bmapHeight*ratioMultiplier);
-		
-		RelativeLayout iView = (RelativeLayout) findViewById(R.id.mainTopLayout);
-		iView.setLayoutParams(new RelativeLayout.LayoutParams(newBmapWidth, newBmapHeight));
-		
-		RelativeLayout main = (RelativeLayout)findViewById(R.id.activityMain);
-		main.setBackgroundResource(R.drawable.bg_details);
-		
-		Button btnBrowse = (Button)findViewById(R.id.btnBrowse);
-		scaleView(btnBrowse, (BitmapDrawable) this.getResources().getDrawable(R.drawable.btn_choose));
-		
-		ImageView mainleftLayout = (ImageView)findViewById(R.id.mainleftLayout);
-		scaleView(mainleftLayout, (BitmapDrawable) this.getResources().getDrawable(R.drawable.title_books_library));
-		
-//		ImageView mainAdv = (ImageView)findViewById(R.id.mainAdv);
-//		scaleView(mainAdv, (BitmapDrawable) this.getResources().getDrawable(R.drawable.adv1));
-//		mainBottomLayout.setLayoutParams(new RelativeLayout.LayoutParams(newBmapWidth, newBmapHeight));
-		//scaleView(mainBottomLayout, (BitmapDrawable) this.getResources().getDrawable(R.drawable.bg_adv));
-		
-		//ImageView mainAds = (ImageView)findViewById(R.id.mainAds);
-		//scaleView(mainAds, (BitmapDrawable) this.getResources().getDrawable(R.drawable.adv1));
-		GridView bookList = (GridView)findViewById(R.id.bookList);
-		
-		float density = getResources().getDisplayMetrics().density;
-		float pxW = bookList.getWidth() * (density / 160f);
-		float pxH = bookList.getHeight() * (density / 160f);
-		Log.d("aaa xx", density + " " + bookList.getWidth() + " " + bookList.getHeight());
-		Log.d("aaa xx", density + " " + pxW + " " + pxH);
+		setUpMultiScreen();
 		
 		
 		// xu li ke sach
-		listBook = (GridView)findViewById(R.id.bookList);
-		bookAdapater = new BookListAdapter(this,settings.arrRecentEpub);
-		listBook.setAdapter(bookAdapater);
-		listBook.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> av, View v, int position, long id) {
-				Object o = listBook.getItemAtPosition(position);
-				// continue here
-				EpubInfo e = (EpubInfo)o;
-				try {
-					File file = new File(e.path);
-	                if (file.exists()) {
-	        			Intent reader = new Intent(MainActivity.this,Reader.class);
-	        			reader.putExtra("epubPath", e.path);
-	        			startActivity(reader);
-	                }
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		});
+//		listBook = (GridView)findViewById(R.id.bookList);
+//		bookAdapater = new BookListAdapter(this,settings.arrRecentEpub);
+//		listBook.setAdapter(bookAdapater);
+//		listBook.setOnItemClickListener(new OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+//				Object o = listBook.getItemAtPosition(position);
+//				// continue here
+//				EpubInfo e = (EpubInfo)o;
+//				try {
+//					File file = new File(e.path);
+//	                if (file.exists()) {
+//	        			Intent reader = new Intent(MainActivity.this,Reader.class);
+//	        			reader.putExtra("epubPath", e.path);
+//	        			startActivity(reader);
+//	                }
+//				} catch (Exception ex) {
+//					ex.printStackTrace();
+//				}
+//			}
+//		});
 		
 		//adView = (AdView) findViewById(R.id.adView);
 //    	XAds xads = new XAds(adView);
@@ -184,7 +143,22 @@ public class MainActivity extends Activity {
 		return ratioMultiplier;
 	}
 	
-	public void scaleView(View v, BitmapDrawable bmap1) {
+	public void setUpMultiScreen() {
+//		ImageView headerMain = (ImageView)findViewById(R.id.headerMainSetting);
+//		scaleViewR(headerMain,R.drawable.header);
+//		
+//		ImageView mainAdv = (ImageView)findViewById(R.id.imgAdvMainSetting);
+//		scaleViewR(mainAdv,R.drawable.adv1);
+//		
+//		ImageView mainleftLayout = (ImageView)findViewById(R.id.leftLayoutMain);
+//		scaleView(mainleftLayout,R.drawable.title_books_library);
+		
+//		ImageView btnBrowse = (ImageView)findViewById(R.id.btnBrowse);
+//		scaleViewR(btnBrowse,R.drawable.btn_choose);
+	}
+	
+	public void scaleView(View v, int id) {
+		BitmapDrawable bmap1 = (BitmapDrawable) this.getResources().getDrawable(id);
 		float w = bmap1.getBitmap().getWidth();
 		float h = bmap1.getBitmap().getHeight();
 		float f = calculateAspectRatio();
@@ -192,12 +166,20 @@ public class MainActivity extends Activity {
 		v.setLayoutParams(layout);
 	}
 	
-	public void scaleView2(View v, int id) {
+	public void scaleViewR(View v, int id) {
 		BitmapDrawable bmap1 = (BitmapDrawable) this.getResources().getDrawable(id);
 		float w = bmap1.getBitmap().getWidth();
 		float h = bmap1.getBitmap().getHeight();
-		float f = calculateAspectRatio();
-		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams((int)(w*f), (int)(h*f));
+		
+		float wRatio = width / w;
+		float hRatio = height / h;
+		 
+		float f = wRatio;
+		if (hRatio < wRatio) {
+			f = hRatio;
+		}
+		
+		RelativeLayout.LayoutParams layout = new RelativeLayout.LayoutParams((int)(w*f), (int)(h*f));
 		v.setLayoutParams(layout);
 	}
 	
@@ -340,7 +322,9 @@ public class MainActivity extends Activity {
 		
 		bookAdapater = new BookListAdapter(MainActivity.this,settings.arrRecentEpub);
 		bookAdapater.notifyDataSetChanged();
-		listBook.invalidateViews();
+		if (listBook!=null) {
+			listBook.invalidateViews();
+		}
 	}
 	
 	
