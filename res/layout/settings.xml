@@ -12,10 +12,12 @@
         
         >
         <ImageView 
+            android:id="@+id/headerSetting"
             android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_alignParentTop="true"
-        	android:background="@drawable/bg_setting"
+        	android:background="@drawable/header"
+        	android:adjustViewBounds="true"
             />
       
         
@@ -29,6 +31,7 @@
         
         >
         <ImageView 
+            android:id="@+id/imgAdvSetting"
             android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_alignParentTop="true"
@@ -52,7 +55,7 @@
 		android:background="@drawable/bg_details"
          >
     <ImageView 
-        android:id="@+id/leftLayout"
+        android:id="@+id/leftSettingLayout"
         android:layout_width="wrap_content"
        	android:layout_height="wrap_content"
 		android:layout_marginTop="15dp"
@@ -63,14 +66,13 @@
     <ScrollView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="30dp"
 		android:layout_marginRight="20dp"
 		android:layout_alignParentRight="true">
 	    <LinearLayout 
 	        android:layout_width="match_parent"
 	    	android:layout_height="match_parent"
-	    	android:background="@drawable/bg_mask_dark"
-	    	android:paddingTop="20dp"
+	    	android:background="@drawable/mask"
+	    	android:paddingTop="10dp"
 	    	
 	    	android:orientation="vertical" >
 	    	<TextView 
@@ -147,6 +149,7 @@
 	            android:layout_height="wrap_content"
 	            android:text="@string/turnPageEffect"
 	            android:layout_margin="10dp"
+	            android:textSize="18sp"
 	    	    />
 	        <RadioGroup
 	            android:layout_width="match_parent" 

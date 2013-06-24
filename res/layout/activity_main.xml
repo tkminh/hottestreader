@@ -6,18 +6,13 @@
     android:id="@+id/activityMain"
     tools:context=".MainActivity" >
 
-   <ImageView 
-       android:layout_alignParentTop="true"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:src="@drawable/bg_details"
-       />
-    
+  
 	<RelativeLayout 
         android:id="@+id/mainTopLayout"
         android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="#fff"
         >
 
         <ImageView
@@ -36,6 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        
         >
         <ImageView 
             android:id="@+id/mainAdv"

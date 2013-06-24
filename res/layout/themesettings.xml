@@ -12,10 +12,12 @@
         
         >
         <ImageView 
+            android:id="@+id/headerThemeSetting"
             android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_alignParentTop="true"
-        	android:background="@drawable/bg_setting"
+        	android:adjustViewBounds="true"
+        	android:background="@drawable/header"
             />
         
         
@@ -29,6 +31,7 @@
         
         >
         <ImageView 
+            android:id="@+id/imgAdvThemeSetting"
             android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_alignParentTop="true"
@@ -49,10 +52,11 @@
         android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
+		android:padding="0dp"
 		android:background="@drawable/bg_details"
          >
     <ImageView 
-        android:id="@+id/leftLayout"
+        android:id="@+id/leftLayoutThemeSetting"
         android:layout_width="wrap_content"
        	android:layout_height="wrap_content"
 		android:layout_marginTop="15dp"
@@ -64,13 +68,13 @@
     <ScrollView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="30dp"
 		android:layout_marginRight="20dp"
+		android:background="@drawable/mask"
 		android:layout_alignParentRight="true">
 	    <LinearLayout 
 	        android:layout_width="match_parent"
-	    	android:layout_height="match_parent"
-	    	android:background="@drawable/bg_mask_dark"
+	    	android:layout_height="wrap_content"
+	    	android:background="@drawable/mask"
 	    	android:orientation="vertical" >
 	    	
 			<ImageView 
@@ -79,6 +83,7 @@
 			    android:src="@drawable/classic_light"
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
+			    android:layout_marginTop="21px"
 			    android:layout_marginBottom="21px"
 			    android:id="@+id/imgClassicLight"
 			    android:onClick="clickClassicLight"
@@ -92,6 +97,26 @@
 			    android:layout_marginBottom="21px"
 			    android:id="@+id/imgGreenCity"
 			    android:onClick="clickGreenCity"
+			    />
+			<ImageView 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:src="@drawable/snow_mountain"
+			    android:adjustViewBounds="true"
+			    android:scaleType="centerInside"
+			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgSnowMountain"
+			    android:onClick="clickSnowMountain"
+			    />
+			<ImageView 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:src="@drawable/ghost_house"
+			    android:adjustViewBounds="true"
+			    android:scaleType="centerInside"
+			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgGhostHouse"
+			    android:onClick="clickGhostHouse"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -116,22 +141,22 @@
 			<ImageView 
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
+			    android:src="@drawable/old_fashioned"
+			    android:adjustViewBounds="true"
+			    android:scaleType="centerInside"
+			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgOldFashioned"
+			    android:onClick="clickOldFashioned"
+			    />
+			<ImageView 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
 			    android:src="@drawable/blue_sky"
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
 			    android:id="@+id/imgBlueSky"
 			    android:onClick="clickBlueSky"
-			    />
-			<ImageView 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:src="@drawable/classic_dark"
-			    android:adjustViewBounds="true"
-			    android:scaleType="centerInside"
-			    android:layout_marginBottom="21px"
-			    android:id="@+id/imgClassicDark"
-			    android:onClick="clickClassicDark"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -146,32 +171,15 @@
 			<ImageView 
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:src="@drawable/ghost_house"
+			    android:src="@drawable/classic_dark"
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
-			    android:id="@+id/imgGhostHouse"
-			    android:onClick="clickGhostHouse"
+			    android:id="@+id/imgClassicDark"
+			    android:onClick="clickClassicDark"
 			    />
-			<ImageView 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:src="@drawable/old_fashioned"
-			    android:adjustViewBounds="true"
-			    android:scaleType="centerInside"
-			    android:layout_marginBottom="21px"
-			    android:id="@+id/imgOldFashioned"
-			    android:onClick="clickOldFashioned"
-			    />
-			<ImageView 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:src="@drawable/snow_mountain"
-			    android:adjustViewBounds="true"
-			    android:scaleType="centerInside"
-			    android:id="@+id/imgSnowMountain"
-			    android:onClick="clickSnowMountain"
-			    />
+
+			
 	    </LinearLayout>
     </ScrollView>
     

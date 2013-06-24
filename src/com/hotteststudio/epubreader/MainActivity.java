@@ -177,11 +177,10 @@ public class MainActivity extends Activity {
 		float wRatio = (width / (float)Default.WIDTH);
 		float hRatio = (height / (float)Default.HEIGHT);
 		float ratioMultiplier = wRatio;
-		// Untested conditional though I expect this might work for landscape mode
 		if (hRatio < wRatio) {
 			ratioMultiplier = hRatio;
 		}
-		//Log.d("aaa",ratioMultiplier + " " + height + " <<< radio multi ");
+		
 		return ratioMultiplier;
 	}
 	

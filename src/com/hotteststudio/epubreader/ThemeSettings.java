@@ -6,9 +6,14 @@ import com.hotteststudio.model.XMLHandler;
 import com.hotteststudio.util.XCommon;
 
 import android.app.Activity;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class ThemeSettings extends Activity {
@@ -16,6 +21,10 @@ public class ThemeSettings extends Activity {
 	public int theme;
 	public UserSettings settings;
 	public XMLHandler xmlHandler;
+	
+	public DisplayMetrics metrics ;
+	public int height; 
+	public int width;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +34,69 @@ public class ThemeSettings extends Activity {
 			xmlHandler = MainActivity.xmlHandler;
 		}
 		settings = MainActivity.settings;
+		
+		setUpMultiScreen();
+		
 	}
 	
 	@Override
 	public void onBackPressed() {
 		save();
 		super.onBackPressed();
+	}
+	
+	public void setUpMultiScreen() {
+		metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		
+		height = metrics.heightPixels;
+		width = metrics.widthPixels;
+		
+		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerThemeSetting);
+		scaleViewR(headerThemeSetting,R.drawable.header);
+		
+		ImageView advThemeSetting = (ImageView)findViewById(R.id.imgAdvThemeSetting);
+		scaleViewR(advThemeSetting,R.drawable.adv1);
+		
+		ImageView leftLayoutThemeSetting = (ImageView)findViewById(R.id.leftLayoutThemeSetting);
+		scaleView(leftLayoutThemeSetting,R.drawable.title_theme_setting);
+	}
+	
+	public float calculateAspectRatio() {
+		float wRatio = (width / (float)Default.WIDTH);
+		float hRatio = (height / (float)Default.HEIGHT);
+		float ratioMultiplier = wRatio;
+		if (hRatio < wRatio) {
+			ratioMultiplier = hRatio;
+		}
+		
+		return ratioMultiplier;
+	}
+	
+	public void scaleView(View v, int id) {
+		BitmapDrawable bmap1 = (BitmapDrawable) this.getResources().getDrawable(id);
+		float w = bmap1.getBitmap().getWidth();
+		float h = bmap1.getBitmap().getHeight();
+		float f = calculateAspectRatio();
+		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams((int)(w*f), (int)(h*f));
+		v.setLayoutParams(layout);
+	}
+	
+	public void scaleViewR(View v, int id) {
+		BitmapDrawable bmap1 = (BitmapDrawable) this.getResources().getDrawable(id);
+		float w = bmap1.getBitmap().getWidth();
+		float h = bmap1.getBitmap().getHeight();
+		
+		float wRatio = width / w;
+		float hRatio = height / h;
+		 
+		float f = wRatio;
+		if (hRatio < wRatio) {
+			f = hRatio;
+		}
+		
+		RelativeLayout.LayoutParams layout = new RelativeLayout.LayoutParams((int)(w*f), (int)(h*f));
+		v.setLayoutParams(layout);
 	}
 	
 	public void save() {

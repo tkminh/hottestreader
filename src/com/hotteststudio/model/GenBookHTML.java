@@ -32,6 +32,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.hotteststudio.epubreader.MainActivity;
+import com.hotteststudio.epubreader.R;
 import com.hotteststudio.epubreader.Reader;
 import com.hotteststudio.util.XCommon;
 
@@ -65,6 +66,9 @@ public class GenBookHTML {
 	
 	public BufferedWriter writer;
 	public FileWriter fw;
+	
+	public Theme light;
+	public Theme dark;
 	
 	public GenBookHTML(InputStream file, String _folderName) {
 		try {
@@ -101,6 +105,10 @@ public class GenBookHTML {
 			int bufSize = (int)(Math.pow(1024, 2));
 			writer = new BufferedWriter(fw,bufSize);
 
+			light = new Theme();
+			dark = new Theme();
+			setUpTheme();
+			
 			LoadEpub load = new LoadEpub();
 			load.execute();
 			
@@ -490,7 +498,9 @@ public class GenBookHTML {
 		//color: #00a8ff !important; 
 	    sb.append("\nbody h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
 	    sb.append("\nhtml {background-image:url('file:///android_asset/" + settingConfig.getTheme() +"') !important; background-repeat: no-repeat !important; background-size: 100% 100% !important; padding-left: 10px !important; padding-right: 10px !important; padding-top:15px !important; padding-bottom: 25px !important; color: #333333 !important;}");
-	    sb.append("\np {margin-top: 1em !important;}");
+	    sb.append("\nh1 {" + getTheme().H1 +" }");
+	    sb.append("\nh2 {" + getTheme().H2 +" }");
+	    sb.append("\np {margin-top: 1em !important;" + getTheme().p + "}");
 	    sb.append("\na,ins {text-decoration:none !important;}");
 	    sb.append("\nspan {text-align:justify !important;}");
 	    sb.append("\n</style>");
@@ -599,8 +609,10 @@ public class GenBookHTML {
 			    replaceAll(content, "xlink:href", "src");
 
 			    String style = "text-align:justify !important;" +
-			    				"font-size:" + settingConfig.getFontSize() + "px !important;" +
-			    				"line-height:" + settingConfig.getLineSpacing() + " !important; font-weight:normal !important;" +
+			    				//"font-size:" + settingConfig.getFontSize() + "px !important;" +
+			    				"font-size:24pt !important;" +
+			    				//"line-height:" + settingConfig.getLineSpacing() + " !important; font-weight:normal !important;" +
+			    				"line-height: 38pt !important; font-weight:normal !important;" +
 			    				"font-family: " + settingConfig.getFontType() + " !important; " 
 			    				//"color: #00a8ff !important; "
 			    		;
@@ -686,5 +698,23 @@ public class GenBookHTML {
 		//Log.d("day ne",">>> " + strXML);
 	}
 	
+	public void setUpTheme() {
+		light.mask = "#ffffff";
+		light.H1 = "color: '#00a8ff' !important ; font-size: 50pt !important; font-style: 'normal' !important;";
+		light.H2 = "color: '#000000' !important; font-size: 36pt !important; font-style: 'normal' !important;";
+		light.p = "color: '#333333'; font-size: 24pt !important; font-style: 'normal' !important;  lineheight: 38pt !important;";
+		
+		dark.mask = "#000000";
+		dark.H1 = "color: '#00a8ff' !important ; font-size: 50pt !important; font-style: 'normal' !important;";
+		dark.H2 = "color: '#cccccc' !important; font-size: 36pt !important; font-style: 'normal' !important;";
+		dark.p = "color: '#888888'; font-size: 24pt !important; font-style: 'normal' !important;  lineheight: 38pt !important;";
+		
+	}
+	
+	public Theme getTheme() {
+		if (MainActivity.settings.theme == R.drawable.classic_dark_active || MainActivity.settings.theme == R.drawable.ghost_house_active)
+			return dark;
+		return light;
+	}
 }
 
