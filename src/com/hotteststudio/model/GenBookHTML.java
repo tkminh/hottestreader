@@ -639,11 +639,15 @@ public class GenBookHTML {
 	private void replaceAll(StringBuilder builder, String from, String to)
 	{
 	    int index = builder.indexOf(from);
-	    while (index != -1)
-	    {
-	        builder.replace(index, index + from.length(), to);
-	        index += to.length(); 
-	        index = builder.indexOf(from, index);
+	    try {
+		    while (index != -1)
+		    {
+		        builder.replace(index, index + from.length(), to);
+		        index += to.length(); 
+		        index = builder.indexOf(from, index);
+		    }
+	    } catch (Exception e) {
+	    	e.printStackTrace();
 	    }
 	}
 	
