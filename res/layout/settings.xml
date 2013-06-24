@@ -17,14 +17,7 @@
         	android:layout_alignParentTop="true"
         	android:background="@drawable/bg_setting"
             />
-        <ImageView 
-            android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_alignParentLeft="true"
-        	android:src="@drawable/logo_details"
-        	android:layout_centerVertical="true"
-        	android:scaleType="fitXY"
-            />
+      
         
     </RelativeLayout>
     
@@ -63,7 +56,7 @@
         android:layout_width="wrap_content"
        	android:layout_height="wrap_content"
 		android:layout_marginTop="15dp"
-       	android:src="@drawable/ti_setting_configuration"
+       	android:src="@drawable/title_setting_configuration"
        	android:layout_alignParentLeft="true"
         />
         

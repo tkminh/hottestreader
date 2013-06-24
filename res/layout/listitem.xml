@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="210dp"
     android:orientation="vertical"
-    android:background="#e3e3e3"
+    android:background="#0068bb"
     >
    
 	    
@@ -13,7 +13,10 @@
 	        android:layout_width="140dp"
 	        android:layout_height="210dp"
 	        android:layout_gravity="top"
+	        android:layout_alignParentTop="true"
 	        android:layout_alignParentLeft="true"
+	        android:adjustViewBounds="true"
+	        android:scaleType="fitXY"
 	         />
 	    
 
@@ -35,7 +38,8 @@
 	            android:layout_marginTop="5dp"
 	            android:layout_marginBottom="5dp"
 	            android:text="title"
-	            android:textSize="20sp"
+	            android:textColor="#9fd4ff"
+	            android:textSize="24sp"
 	            android:textStyle="bold" />
 
 	        <TextView
@@ -44,7 +48,8 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginTop="5dp"
 	            android:text="extra"
-	            android:textSize="12sp" />
+	            android:textColor="#ffffff"
+	            android:textSize="14sp" />
 	    </LinearLayout>
 	
 </RelativeLayout>

@@ -17,14 +17,7 @@
         	android:layout_alignParentTop="true"
         	android:background="@drawable/bg_setting"
             />
-        <ImageView 
-            android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_alignParentLeft="true"
-        	android:src="@drawable/logo_details"
-        	android:layout_centerVertical="true"
-        	android:scaleType="fitXY"
-            />
+        
         
     </RelativeLayout>
     
@@ -87,6 +80,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgClassicLight"
+			    android:onClick="clickClassicLight"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -95,6 +90,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgGreenCity"
+			    android:onClick="clickGreenCity"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -103,6 +100,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgAquarium"
+			    android:onClick="clickAquarium"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -111,6 +110,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgBeachVacation"
+			    android:onClick="clickBeachVacation"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -119,6 +120,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgBlueSky"
+			    android:onClick="clickBlueSky"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -127,6 +130,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgClassicDark"
+			    android:onClick="clickClassicDark"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -135,6 +140,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgDailyNews"
+			    android:onClick="clickDailyNews"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -143,6 +150,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgGhostHouse"
+			    android:onClick="clickGhostHouse"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -151,6 +160,8 @@
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgOldFashioned"
+			    android:onClick="clickOldFashioned"
 			    />
 			<ImageView 
 			    android:layout_width="wrap_content"
@@ -158,6 +169,8 @@
 			    android:src="@drawable/snow_mountain"
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
+			    android:id="@+id/imgSnowMountain"
+			    android:onClick="clickSnowMountain"
 			    />
 	    </LinearLayout>
     </ScrollView>

@@ -3,55 +3,50 @@
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activityMain"
     tools:context=".MainActivity" >
 
+   <ImageView 
+       android:layout_alignParentTop="true"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:src="@drawable/bg_details"
+       />
     
 	<RelativeLayout 
         android:id="@+id/mainTopLayout"
         android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        
         >
-        <ImageView 
-            android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_alignParentTop="true"
-        	android:background="@drawable/bg_setting"
-            />
-        <ImageView 
-            android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_alignParentLeft="true"
-        	android:src="@drawable/logo_details"
-        	android:layout_centerVertical="true"
-        	android:scaleType="fitXY"
-            />
+
+        <ImageView
+            android:id="@+id/headerMain"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:background="@drawable/header"
+            android:scaleType="centerCrop"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
         
     </RelativeLayout>
     
-	<RelativeLayout 
+	<LinearLayout 
         android:id="@+id/mainBottomLayout"
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        
         >
         <ImageView 
-            android:layout_width="wrap_content"
+            android:id="@+id/mainAdv"
+            android:src="@drawable/adv1"
+            android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:layout_alignParentTop="true"
-        	android:layout_marginTop="10dp"
-        	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="15dp"
-        	android:layout_marginRight="15dp"
-        	android:background="@drawable/adv1"
-        	android:scaleType="centerInside"
         	android:onClick="clickAds"
+        	android:adjustViewBounds="true"
+        	android:scaleType="centerCrop"
             />
-        
-    </RelativeLayout>
-    
+    </LinearLayout>
     
 	
 	<LinearLayout 
@@ -60,51 +55,59 @@
         android:layout_below="@id/mainTopLayout"
         android:layout_above="@id/mainBottomLayout"
         android:orientation="horizontal"
-		android:background="@drawable/bg_details" >
+		 >
+
         <ImageView 
 	        android:id="@+id/mainleftLayout"
 	        android:layout_width="wrap_content"
 	       	android:layout_height="wrap_content"
 			android:layout_marginTop="15dp"
-	       	android:src="@drawable/ti_books_library"
-	       	
+	       	android:src="@drawable/title_books_library"
+	       	android:scaleType="centerCrop"
 	       	android:adjustViewBounds="true"
         />
         
         <LinearLayout 
-        
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/tblAdView">
-        
-        <Button 
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:id="@+id/btnBrowse"
-		        android:gravity="center"
-		        android:layout_gravity="right"
-		        android:onClick="openFileChooser"
-		        android:background="@drawable/btn_choose"
-	        />
-        
-        
-           
-			
-        <GridView
-	        android:id="@+id/bookList"
-	        android:layout_width="fill_parent"
+	        android:layout_width="match_parent" 
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	        android:numColumns="2"
-	        android:cacheColorHint="#00000000"
-	        android:choiceMode="singleChoice"
-	        android:listSelector="#00000000"
-	        android:divider="@layout/listdivider"
-	        android:stretchMode="columnWidth"
-	        android:verticalSpacing="10dp"
-	        android:horizontalSpacing="10dp"
-	        android:dividerHeight="6dp" />
+	        android:orientation="vertical"
+	        android:layout_gravity="center"
+	        android:padding="10dp"
+	        android:id="@+id/tblAdView">
+        	
+            <LinearLayout 
+                android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                >
+		        <Button 
+		            android:layout_marginTop="10dp"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:id="@+id/btnBrowse"
+			        android:gravity="center"
+			        android:layout_gravity="right"
+			        android:onClick="openFileChooser"
+			        android:layout_marginBottom="10dp"
+			        android:background="@drawable/btn_choose"
+			        />
+        	</LinearLayout>
+        	
+	        <GridView
+		        android:id="@+id/bookList"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentBottom="true"
+		        android:layout_marginTop="10dp"
+		        android:numColumns="2"
+		        android:cacheColorHint="#00000000"
+		        android:choiceMode="singleChoice"
+		        android:listSelector="#00000000"
+		        android:divider="@layout/listdivider"
+		        android:stretchMode="columnWidth"
+		        android:verticalSpacing="10dp"
+		        android:horizontalSpacing="10dp"
+		        android:dividerHeight="6dp" />
     </LinearLayout>
         
    </LinearLayout>

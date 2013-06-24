@@ -37,6 +37,10 @@ div.monelem_page {
 }
 
 
+div.monelem_page:nth-child(2) {
+  text-indent:-1000px;
+}
+
 /* The div within the page that determines page margins. */
 div.monelem_sheaf {
   top: 1em;

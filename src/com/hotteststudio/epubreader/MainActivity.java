@@ -12,9 +12,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +24,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.ads.AdView;
@@ -32,7 +37,6 @@ import com.hotteststudio.model.BookListAdapter;
 import com.hotteststudio.model.EpubInfo;
 import com.hotteststudio.model.UserSettings;
 import com.hotteststudio.model.XMLHandler;
-import com.hotteststudio.util.XAds;
 import com.hotteststudio.util.XCommon;
 
 public class MainActivity extends Activity {
@@ -48,8 +52,14 @@ public class MainActivity extends Activity {
 	public BookListAdapter bookAdapater;
 	
 	public AdView adView;
+	public DisplayMetrics metrics ;
+	
+	public int height; 
+	public int width;
+	public BitmapDrawable bmap;
 	
 	private static final int _ReqChooseFile = 0;
+	public static boolean isShowBookDetail = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +95,57 @@ public class MainActivity extends Activity {
 	}
 	
 	public void initGui() {
+		metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		
+		height = metrics.heightPixels;
+		width = metrics.widthPixels;
+		
+		bmap = (BitmapDrawable) this.getResources().getDrawable(R.drawable.header);
+		float bmapWidth = bmap.getBitmap().getWidth();
+		float bmapHeight = bmap.getBitmap().getHeight();
+		
+		float wRatio = width / bmapWidth;
+		float hRatio = height / bmapHeight;
+		 
+		float ratioMultiplier = wRatio;
+		// Untested conditional though I expect this might work for landscape mode
+		if (hRatio < wRatio) {
+			ratioMultiplier = hRatio;
+		}
+		 
+		int newBmapWidth = (int) (bmapWidth*ratioMultiplier);
+		int newBmapHeight = (int) (bmapHeight*ratioMultiplier);
+		
+		RelativeLayout iView = (RelativeLayout) findViewById(R.id.mainTopLayout);
+		iView.setLayoutParams(new RelativeLayout.LayoutParams(newBmapWidth, newBmapHeight));
+		
+		RelativeLayout main = (RelativeLayout)findViewById(R.id.activityMain);
+		main.setBackgroundResource(R.drawable.bg_details);
+		
+		Button btnBrowse = (Button)findViewById(R.id.btnBrowse);
+		scaleView(btnBrowse, (BitmapDrawable) this.getResources().getDrawable(R.drawable.btn_choose));
+		
+		ImageView mainleftLayout = (ImageView)findViewById(R.id.mainleftLayout);
+		scaleView(mainleftLayout, (BitmapDrawable) this.getResources().getDrawable(R.drawable.title_books_library));
+		
+//		ImageView mainAdv = (ImageView)findViewById(R.id.mainAdv);
+//		scaleView(mainAdv, (BitmapDrawable) this.getResources().getDrawable(R.drawable.adv1));
+//		mainBottomLayout.setLayoutParams(new RelativeLayout.LayoutParams(newBmapWidth, newBmapHeight));
+		//scaleView(mainBottomLayout, (BitmapDrawable) this.getResources().getDrawable(R.drawable.bg_adv));
+		
+		//ImageView mainAds = (ImageView)findViewById(R.id.mainAds);
+		//scaleView(mainAds, (BitmapDrawable) this.getResources().getDrawable(R.drawable.adv1));
+		GridView bookList = (GridView)findViewById(R.id.bookList);
+		
+		float density = getResources().getDisplayMetrics().density;
+		float pxW = bookList.getWidth() * (density / 160f);
+		float pxH = bookList.getHeight() * (density / 160f);
+		Log.d("aaa xx", density + " " + bookList.getWidth() + " " + bookList.getHeight());
+		Log.d("aaa xx", density + " " + pxW + " " + pxH);
+		
+		
+		// xu li ke sach
 		listBook = (GridView)findViewById(R.id.bookList);
 		bookAdapater = new BookListAdapter(this,settings.arrRecentEpub);
 		listBook.setAdapter(bookAdapater);
@@ -110,6 +171,35 @@ public class MainActivity extends Activity {
 		//adView = (AdView) findViewById(R.id.adView);
 //    	XAds xads = new XAds(adView);
 //    	xads.loadAds();
+	}
+	
+	public float calculateAspectRatio() {
+		float wRatio = (width / (float)Default.WIDTH);
+		float hRatio = (height / (float)Default.HEIGHT);
+		float ratioMultiplier = wRatio;
+		// Untested conditional though I expect this might work for landscape mode
+		if (hRatio < wRatio) {
+			ratioMultiplier = hRatio;
+		}
+		//Log.d("aaa",ratioMultiplier + " " + height + " <<< radio multi ");
+		return ratioMultiplier;
+	}
+	
+	public void scaleView(View v, BitmapDrawable bmap1) {
+		float w = bmap1.getBitmap().getWidth();
+		float h = bmap1.getBitmap().getHeight();
+		float f = calculateAspectRatio();
+		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams((int)(w*f), (int)(h*f));
+		v.setLayoutParams(layout);
+	}
+	
+	public void scaleView2(View v, int id) {
+		BitmapDrawable bmap1 = (BitmapDrawable) this.getResources().getDrawable(id);
+		float w = bmap1.getBitmap().getWidth();
+		float h = bmap1.getBitmap().getHeight();
+		float f = calculateAspectRatio();
+		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams((int)(w*f), (int)(h*f));
+		v.setLayoutParams(layout);
 	}
 	
 	public void openFileChooser(View v) {

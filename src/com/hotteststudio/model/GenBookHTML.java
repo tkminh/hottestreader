@@ -489,7 +489,7 @@ public class GenBookHTML {
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}"); 
 		//color: #00a8ff !important; 
 	    sb.append("\nbody h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
-	    sb.append("\nhtml {background-image:url('file:///android_asset/bg/test.jpg') !important; background-repeat: no-repeat !important; background-size: 100% 100% !important; padding-left: 10px !important; padding-right: 10px !important; padding-top:15px !important; padding-bottom: 25px !important; color: #333333 !important;}");
+	    sb.append("\nhtml {background-image:url('file:///android_asset/" + settingConfig.getTheme() +"') !important; background-repeat: no-repeat !important; background-size: 100% 100% !important; padding-left: 10px !important; padding-right: 10px !important; padding-top:15px !important; padding-bottom: 25px !important; color: #333333 !important;}");
 	    sb.append("\np {margin-top: 1em !important;}");
 	    sb.append("\na,ins {text-decoration:none !important;}");
 	    sb.append("\nspan {text-align:justify !important;}");
