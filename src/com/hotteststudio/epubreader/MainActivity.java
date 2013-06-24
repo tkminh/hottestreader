@@ -105,27 +105,27 @@ public class MainActivity extends Activity {
 		
 		
 		// xu li ke sach
-//		listBook = (GridView)findViewById(R.id.bookList);
-//		bookAdapater = new BookListAdapter(this,settings.arrRecentEpub);
-//		listBook.setAdapter(bookAdapater);
-//		listBook.setOnItemClickListener(new OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> av, View v, int position, long id) {
-//				Object o = listBook.getItemAtPosition(position);
-//				// continue here
-//				EpubInfo e = (EpubInfo)o;
-//				try {
-//					File file = new File(e.path);
-//	                if (file.exists()) {
-//	        			Intent reader = new Intent(MainActivity.this,Reader.class);
-//	        			reader.putExtra("epubPath", e.path);
-//	        			startActivity(reader);
-//	                }
-//				} catch (Exception ex) {
-//					ex.printStackTrace();
-//				}
-//			}
-//		});
+		listBook = (GridView)findViewById(R.id.bookList);
+		bookAdapater = new BookListAdapter(this,settings.arrRecentEpub);
+		listBook.setAdapter(bookAdapater);
+		listBook.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+				Object o = listBook.getItemAtPosition(position);
+				// continue here
+				EpubInfo e = (EpubInfo)o;
+				try {
+					File file = new File(e.path);
+	                if (file.exists()) {
+	        			Intent reader = new Intent(MainActivity.this,Reader.class);
+	        			reader.putExtra("epubPath", e.path);
+	        			startActivity(reader);
+	                }
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
 		
 		//adView = (AdView) findViewById(R.id.adView);
 //    	XAds xads = new XAds(adView);
@@ -144,14 +144,14 @@ public class MainActivity extends Activity {
 	}
 	
 	public void setUpMultiScreen() {
-//		ImageView headerMain = (ImageView)findViewById(R.id.headerMainSetting);
-//		scaleViewR(headerMain,R.drawable.header);
+		ImageView headerMain = (ImageView)findViewById(R.id.headerMain);
+		scaleViewR(headerMain,R.drawable.header);
 //		
 //		ImageView mainAdv = (ImageView)findViewById(R.id.imgAdvMainSetting);
 //		scaleViewR(mainAdv,R.drawable.adv1);
 //		
-//		ImageView mainleftLayout = (ImageView)findViewById(R.id.leftLayoutMain);
-//		scaleView(mainleftLayout,R.drawable.title_books_library);
+		ImageView mainleftLayout = (ImageView)findViewById(R.id.mainleft);
+		scaleView(mainleftLayout,R.drawable.title_books_library);
 		
 //		ImageView btnBrowse = (ImageView)findViewById(R.id.btnBrowse);
 //		scaleViewR(btnBrowse,R.drawable.btn_choose);

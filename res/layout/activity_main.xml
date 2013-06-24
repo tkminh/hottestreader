@@ -56,7 +56,7 @@
 		 >
 
         <ImageView 
-	        android:id="@+id/mainleftLayout"
+	        android:id="@+id/mainleft"
 	        android:layout_width="wrap_content"
 	       	android:layout_height="wrap_content"
 			android:layout_marginTop="15dp"
@@ -98,7 +98,8 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignParentBottom="true"
 		        android:layout_marginTop="10dp"
-		        android:numColumns="2"
+		        android:numColumns="auto_fit"
+		        android:columnWidth="300dp"
 		        android:cacheColorHint="#00000000"
 		        android:choiceMode="singleChoice"
 		        android:listSelector="#00000000"
