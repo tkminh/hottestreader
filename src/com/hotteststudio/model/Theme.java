@@ -5,4 +5,5 @@ public class Theme {
 	public String H1;
 	public String H2;
 	public String p;
+	public String pColor;
 }

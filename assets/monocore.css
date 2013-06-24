@@ -9,19 +9,6 @@ modify this stylesheet accordingly.
 /* The reader object that holds pretty much everything.
  * (A direct child of the element passed to reader initialisation). */
 
-  /*
- Minh Edit
- */
- #mask {
- position:absolute;
- top: 1em;
- left: 1em;
- bottom: 1.8em;
- right: 1em;
- background-color:#fff;
- opacity:0.5;
- z-index:0;
-}
  
 div.monelem_container {
   

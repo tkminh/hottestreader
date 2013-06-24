@@ -148,33 +148,33 @@ public class GenBookHTML {
 		}
 		
 	}
-	
-	public String genHTML() {
-		
-		String html = "<head>\n" 
-		  + "<meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>"
-		  +"<!-- Include the Monocle library and styles -->"
-		  +"\n<script src=\"file:///android_asset/monocore.js\"></script>"
-		  +"\n<script src=\"file:///android_asset/monoctrl.js\"></script>"
-		  +"\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monocore.css\" />"
-		  +"\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monoctrl.css\" />"
-			  +"\n<style>"
-			    +"#reader { width: 100%; height: 100%; border: 0px solid #000; }"
-			    +"@font-face {font-family: 'Times New Roman'; src:url('file:///android_asset/fonts/times.ttf') format('truetype'); font-weight: normal; font-style: normal;}"
-			    +"body * {text-align:justify !important;font-family: 'Times New Roman' !important;font-style:normal !important; text-decoration:none !important;}"
-			    +"div,p,span,* {text-align:justify !important;}"
-			  +"</style>"
-		+"\n</head>\n"
-			  + genBookData() 
-		+"\n<body style='margin:0px; padding:0px;'>"
-		  +"\n<div id=\"reader\">"
-		  +"</div>"
-		  
-		+"\n</body>";
-		
-		return html;
-	}
-	
+//	
+//	public String genHTML() {
+//		
+//		String html = "<head>\n" 
+//		  + "<meta http-equiv='Content-Type' content='Type=text/html; charset=utf-8'>"
+//		  +"<!-- Include the Monocle library and styles -->"
+//		  +"\n<script src=\"file:///android_asset/monocore.js\"></script>"
+//		  +"\n<script src=\"file:///android_asset/monoctrl.js\"></script>"
+//		  +"\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monocore.css\" />"
+//		  +"\n<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/monoctrl.css\" />"
+//			  +"\n<style>"
+//			    +"#reader { width: 100%; height: 100%; border: 0px solid #000; }"
+//			    +"@font-face {font-family: 'Times New Roman'; src:url('file:///android_asset/fonts/times.ttf') format('truetype'); font-weight: normal; font-style: normal;}"
+//			    +"body * {text-align:justify !important;font-family: 'Times New Roman' !important;font-style:normal !important; text-decoration:none !important;}"
+//			    +"div,p,span,* {text-align:justify !important;}"
+//			  +"</style>"
+//		+"\n</head>\n"
+//			  + genBookData() 
+//		+"\n<body style='margin:0px; padding:0px;'>"
+//		  +"\n<div id=\"reader\">"
+//		  +"</div>"
+//		  
+//		+"\n</body>";
+//		
+//		return html;
+//	}
+//	
 	public String genBookData() {
 		String component = genComponent();
 		String components = genComponents();
@@ -493,9 +493,11 @@ public class GenBookHTML {
 		sb.append("\n@font-face {font-family: 'Verdana'; src:url('file:///android_asset/fonts/verdana.ttf') format('truetype'); font-weight: normal; font-style: normal;}");
 		sb.append("\n#reader { position: relative; width: 100%; height: 100%; border: 0px solid #000; }");
 		sb.append(styleChapter);
-		sb.append("\nbody * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important; }");
+		sb.append("\nbody * {font-style:normal !important; text-decoration:none !important; line-height:2 !important; font-weight:normal !important; font-size: 100% !important; color:'" + getTheme().pColor + "' !important; }");
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}"); 
 		//color: #00a8ff !important; 
+		
+		sb.append("\n#mask {position:absolute;top: 1.5em;left: 1em;bottom: 2.0em;right: 1em;background-color:'" + getTheme().mask + "';opacity:0.5;z-index:0;}");
 	    sb.append("\nbody h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
 	    sb.append("\nhtml {background-image:url('file:///android_asset/" + settingConfig.getTheme() +"') !important; background-repeat: no-repeat !important; background-size: 100% 100% !important; padding-left: 10px !important; padding-right: 10px !important; padding-top:15px !important; padding-bottom: 25px !important; color: #333333 !important;}");
 	    sb.append("\nh1 {" + getTheme().H1 +" }");
@@ -609,6 +611,7 @@ public class GenBookHTML {
 			    replaceAll(content, "xlink:href", "src");
 
 			    String style = "text-align:justify !important;" +
+			    				"color:" + getTheme().pColor + " !important; " +
 			    				//"font-size:" + settingConfig.getFontSize() + "px !important;" +
 			    				"font-size:24pt !important;" +
 			    				//"line-height:" + settingConfig.getLineSpacing() + " !important; font-weight:normal !important;" +
@@ -707,11 +710,13 @@ public class GenBookHTML {
 		light.H1 = "color: '#00a8ff' !important ; font-size: 50pt !important; font-style: 'normal' !important;";
 		light.H2 = "color: '#000000' !important; font-size: 36pt !important; font-style: 'normal' !important;";
 		light.p = "color: '#333333'; font-size: 24pt !important; font-style: 'normal' !important;  lineheight: 38pt !important;";
+		light.pColor = "#333333";
 		
 		dark.mask = "#000000";
 		dark.H1 = "color: '#00a8ff' !important ; font-size: 50pt !important; font-style: 'normal' !important;";
 		dark.H2 = "color: '#cccccc' !important; font-size: 36pt !important; font-style: 'normal' !important;";
 		dark.p = "color: '#888888'; font-size: 24pt !important; font-style: 'normal' !important;  lineheight: 38pt !important;";
+		dark.pColor = "#888888";
 		
 	}
 	
