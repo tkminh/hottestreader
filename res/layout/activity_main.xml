@@ -102,7 +102,7 @@
 		        android:columnWidth="200dp"
 		        android:cacheColorHint="#00000000"
 		        android:choiceMode="singleChoice"
-		        
+		        android:listSelector="#000000ff"
 		        android:divider="@layout/listdivider"
 		        android:stretchMode="columnWidth"
 		        android:verticalSpacing="10dp"

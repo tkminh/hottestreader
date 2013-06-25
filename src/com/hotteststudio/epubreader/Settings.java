@@ -197,7 +197,10 @@ public class Settings extends Activity {
 	
 	public void loadCurrentSetting() {
 		// setting font size
-		if (settings.fontSize<10) settings.fontSize=10;
+		if (settings.fontSize<10) {
+			settings.fontSize=10;
+			Toast.makeText(this, "Font size cannot be smaller than 10 !", Toast.LENGTH_SHORT).show();
+		}
 		sbFontSize.setProgress(settings.fontSize);
 		
 		// setting brightness

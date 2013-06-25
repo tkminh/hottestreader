@@ -21,10 +21,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -127,6 +128,8 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		
+		
 		//adView = (AdView) findViewById(R.id.adView);
 //    	XAds xads = new XAds(adView);
 //    	xads.loadAds();
@@ -153,7 +156,23 @@ public class MainActivity extends Activity {
 		ImageView mainleftLayout = (ImageView)findViewById(R.id.mainleft);
 		scaleView(mainleftLayout,R.drawable.title_books_library);
 		
-//		ImageView btnBrowse = (ImageView)findViewById(R.id.btnBrowse);
+		final ImageView btnBrowse = (ImageView)findViewById(R.id.btnBrowse);
+		btnBrowse.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                switch (arg1.getAction()) {
+	                case MotionEvent.ACTION_DOWN: {
+	                	btnBrowse.setImageDrawable(getResources().getDrawable(R.drawable.btn_choose_select));
+	                    break;
+	                }
+	                case MotionEvent.ACTION_UP:{
+	                	btnBrowse.setImageDrawable(getResources().getDrawable(R.drawable.btn_choose));
+	                    break;
+	                }
+                }
+                return true;
+            }
+        });
 //		scaleViewR(btnBrowse,R.drawable.btn_choose);
 	}
 	

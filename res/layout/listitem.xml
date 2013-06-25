@@ -4,6 +4,7 @@
     android:layout_height="150dp"
     android:orientation="vertical"
     android:background="#0068bb"
+    
     >
    
 	    
@@ -26,10 +27,9 @@
 	        android:layout_alignParentTop="true"
 	        android:layout_alignParentRight="true"
 	        android:orientation="vertical"
-	        
 	        android:layout_toRightOf="@id/img_bookList_item_thumnail" 
-	        android:layout_marginRight="10dp"
-	        android:layout_marginLeft="5dp"
+	        
+	        android:background="@drawable/btnstate"
 	        >
 
 	        <TextView
@@ -41,6 +41,8 @@
 	            android:text="title"
 	            android:textColor="#9fd4ff"
 	            android:textSize="24sp"
+	            android:layout_marginRight="10dp"
+	        	android:layout_marginLeft="5dp"
 	            android:textStyle="bold" />
 
 	        <TextView
@@ -49,7 +51,9 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginTop="5dp"
 	            android:text="extra"
-	            android:textColor="#ffffff"
+	            android:layout_marginRight="10dp"
+	        	android:layout_marginLeft="5dp"
+	            android:textColor="@drawable/txt_author_color"
 	            android:textSize="14sp" />
 	    </LinearLayout>
 	

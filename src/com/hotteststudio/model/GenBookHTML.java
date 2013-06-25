@@ -554,10 +554,10 @@ public class GenBookHTML {
 	    
 	    saveTextToFile(sb.toString());
 	    
-	    start = System.currentTimeMillis();
+//	    start = System.currentTimeMillis();
 	    fullContent();
-	    end = System.currentTimeMillis();
-	    Log.d("timer", "step 3: " + (end - start) / 1000f + " seconds");
+//	    end = System.currentTimeMillis();
+//	    Log.d("timer", "step 3: " + (end - start) / 1000f + " seconds");
 
 	    saveTextToFile("\n</body>");	
 	    
@@ -608,14 +608,15 @@ public class GenBookHTML {
 	        	
 			    replaceAll(content, "%20", " ");
 			    replaceAll(content, "alt=\"\" src=\"../", "alt=\"\" src=\"file://" + (XCommon.getRootPath() + folderName + "/"));
+			    replaceAll(content, "src=\"../Images/", "src=\"file://" + (XCommon.getRootPath() + folderName + "/Images/"));
 			    replaceAll(content, "xlink:href", "src");
 
 			    String style = "text-align:justify !important;" +
 			    				"color:" + getTheme().pColor + " !important; " +
-			    				//"font-size:" + settingConfig.getFontSize() + "px !important;" +
-			    				"font-size:24pt !important;" +
-			    				//"line-height:" + settingConfig.getLineSpacing() + " !important; font-weight:normal !important;" +
-			    				"line-height: 38pt !important; font-weight:normal !important;" +
+			    				"font-size:" + settingConfig.getFontSize() + "px !important;" +
+			    				//"font-size:24pt !important;" +
+			    				"line-height:" + settingConfig.getLineSpacing() + " !important; font-weight:normal !important;" +
+			    				//"line-height: 38pt !important; font-weight:normal !important;" +
 			    				"font-family: " + settingConfig.getFontType() + " !important; " 
 			    				//"color: #00a8ff !important; "
 			    		;
