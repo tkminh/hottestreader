@@ -168,8 +168,10 @@ public class MainActivity extends Activity {
 	                }
 	                case MotionEvent.ACTION_UP:{
 	                	btnBrowse.setImageDrawable(getResources().getDrawable(R.drawable.btn_choose));
+	                	showFileChooser();
 	                    break;
 	                }
+	                
                 }
                 return true;
             }

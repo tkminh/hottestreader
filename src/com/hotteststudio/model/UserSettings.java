@@ -10,7 +10,8 @@ public class UserSettings {
 	public int fontType; // list of 3 font
 	public int lineSpacing;
 	public int screenOrientation;
-	public int theme; 
+	public int theme;
+	public boolean showProgress = false; 
 	
 	public ArrayList<EpubInfo> arrRecentEpub = new ArrayList<EpubInfo>(); // books that user has selected
 	

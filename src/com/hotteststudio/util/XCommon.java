@@ -3,26 +3,32 @@ package com.hotteststudio.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.Normalizer;
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.regex.Pattern;
-
-import com.hotteststudio.constant.Default;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.util.DisplayMetrics;
+
+import com.hotteststudio.constant.Default;
 
 public class XCommon {
 	
 	public static final String ROOT_FOLDER = "hottestreader";
 	public static final String XML_FILE = "settings.xml";
-	public Context context;
+	public static Context context;
 	
 	public XCommon() {
 		
@@ -137,6 +143,82 @@ public class XCommon {
 	    Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 	    return pattern.matcher(nfdNormalizedString).replaceAll("");
 	}
+	
+	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
+    {
+      // Raw height and width of image
+      final int height = options.outHeight;
+      final int width = options.outWidth;
+      int inSampleSize = 1;
+
+      if(height > reqHeight || width > reqWidth)
+      {
+         if(width > height)
+         {
+            inSampleSize = Math.round((float) height / (float) reqHeight);
+         }
+         else
+         {
+            inSampleSize = Math.round((float) width / (float) reqWidth);
+         }
+      }
+      return inSampleSize;
+    }
+	
+	private static Bitmap decodeFile(File file, int newWidth, int newHeight)
+    {// target size
+      try
+      {
+
+         Bitmap bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.fromFile(file));
+         if(bmp == null)
+         {
+            // avoid concurrence
+            // Decode image size
+            BitmapFactory.Options option = new BitmapFactory.Options();
+
+            // option = getBitmapOutput(file);
+
+            option.inDensity = context.getResources().getDisplayMetrics().densityDpi < DisplayMetrics.DENSITY_HIGH ? 120 : 240;
+            option.inTargetDensity = context.getResources().getDisplayMetrics().densityDpi;
+
+            if(newHeight > 0 && newWidth > 0) 
+                option.inSampleSize = calculateInSampleSize(option, newWidth, newWidth);
+
+            option.inJustDecodeBounds = false;
+            byte[] decodeBuffer = new byte[12 * 1024];
+            option.inTempStorage = decodeBuffer;
+            option.inPurgeable = true;
+            option.inInputShareable = true;
+            option.inScaled = true;
+
+            bmp = BitmapFactory.decodeStream(new FileInputStream(file), null, option);
+            if(bmp == null)
+            {
+               return null;
+            }
+
+         }
+         else
+         {
+            int inDensity = context.getResources().getDisplayMetrics().densityDpi < DisplayMetrics.DENSITY_HIGH ? 120 : 240;
+            int inTargetDensity = context.getResources().getDisplayMetrics().densityDpi;
+            if(inDensity != inTargetDensity)
+            {
+               int newBmpWidth = (bmp.getWidth() * inTargetDensity) / inDensity;
+               int newBmpHeight = (bmp.getHeight() * inTargetDensity) / inDensity;
+               bmp = Bitmap.createScaledBitmap(bmp, newBmpWidth, newBmpHeight, true);
+            }
+         }
+
+         return bmp;
+      }
+      catch(Exception e)
+      {
+         e.printStackTrace();
+      }
+      return null;
+    }
 	
 	//
 	public static String convertStringVietnamese(String str) {

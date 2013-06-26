@@ -47,11 +47,14 @@
         android:layout_below="@+id/loading"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/img_book_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_margin="0dp"
         android:adjustViewBounds="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/book_loading" />
+        android:scaleType="centerInside"
+        android:src="@drawable/book_loading"
+        />
 </RelativeLayout>
