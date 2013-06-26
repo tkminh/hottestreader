@@ -33,15 +33,16 @@
         android:layout_height="wrap_content"
         
         >
-        <ImageView 
-            android:id="@+id/mainAdv"
-            android:src="@drawable/adv1"
-            android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:onClick="clickAds"
-        	android:adjustViewBounds="true"
-        	android:scaleType="centerCrop"
-            />
+        <com.google.ads.AdView
+	        android:id="@+id/adViewMain"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        ads:adSize="BANNER"
+	        ads:adUnitId="a1512d725538489"
+	        ads:loadAdOnCreate="true" >
+		    
+		</com.google.ads.AdView>
     </RelativeLayout>
     
 	

@@ -38,6 +38,7 @@ import com.hotteststudio.model.BookListAdapter;
 import com.hotteststudio.model.EpubInfo;
 import com.hotteststudio.model.UserSettings;
 import com.hotteststudio.model.XMLHandler;
+import com.hotteststudio.util.XAds;
 import com.hotteststudio.util.XCommon;
 
 public class MainActivity extends Activity {
@@ -130,9 +131,9 @@ public class MainActivity extends Activity {
 		
 		
 		
-		//adView = (AdView) findViewById(R.id.adView);
-//    	XAds xads = new XAds(adView);
-//    	xads.loadAds();
+		adView = (AdView) findViewById(R.id.adViewMain);
+    	XAds xads = new XAds(adView);
+    	xads.loadAds();
 	}
 	
 	public float calculateAspectRatio() {
