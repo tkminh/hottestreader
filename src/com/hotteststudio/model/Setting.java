@@ -78,6 +78,15 @@ public class Setting {
 		if (theme==R.drawable.snow_mountain_active) {
 			return "bg/snow_mountain.jpg";
 		}
+		if (theme==R.drawable.classic_paper_active) {
+			return "bg/classic_paper.jpg";
+		}
+		if (theme==R.drawable.classic_wood_active) {
+			return "bg/classic_wood.jpg";
+		}
+		if (theme==R.drawable.dmabstract_active) {
+			return "bg/dmabstract.jpg";
+		}
 		
 		return "bg/classic_light.jpg";
 	}

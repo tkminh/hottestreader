@@ -91,6 +91,36 @@
 			<ImageView 
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
+			    android:src="@drawable/classic_dark"
+			    android:adjustViewBounds="true"
+			    android:scaleType="centerInside"
+			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgClassicDark"
+			    android:onClick="clickClassicDark"
+			    />
+			<ImageView 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:src="@drawable/classic_paper"
+			    android:adjustViewBounds="true"
+			    android:scaleType="centerInside"
+			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgClassicPaper"
+			    android:onClick="clickClassicPaper"
+			    />
+			<ImageView 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:src="@drawable/classic_wood"
+			    android:adjustViewBounds="true"
+			    android:scaleType="centerInside"
+			    android:layout_marginBottom="21px"
+			    android:id="@+id/imgClassicWood"
+			    android:onClick="clickClassicWood"
+			    />
+			<ImageView 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
 			    android:src="@drawable/green_city"
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
@@ -168,17 +198,17 @@
 			    android:id="@+id/imgDailyNews"
 			    android:onClick="clickDailyNews"
 			    />
+			
 			<ImageView 
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:src="@drawable/classic_dark"
+			    android:src="@drawable/dmabstract"
 			    android:adjustViewBounds="true"
 			    android:scaleType="centerInside"
 			    android:layout_marginBottom="21px"
-			    android:id="@+id/imgClassicDark"
-			    android:onClick="clickClassicDark"
+			    android:id="@+id/dmabstract"
+			    android:onClick="clickAbstract"
 			    />
-
 			
 	    </LinearLayout>
     </ScrollView>

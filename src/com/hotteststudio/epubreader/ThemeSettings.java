@@ -188,6 +188,27 @@ public class ThemeSettings extends Activity {
 		theme = R.drawable.classic_dark_active;
 	}
 	
+	public void clickClassicPaper(View v) {
+		clearSelection();
+		ImageView vv = (ImageView)v;
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_paper_active));
+		theme = R.drawable.classic_paper_active;
+	}
+	
+	public void clickClassicWood(View v) {
+		clearSelection();
+		ImageView vv = (ImageView)v;
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_wood_active));
+		theme = R.drawable.classic_wood_active;
+	}
+	
+	public void clickAbstract(View v) {
+		clearSelection();
+		ImageView vv = (ImageView)v;
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.dmabstract_active));
+		theme = R.drawable.dmabstract_active;
+	}
+	
 	public void clickDailyNews(View v) {
 		clearSelection();
 		ImageView vv = (ImageView)v;

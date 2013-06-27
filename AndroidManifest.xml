@@ -20,6 +20,7 @@
         <activity
             android:name="com.hotteststudio.epubreader.SplashActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +37,7 @@
          <activity
             android:name="com.hotteststudio.epubreader.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
          </activity>
         <activity 
