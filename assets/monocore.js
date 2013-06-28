@@ -1684,8 +1684,10 @@ Monocle.Formatting = function (reader, optStyles, optScale) {
     } else {
       styleTag.appendChild(doc.createTextNode(styleRules));
     }
+		
 
     head.appendChild(styleTag);
+
 
     return styleTag;
   }
@@ -1981,15 +1983,28 @@ Monocle.Reader = function (node, bookData, options, onLoadCallback) {
     for (var i = 0; i < p.flipper.pageCount; ++i) {
       var page = cntr.dom.append('div', 'page', i);
       page.style.visibility = "hidden";
+	  
+
+
+
+	  
       page.m = { reader: API, pageIndex: i, place: null }
       page.m.sheafDiv = page.dom.append('div', 'sheaf', i);
       page.m.activeFrame = page.m.sheafDiv.dom.append('iframe', 'component', i);
       page.m.activeFrame.m = { 'pageDiv': page };
       page.m.activeFrame.setAttribute('frameBorder', 0);
       page.m.activeFrame.setAttribute('scrolling', 'no');
+	  page.m.sheafDiv = page.dom.append('div', 'mask', i);
+
       p.flipper.addPage(page);
+	  
+	  
+	  
+	  
     }
     dom.append('div', 'overlay');
+	/* kenny update*/
+	dom.append('div', 'mask');
     dispatchEvent("monocle:loading", API);
   }
 
@@ -4981,6 +4996,7 @@ Monocle.Flippers.Slider = function (reader) {
       ) {
         // Completing forward turn
         slideOut(afterGoingForward);
+		// minh
       } else {
         // Cancelling forward turn
         slideIn(afterCancellingForward);
@@ -5045,8 +5061,21 @@ Monocle.Flippers.Slider = function (reader) {
   }
 
 
+	// minh
+	function sleep(milliseconds) {
+	  var start = new Date().getTime();
+	  for (var i = 0; i < 1e7; i++) {
+		if ((new Date().getTime() - start) > milliseconds){
+		  break;
+		}
+	  }
+	}
+
+
+  
   function afterGoingForward() {
     var up = upperPage(), lp = lowerPage();
+	
     if (p.interactive) {
       // set upper (off screen) to current
       setPage(
@@ -5059,7 +5088,11 @@ Monocle.Flippers.Slider = function (reader) {
       );
     } else {
       flipPages();
+	  // minh
+	  //prepareNextPage(announceTurn);
+	  //jumpIn(lp, function () { prepareNextPage(announceTurn); });
       jumpIn(up, function () { prepareNextPage(announceTurn); });
+	 
     }
   }
 
@@ -5217,6 +5250,7 @@ Monocle.Flippers.Slider = function (reader) {
 
 
   function slideOut(callback) {
+  // minh
     setX(upperPage(), 0 - upperPage().offsetWidth, slideOpts(), callback);
   }
 
