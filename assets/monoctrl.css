@@ -92,29 +92,30 @@ div.monelem_controls_scrubber_container {
 
 div.monelem_controls_scrubber_track {
   margin-top: 10px;
-  height: 5px;
-  border: 1px solid #999;
+  border: 2px solid #fff;
+  opacity:0.8;
   cursor: pointer;
 }
 
 div.monelem_controls_scrubber_needle {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  top: 5px;
-  background: #00aabe;
-  border: 1px solid #999;
-  border-radius: 8px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  background: #fff;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border:6px solid #3ca8ff;
 }
 
 div.monelem_controls_scrubber_trail {
   position: absolute;
-  background: #DEE;
-  top: 11px;
+  background: #77c2ff;
+  top: 10px;
   left: 1px;
-  height: 5px;
+  height: 4px;
+  opacity:0.8;
 }
 
 div.monelem_controls_scrubber_bubble {
