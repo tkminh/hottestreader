@@ -497,7 +497,7 @@ public class GenBookHTML {
 	    //sb.append("body * {font-family: 'Athelas' !important; font-size: 100% !important;}"); 
 		//color: #00a8ff !important; 
 		
-		sb.append("\n#mask {position:absolute;top: 1.5em;left: 1em;bottom: 2.0em;right: 1em;background-color:'" + getTheme().mask + "';opacity:0.5;z-index:0;}");
+		sb.append("\n#mask {position:absolute;top: 1.5em;left: 1em;bottom: 2.0em;right: 1em;background-color:" + getTheme().mask + "; opacity:0.5;z-index:0;}");
 	    sb.append("\nbody h1:first-of-type {font-weight:bold !important; font-size: 200% !important; }");
 	    sb.append("\nhtml {background-image:url('file:///android_asset/" + settingConfig.getTheme() +"') !important; background-repeat: no-repeat !important; background-size: 100% 100% !important; padding-left: 10px !important; padding-right: 10px !important; padding-top:15px !important; padding-bottom: 25px !important; color: #333333 !important;}");
 	    sb.append("\nh1 {" + getTheme().H1 +" }");
@@ -526,6 +526,9 @@ public class GenBookHTML {
 	    sb.append("\ntoc = Monocle.Controls.Contents(rdr);");
 	    sb.append("\nrdr.addControl(toc, 'modal', { hidden: true });");
 	    sb.append("\nrdr.addControl(placeSaver, 'invisible');");
+	    if (settingConfig.getShowProgress()==true) {
+	    	sb.append("showProgressbar();");
+	    }
 	    sb.append("\n");
 	    sb.append("\n});");
 	    sb.append("\n});");
@@ -722,7 +725,7 @@ public class GenBookHTML {
 	}
 	
 	public Theme getTheme() {
-		if (MainActivity.settings.theme == R.drawable.classic_dark_active || MainActivity.settings.theme == R.drawable.ghost_house_active)
+		if (MainActivity.settings.theme == R.drawable.classic_dark_active || MainActivity.settings.theme == R.drawable.ghost_house_active || MainActivity.settings.theme == R.drawable.dmabstract_active)
 			return dark;
 		return light;
 	}

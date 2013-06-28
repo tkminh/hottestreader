@@ -9,6 +9,10 @@ public class Setting {
 		
 	}
 	
+	public boolean getShowProgress() {
+		return MainActivity.settings.showProgress;
+	}
+	
 	public String getFlipper() {
 		if (MainActivity.settings.flipper == 0)
 			return "Monocle.Flippers.Instant";

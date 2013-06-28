@@ -36,13 +36,110 @@ public class ThemeSettings extends Activity {
 		settings = MainActivity.settings;
 		
 		setUpMultiScreen();
-		
+		loadCurrentSetting();
 	}
 	
 	@Override
 	public void onBackPressed() {
 		save();
 		super.onBackPressed();
+	}
+	
+	public void loadCurrentSetting() {
+		ImageView vv = (ImageView)findViewById(R.id.imgClassicLight);
+		
+		if (settings.theme==R.drawable.classic_light_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_light_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_light));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgClassicPaper);
+		if (settings.theme==R.drawable.classic_paper_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_paper_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_paper));
+		}
+		
+		
+		vv = (ImageView)findViewById(R.id.imgClassicWood);
+		if (settings.theme==R.drawable.classic_wood_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_wood_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_wood));
+		}
+		
+		
+		vv = (ImageView)findViewById(R.id.dmabstract);
+		if (settings.theme==R.drawable.dmabstract_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.dmabstract_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.dmabstract));
+		}
+		
+		
+		vv = (ImageView)findViewById(R.id.imgGreenCity);
+		if (settings.theme==R.drawable.green_city_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.green_city_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.green_city));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgAquarium);
+		if (settings.theme==R.drawable.aquarium_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.aquarium_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.aquarium));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgBeachVacation);
+		if (settings.theme==R.drawable.beach_vacation_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.beach_vacation_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.beach_vacation));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgBlueSky);
+		if (settings.theme==R.drawable.blue_sky_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.blue_sky_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.blue_sky));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgClassicDark);
+		if (settings.theme==R.drawable.classic_dark_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_dark_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_dark));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgDailyNews);
+		if (settings.theme==R.drawable.daily_news_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.daily_news_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.daily_news));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgGhostHouse);
+		if (settings.theme==R.drawable.ghost_house_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.ghost_house_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.ghost_house));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgOldFashioned);
+		if (settings.theme==R.drawable.old_fashioned_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.old_fashioned_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.old_fashioned));
+		}
+		
+		vv = (ImageView)findViewById(R.id.imgSnowMountain);
+		if (settings.theme==R.drawable.snow_mountain_active) {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.snow_mountain_active));
+		} else {
+			vv.setImageDrawable(getResources().getDrawable(R.drawable.snow_mountain));
+		}
 	}
 	
 	public void setUpMultiScreen() {
@@ -116,6 +213,15 @@ public class ThemeSettings extends Activity {
 	public void clearSelection() {
 		ImageView vv = (ImageView)findViewById(R.id.imgClassicLight);
 		vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_light));
+		
+		vv = (ImageView)findViewById(R.id.imgClassicPaper);
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_paper));
+		
+		vv = (ImageView)findViewById(R.id.imgClassicWood);
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_wood));
+		
+		vv = (ImageView)findViewById(R.id.dmabstract);
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.dmabstract));
 		
 		vv = (ImageView)findViewById(R.id.imgGreenCity);
 		vv.setImageDrawable(getResources().getDrawable(R.drawable.green_city));
