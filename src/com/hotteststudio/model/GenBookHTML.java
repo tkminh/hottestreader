@@ -554,7 +554,7 @@ public class GenBookHTML {
 
 	    sb.append("\n</head>");
 	    sb.append("\n<body>");
-	    sb.append("\n<div id=\"mask\"></div>\n");
+	    //sb.append("\n<div id=\"mask\"></div>\n");
 	    sb.append("\n<div id=\"reader\"></div>\n");
 	    
 	    saveTextToFile(sb.toString());

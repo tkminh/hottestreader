@@ -9,13 +9,10 @@ modify this stylesheet accordingly.
 /* The reader object that holds pretty much everything.
  * (A direct child of the element passed to reader initialisation). */
 
- 
-/* kenny update*/
 body {
-	padding:0;
-	margin:0;
+	padding:0 !important;
+	margin:0 !important;
 }
- 
 div.monelem_container {
   
 }
@@ -27,39 +24,24 @@ div.monelem_page {
   left: 0;
   bottom: 0px;
   right: 0px;
-  /* kenny update*/
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	width:100%;
-	height:100%;
-	
 }
 
+
+div.monelem_page:nth-child(2) {
+  text-indent:-1000px;
+}
 
 /* The div within the page that determines page margins. */
-/* kenny update*/
 div.monelem_sheaf {
-  top: 1.5em;
-  left: 0;
-  bottom: 2em;
-  right:0;
-  padding:1em 1.6em;  
-  z-index:1;
+  top: 1em;
+  left: 1em;
+  bottom: 1em;
+  right: 1em;
 }
-
-/* kenny update*/
-.chapter-container a {
-	color:#F00 !important;
-	text-decoration:none !important;
-}
-
 
 
 /* The iframe within the page that loads the content of the book. */
 div.monelem_component {
-	color:#F00 !important;
 }
 
 

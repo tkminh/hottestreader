@@ -85,7 +85,7 @@ div.monelem_controls_scrubber_container {
   position: absolute;
   left: 1em;
   right: 1em;
-  bottom: 4px;
+  bottom: 0;
   height: 30px;
   background: rgba(255,255,255,0);
 }
@@ -99,14 +99,15 @@ div.monelem_controls_scrubber_track {
 
 div.monelem_controls_scrubber_needle {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   top: 0;
   background: #fff;
   border-radius: 15px;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
   border:6px solid #3ca8ff;
+  overflow: hidden;
 }
 
 div.monelem_controls_scrubber_trail {
