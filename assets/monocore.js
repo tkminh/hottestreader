@@ -1697,7 +1697,7 @@ Monocle.Formatting = function (reader, optStyles, optScale) {
 	 var fileref=document.createElement("link")
 	  fileref.setAttribute("rel", "stylesheet")
 	  fileref.setAttribute("type", "text/css")
-	  fileref.setAttribute("href", "hottest_reader.css")	
+	  fileref.setAttribute("href", "file:///android_asset/hottest_reader.css")	
 	
 	head.appendChild(fileref);
 	/* *** */
@@ -2002,6 +2002,8 @@ Monocle.Reader = function (node, bookData, options, onLoadCallback) {
       page.m.activeFrame.m = { 'pageDiv': page };
       page.m.activeFrame.setAttribute('frameBorder', 0);
       page.m.activeFrame.setAttribute('scrolling', 'no');
+	  page.m.sheafDiv = page.dom.append('div', 'mask', i); // kenny update
+	  
       p.flipper.addPage(page);
     }
     dom.append('div', 'overlay');
