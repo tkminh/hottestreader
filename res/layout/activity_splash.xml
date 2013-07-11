@@ -54,7 +54,7 @@
         android:adjustViewBounds="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:scaleType="centerInside"
+        
         android:src="@drawable/book_loading"
         />
 </RelativeLayout>
