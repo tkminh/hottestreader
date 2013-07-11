@@ -1676,9 +1676,15 @@ Monocle.Formatting = function (reader, optStyles, optScale) {
       styleRules = styleRules.join("\n");
     }
 
+
+	/* kenny update **********************************   */
+
     var styleTag = doc.createElement('style');
     styleTag.type = 'text/css';
     styleTag.id = "monStylesheet"+sheetIndex;
+	
+	styleRules="";  // kenny
+	
     if (styleTag.styleSheet) {
       styleTag.styleSheet.cssText = styleRules;
     } else {
@@ -1686,6 +1692,15 @@ Monocle.Formatting = function (reader, optStyles, optScale) {
     }
 
     head.appendChild(styleTag);
+	
+	/* kenny update **********************************   */
+	 var fileref=document.createElement("link")
+	  fileref.setAttribute("rel", "stylesheet")
+	  fileref.setAttribute("type", "text/css")
+	  fileref.setAttribute("href", "file:///android_asset/hottest_reader.css")	
+	
+	head.appendChild(fileref);
+	/* *** */
 
     return styleTag;
   }
@@ -1987,6 +2002,8 @@ Monocle.Reader = function (node, bookData, options, onLoadCallback) {
       page.m.activeFrame.m = { 'pageDiv': page };
       page.m.activeFrame.setAttribute('frameBorder', 0);
       page.m.activeFrame.setAttribute('scrolling', 'no');
+	  page.m.sheafDiv = page.dom.append('div', 'mask', i); // kenny update
+	  
       p.flipper.addPage(page);
     }
     dom.append('div', 'overlay');

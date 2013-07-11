@@ -144,6 +144,11 @@
 				
 			</RelativeLayout>
 	    	
+	        <CheckBox
+		        android:id="@+id/chkProgressbar"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/showprogress" />
 	    	<TextView 
 	    	    android:layout_width="match_parent" 
 	            android:layout_height="wrap_content"
@@ -176,6 +181,7 @@
 	                android:text="Scroll"
 	                />
 	        </RadioGroup>
+	        
 	        <TextView 
 	    	    android:layout_width="match_parent" 
 	            android:layout_height="wrap_content"

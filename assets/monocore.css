@@ -9,7 +9,10 @@ modify this stylesheet accordingly.
 /* The reader object that holds pretty much everything.
  * (A direct child of the element passed to reader initialisation). */
 
- 
+body {
+	padding:0 !important;
+	margin:0 !important;
+}
 div.monelem_container {
   
 }
@@ -19,23 +22,23 @@ div.monelem_container {
 div.monelem_page {
   top: 0;
   left: 0;
-  bottom: 0px;
-  right: 0px;
+  bottom: 0;
+  right: 0;
 }
 
 
 div.monelem_page:nth-child(2) {
-  text-indent:-1000px;
+  /*text-indent:-1000px;*/
 }
 
 /* The div within the page that determines page margins. */
 div.monelem_sheaf {
-  top: 1em;
+  top: 2em;
   left: 1em;
-  bottom: 1em;
+  bottom: 2em;
   right: 1em;
+  z-index:1;
 }
-
 
 /* The iframe within the page that loads the content of the book. */
 div.monelem_component {

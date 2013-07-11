@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -50,6 +52,8 @@ public class Settings extends Activity {
 	public RadioButton rb_LS_Normal;
 	public RadioButton rb_LS_Large;
 	public RadioButton rb_LS_ExLarge;
+	
+	public CheckBox chkProgressbar;
 	
 	public DisplayMetrics metrics ;
 	public int height; 
@@ -193,6 +197,10 @@ public class Settings extends Activity {
 				
 			}
 		});
+		
+		chkProgressbar = (CheckBox) findViewById(R.id.chkProgressbar);
+		 
+		
 	}
 	
 	public void loadCurrentSetting() {
@@ -202,6 +210,8 @@ public class Settings extends Activity {
 			Toast.makeText(this, "Font size cannot be smaller than 10 !", Toast.LENGTH_SHORT).show();
 		}
 		sbFontSize.setProgress(settings.fontSize);
+		
+		chkProgressbar.setChecked(settings.showProgress);
 		
 		// setting brightness
 		if (settings.brightness<1) settings.brightness=50;
@@ -244,6 +254,7 @@ public class Settings extends Activity {
 	
 	// save current user setting to xml
 	public void save() {
+		settings.showProgress = chkProgressbar.isChecked();
 		settings.brightness = sbBrightness.getProgress();
 		settings.fontSize = sbFontSize.getProgress();
 		settings.flipper = getIndexCheckedFromRadioGroup(rgPageTurn);
@@ -272,6 +283,8 @@ public class Settings extends Activity {
 	public void setCheckIndexForRadioGroup(RadioGroup radioButtonGroup,int id) {
 		radioButtonGroup.check(id);
 	}
+	
+	
 	
 	// buy books
 	public void clickAds(View v) {
