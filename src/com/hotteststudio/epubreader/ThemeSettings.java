@@ -143,6 +143,15 @@ public class ThemeSettings extends Activity {
 		
 		vv = (ImageView)findViewById(R.id.imgSnowMountain);
 		vv.setImageDrawable(getResources().getDrawable(R.drawable.snow_mountain));
+		
+		vv = (ImageView)findViewById(R.id.imgClassicPaper);
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_paper));
+		
+		vv = (ImageView)findViewById(R.id.imgClassicWood);
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_wood));
+		
+		vv = (ImageView)findViewById(R.id.dmabstract);
+		vv.setImageDrawable(getResources().getDrawable(R.drawable.dmabstract));
 	}
 	
 	// theme click

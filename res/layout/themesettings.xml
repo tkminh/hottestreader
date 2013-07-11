@@ -78,7 +78,7 @@
 	    	android:orientation="vertical" >
 	    	
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/classic_light"
 			    android:adjustViewBounds="true"
@@ -89,7 +89,7 @@
 			    android:onClick="clickClassicLight"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/classic_dark"
 			    android:adjustViewBounds="true"
@@ -99,7 +99,7 @@
 			    android:onClick="clickClassicDark"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/classic_paper"
 			    android:adjustViewBounds="true"
@@ -109,7 +109,7 @@
 			    android:onClick="clickClassicPaper"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/classic_wood"
 			    android:adjustViewBounds="true"
@@ -119,7 +119,7 @@
 			    android:onClick="clickClassicWood"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/green_city"
 			    android:adjustViewBounds="true"
@@ -129,7 +129,7 @@
 			    android:onClick="clickGreenCity"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/snow_mountain"
 			    android:adjustViewBounds="true"
@@ -139,7 +139,7 @@
 			    android:onClick="clickSnowMountain"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/ghost_house"
 			    android:adjustViewBounds="true"
@@ -149,7 +149,7 @@
 			    android:onClick="clickGhostHouse"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/aquarium"
 			    android:adjustViewBounds="true"
@@ -159,7 +159,7 @@
 			    android:onClick="clickAquarium"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/beach_vacation"
 			    android:adjustViewBounds="true"
@@ -169,7 +169,7 @@
 			    android:onClick="clickBeachVacation"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/old_fashioned"
 			    android:adjustViewBounds="true"
@@ -179,7 +179,7 @@
 			    android:onClick="clickOldFashioned"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/blue_sky"
 			    android:adjustViewBounds="true"
@@ -189,7 +189,7 @@
 			    android:onClick="clickBlueSky"
 			    />
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/daily_news"
 			    android:adjustViewBounds="true"
@@ -200,7 +200,7 @@
 			    />
 			
 			<ImageView 
-			    android:layout_width="wrap_content"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:src="@drawable/dmabstract"
 			    android:adjustViewBounds="true"
