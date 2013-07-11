@@ -129,7 +129,9 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		
+		Intent openMainActivity= new Intent(getApplicationContext(), MainActivity.class);
+		openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		startActivityForResult(openMainActivity, _readerResult);
 		
 		adView = (AdView) findViewById(R.id.adViewMain);
     	XAds xads = new XAds(adView);
@@ -247,6 +249,7 @@ public class MainActivity extends Activity {
             break;*/
         	case _readerResult:
         		reloadListBook();
+        		Log.d("Reload sach","Reload");
         		break;
             case _ReqChooseFile:
             	try {
@@ -335,18 +338,30 @@ public class MainActivity extends Activity {
 
 	public void reloadListBook() {
 		xmlContent = getXMLSettings();
-		Log.d("minh debug","resume activity " + xmlContent);
+		Log.d("minh debug","22 resume activity " + xmlContent);
 		if (xmlContent.length()>1) {
 			settings = loadXML(xmlContent);
 		} 
 		
-		//Log.d("aaa","resume activity " + settings.arrRecentEpub.size());
+		Log.d("aaa","resume activity 33 " + settings.arrRecentEpub.size());
 		
-		bookAdapater = new BookListAdapter(MainActivity.this,settings.arrRecentEpub);
-		bookAdapater.notifyDataSetChanged();
-		if (listBook!=null) {
-			listBook.invalidateViews();
-		}
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				bookAdapater = new BookListAdapter(MainActivity.this,settings.arrRecentEpub);
+				
+				bookAdapater.notifyDataSetChanged();
+				
+				if (listBook!=null) {
+					listBook.setAdapter(bookAdapater);
+					listBook.invalidateViews();
+					
+				}
+				Log.d("aaa","lalalalalalalallala" + settings.arrRecentEpub.size());
+			}
+		});
+		
 	}
 	
 	

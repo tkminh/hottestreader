@@ -58,9 +58,9 @@ public class Reader extends Activity {
 	public TimerTask showAdsTask;
 	public Timer timer;
 	public Handler handler;
-	public final int DELAY = 30000;
-	public final int PERIOD = 30000;
-	public final int SHOWTIME = 20; //600
+	public final int DELAY = 20000;
+	public final int PERIOD = 20000;
+	public final int SHOWTIME = 30; //600
 	public int count;
 	
 	public AdView adView;
