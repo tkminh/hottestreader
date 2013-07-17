@@ -149,14 +149,14 @@ public class ThemeSettings extends Activity {
 		height = metrics.heightPixels;
 		width = metrics.widthPixels;
 		
-		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerThemeSetting);
-		scaleViewR(headerThemeSetting,R.drawable.header);
-		
-		ImageView advThemeSetting = (ImageView)findViewById(R.id.imgAdvThemeSetting);
-		scaleViewR(advThemeSetting,R.drawable.adv1);
-		
-		ImageView leftLayoutThemeSetting = (ImageView)findViewById(R.id.leftLayoutThemeSetting);
-		scaleView(leftLayoutThemeSetting,R.drawable.title_theme_setting);
+//		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerThemeSetting);
+//		scaleViewR(headerThemeSetting,R.drawable.header);
+//		
+//		ImageView advThemeSetting = (ImageView)findViewById(R.id.imgAdvThemeSetting);
+//		scaleViewR(advThemeSetting,R.drawable.adv1);
+//		
+//		ImageView leftLayoutThemeSetting = (ImageView)findViewById(R.id.leftLayoutThemeSetting);
+//		scaleView(leftLayoutThemeSetting,R.drawable.title_theme_setting);
 	}
 	
 	public float calculateAspectRatio() {

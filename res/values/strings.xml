@@ -14,7 +14,19 @@
 	<string name="selectBackground">Select background</string>
 	<string name="selectLineSpacing">Select Line spacing</string>
 	<string name="selectScreenOrientation">Select Screen Orientation</string>
-	<string name="txtWhatIs">What is an EPUB File ?</string>    
+	<string name="txtWhatIs">What is an EPUB File ?</string>
+	<string name="txtWhatIs1">Did you find an EPUB file on your phone / tablet and wonder what program should open it \? Maybe someone emailed you an EPUB file but you\'re not sure how to use it.</string>
+	<string name="txtWhatIs2">A file with the EPUB file extension is an Open Publication Structure eBook file. The Open Publication Structure eBook format is a popular and freely available eBook standard so most EPUB files you find will probably be of this format.</string>
+	<string name="txtHowOpen">How to Open an EPUB File?</string>
+	<string name="txtHowOpen1">The easiest way to open an EPUB file is to tap on “CHOOSE FILE” button, then simply select your epub file which located on your phone / tablet</string>
+	<string name="txtConvert">Do You want to Convert PDF to EPUB ?</string>
+	<string name="txtConvert1">http://www.2epub.com/</string>    
+	<string name="txtWhereDownload">Where to Download Free ePub Books ?</string>    
+	<string name="txtLink1">ManyBooks.net - The best ebooks at the best price: free!\nhttp://manybooks.net/</string>    
+	<string name="txtLink2">Free epub Children\'s picture books\nhttp://www.snee.com/epubkidsbooks/</string>    
+	<string name="txtLink3">E-Book Uploads - Patricia Clark Memorial Library ePub Books\nhttp://www.mobileread.com/forums/forumdisplay.php?f=130</string>    
+	<string name="txtLink4">Original Books - Publish your books and discover new authors\nhttp://www.feedbooks.com/original</string>    
+	<string name="txtLink5">Vietnamese Epub library download - Free\nhttp://motsach.info/</string>      
 	<string name="msg_save_setting">Setting was save successfully</string>
 	<style name="CustomSeekBar1" parent="android:Widget.SeekBar">
 	   <item name="android:progressDrawable">@drawable/custom_seekbar</item>

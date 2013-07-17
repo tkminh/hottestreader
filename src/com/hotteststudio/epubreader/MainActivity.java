@@ -370,8 +370,8 @@ public class MainActivity extends Activity {
 	// xu li menu
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.layout.menubar, menu);
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.layout.menubar, menu);
         return true;
     }
 	
@@ -395,5 +395,21 @@ public class MainActivity extends Activity {
 	// buy books
 	public void clickAds(View v) {
 		XCommon.openBrowser(this, Default.URL_BOOK);
+	}
+	
+	public void openIntroduce(View v) {
+		startActivity(new Intent(getApplicationContext(), IntroActivity.class));
+	}
+	
+	public void openSetting(View v) {
+			
+	}
+	
+	public void openTheme(View v) {
+		
+	}
+	
+	public void openBookstore(View v) {
+		startActivity(new Intent(getApplicationContext(), BookstoreActivity.class));
 	}
 }

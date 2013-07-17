@@ -19,7 +19,7 @@
             android:layout_alignParentTop="true"
             android:adjustViewBounds="true"
             android:background="@drawable/sub_header"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="backToMainActivity"
@@ -35,51 +35,65 @@
         >
         
 		<TableLayout 
-		    android:id="@+id/tblMenuIntro"
-		    android:layout_width="fill_parent"
+		    android:id="@+id/tblMenuMainA"
+		    android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:background="@drawable/footer"
-	        android:layout_alignParentBottom="true">
+	        android:stretchColumns="*"
+	       >
+	       	
+		        <com.google.ads.AdView
+			        android:id="@+id/adViewMainIntro"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        ads:adSize="BANNER"
+			        ads:adUnitId="a1512d725538489"
+			        ads:loadAdOnCreate="true" >
+				    
+				</com.google.ads.AdView>
+		    
 		    <TableRow 
 		        android:layout_width="fill_parent"
 	        	android:layout_height="wrap_content"
+	        	android:layout_gravity="center_horizontal"
+	        	
 		        >
-		        <ImageView 
+		        <ImageButton 
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:src="@drawable/f_mn_introduce"
-			        android:layout_weight="0.25"
+			        android:scaleType="fitCenter"
+			        android:layout_gravity="center"
+			        android:background="@drawable/btnintroduce"
+			        android:onClick="openIntroduce"
 			        />
-		        <ImageView 
+		        <ImageButton
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:src="@drawable/f_mn_setting"
-			        android:layout_weight="0.25"
+			        android:scaleType="fitCenter"
+			        android:layout_gravity="center"
+			        android:background="@drawable/btnsetting"
+			        android:onClick="openSetting"
 			        />
-		        <ImageView 
+		        <ImageButton 
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:src="@drawable/f_mn_theme"
-			        android:layout_weight="0.25"
+			        android:scaleType="fitCenter"
+			        android:layout_gravity="center"
+			        android:background="@drawable/btntheme"
+			        android:onClick="openTheme"
 			        />
-		        <ImageView 
+		        <ImageButton 
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:src="@drawable/f_mn_bookstore"
-			        android:layout_weight="0.25"
+			        android:scaleType="fitCenter"
+			        android:layout_gravity="center"
+			        android:background="@drawable/btnbookstore"
+			        android:onClick="openBookstore"
 			        />
 		    </TableRow>
-		</TableLayout>
-		<com.google.ads.AdView
-	        android:id="@+id/adViewMainIntro"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_above="@id/tblMenuIntro"
-	        ads:adSize="BANNER"
-	        ads:adUnitId="a1512d725538489"
-	        ads:loadAdOnCreate="true" >
 		    
-		</com.google.ads.AdView>
+		</TableLayout>
+		
     </RelativeLayout>
     
     <LinearLayout 
@@ -113,9 +127,118 @@
 	            android:layout_width="match_parent" 
 	        	android:layout_height="wrap_content"
 	        	android:text="@string/txtWhatIs"
-	        	android:textColor="#9fd4ff"
-	        	android:textStyle="bold"
+	        	android:textColor="#3ca8ff"
+	        	android:textStyle="normal"
 	        	android:textSize="15sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtWhatIs1"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtWhatIs2"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtHowOpen"
+	        	android:textColor="#3ca8ff"
+	        	android:textStyle="normal"
+	        	android:textSize="15sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtHowOpen1"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtConvert"
+	        	android:textColor="#3ca8ff"
+	        	android:textStyle="normal"
+	        	android:textSize="15sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtConvert1"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtWhereDownload"
+	        	android:textColor="#3ca8ff"
+	        	android:textStyle="normal"
+	        	android:textSize="15sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtLink1"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtLink2"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtLink3"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtLink4"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
+	            />
+	        <TextView 
+	            android:layout_width="match_parent" 
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/txtLink5"
+	        	android:textColor="#fff"
+	        	android:textStyle="normal"
+	        	android:textSize="10sp"
+	        	android:layout_marginBottom="10dp"
 	            />
 		</LinearLayout>
 		

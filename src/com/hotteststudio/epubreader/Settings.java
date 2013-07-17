@@ -107,14 +107,14 @@ public class Settings extends Activity {
 		height = metrics.heightPixels;
 		width = metrics.widthPixels;
 		
-		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerSetting);
-		scaleViewR(headerThemeSetting,R.drawable.header);
-		
-		ImageView imgAdvSetting = (ImageView)findViewById(R.id.imgAdvSetting);
-		scaleViewR(imgAdvSetting,R.drawable.adv2);
-		
-		ImageView leftSettingLayout = (ImageView)findViewById(R.id.leftSettingLayout);
-		scaleView(leftSettingLayout,R.drawable.title_setting_configuration);
+//		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerSetting);
+//		scaleViewR(headerThemeSetting,R.drawable.header);
+//		
+//		ImageView imgAdvSetting = (ImageView)findViewById(R.id.imgAdvSetting);
+//		scaleViewR(imgAdvSetting,R.drawable.adv2);
+//		
+//		ImageView leftSettingLayout = (ImageView)findViewById(R.id.leftSettingLayout);
+//		scaleView(leftSettingLayout,R.drawable.title_setting_configuration);
 	}
 	
 	public float calculateAspectRatio() {
