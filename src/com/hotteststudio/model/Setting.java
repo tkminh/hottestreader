@@ -52,43 +52,43 @@ public class Setting {
 	
 	public String getTheme() {
 		int theme = MainActivity.settings.theme;
-		if (theme==R.drawable.classic_light_active) {
+		if (theme==Theme.classic_light) {
 			return "bg/classic_light.jpg";
 		}
-		if (theme==R.drawable.aquarium_active) {
+		if (theme==Theme.aquarium) {
 			return "bg/aquarium.jpg";
 		}
-		if (theme==R.drawable.beach_vacation_active) {
+		if (theme==Theme.beach_vacation) {
 			return "bg/beach_vacation.jpg";
 		}
-		if (theme==R.drawable.blue_sky_active) {
+		if (theme==Theme.blue_sky) {
 			return "bg/blue_sky.jpg";
 		}
-		if (theme==R.drawable.classic_dark_active) {
+		if (theme==Theme.classic_dark) {
 			return "bg/classic_dark.jpg";
 		}
-		if (theme==R.drawable.daily_news_active) {
+		if (theme==Theme.daily_news) {
 			return "bg/daily_news.jpg";
 		}
-		if (theme==R.drawable.ghost_house_active) {
+		if (theme==Theme.ghost_house) {
 			return "bg/ghost_house.jpg";
 		}
-		if (theme==R.drawable.green_city_active) {
+		if (theme==Theme.green_city) {
 			return "bg/green_city.jpg";
 		}
-		if (theme==R.drawable.old_fashioned_active) {
+		if (theme==Theme.old_fashioned) {
 			return "bg/old_fashioned.jpg";
 		}
-		if (theme==R.drawable.snow_mountain_active) {
+		if (theme==Theme.snow_mountain) {
 			return "bg/snow_mountain.jpg";
 		}
-		if (theme==R.drawable.classic_paper_active) {
+		if (theme==Theme.classic_paper) {
 			return "bg/classic_paper.jpg";
 		}
-		if (theme==R.drawable.classic_wood_active) {
+		if (theme==Theme.classic_wood) {
 			return "bg/classic_wood.jpg";
 		}
-		if (theme==R.drawable.dmabstract_active) {
+		if (theme==Theme.dmabstract) {
 			return "bg/dmabstract.jpg";
 		}
 		

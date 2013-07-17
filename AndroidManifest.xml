@@ -45,6 +45,10 @@
             android:windowSoftInputMode="stateHidden"         
   			android:screenOrientation="portrait"/>
         <activity 
+            android:name="com.hotteststudio.epubreader.IntroActivity" 
+            android:windowSoftInputMode="stateHidden"         
+  			android:screenOrientation="portrait"/>
+        <activity 
             android:name="com.hotteststudio.epubreader.Settings" 
             android:windowSoftInputMode="stateHidden"         
   			android:screenOrientation="portrait"/>

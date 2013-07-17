@@ -33,16 +33,55 @@
         android:layout_height="wrap_content"
         
         >
-        <com.google.ads.AdView
-	        android:id="@+id/adViewMain"
-	        android:layout_width="fill_parent"
+        <TableLayout 
+		    android:id="@+id/tblMenuMainA"
+		    android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentTop="true"
-	        ads:adSize="BANNER"
-	        ads:adUnitId="a1512d725538489"
-	        ads:loadAdOnCreate="true" >
+	        android:background="@drawable/footer"
+	       >
+	       	
+		        <com.google.ads.AdView
+			        android:id="@+id/adViewMain"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        ads:adSize="BANNER"
+			        ads:adUnitId="a1512d725538489"
+			        ads:loadAdOnCreate="true" >
+				    
+				</com.google.ads.AdView>
 		    
-		</com.google.ads.AdView>
+		    <TableRow 
+		        android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+		        >
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_introduce"
+			        android:layout_weight="0.25"
+			        />
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_setting"
+			        android:layout_weight="0.25"
+			        />
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_theme"
+			        android:layout_weight="0.25"
+			        />
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_bookstore"
+			        android:layout_weight="0.25"
+			        />
+		    </TableRow>
+		    
+		</TableLayout>
+        
     </RelativeLayout>
     
 	

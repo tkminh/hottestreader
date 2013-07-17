@@ -727,7 +727,7 @@ public class GenBookHTML {
 	}
 	
 	public Theme getTheme() {
-		if (MainActivity.settings.theme == R.drawable.classic_dark_active || MainActivity.settings.theme == R.drawable.ghost_house_active || MainActivity.settings.theme == R.drawable.dmabstract_active)
+		if (MainActivity.settings.theme == Theme.classic_dark || MainActivity.settings.theme == Theme.ghost_house || MainActivity.settings.theme == Theme.dmabstract)
 			return dark;
 		return light;
 	}
