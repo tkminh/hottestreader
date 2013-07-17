@@ -13,7 +13,8 @@
 	<string name="selectFontSize">Select font size</string>
 	<string name="selectBackground">Select background</string>
 	<string name="selectLineSpacing">Select Line spacing</string>
-	<string name="selectScreenOrientation">Select Screen Orientation</string>    
+	<string name="selectScreenOrientation">Select Screen Orientation</string>
+	<string name="txtWhatIs">What is an EPUB File ?</string>    
 	<string name="msg_save_setting">Setting was save successfully</string>
 	<style name="CustomSeekBar1" parent="android:Widget.SeekBar">
 	   <item name="android:progressDrawable">@drawable/custom_seekbar</item>

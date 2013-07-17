@@ -16,8 +16,9 @@
             android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_alignParentTop="true"
-        	android:background="@drawable/header"
+        	android:background="@drawable/sub_header"
         	android:adjustViewBounds="true"
+        	android:onClick="backToMainActivity"
             />
       
         

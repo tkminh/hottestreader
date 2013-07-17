@@ -290,4 +290,8 @@ public class Settings extends Activity {
 	public void clickAds(View v) {
 		XCommon.openBrowser(this, Default.URL_BOOK);
 	}
+	
+	public void backToMainActivity(View v) {
+		finish();
+	}
 }

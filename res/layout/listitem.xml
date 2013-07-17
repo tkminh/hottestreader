@@ -27,8 +27,8 @@
 	        android:layout_alignParentTop="true"
 	        android:layout_alignParentRight="true"
 	        android:orientation="vertical"
-	        android:layout_toRightOf="@id/img_bookList_item_thumnail" 
-	        
+	        android:layout_toRightOf="@id/img_bookList_item_thumnail"
+
 	        android:background="@drawable/btnstate"
 	        >
 
