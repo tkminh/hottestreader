@@ -4,57 +4,8 @@
     android:layout_height="match_parent"
     android:layout_margin="0dp"
     android:padding="0dp"
-    android:background="@drawable/bg_loading" >
+    android:background="@drawable/loading" >
 
-    <ImageView
-        android:id="@+id/splash_image"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/logo_loading" />
     
-    <ImageView
-        android:id="@+id/version"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/splash_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/version" />
-   
-    <ImageView 
-        android:id="@+id/loading"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/loading"
-        android:layout_below="@+id/version"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        />
-   
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="0dp"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
-        android:src="@drawable/rolling"
-        android:scaleType="centerInside"
-        android:layout_below="@+id/loading"/>
 
-    <ImageView
-        android:id="@+id/img_book_loading"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="0dp"
-        android:adjustViewBounds="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        
-        android:src="@drawable/book_loading"
-        />
 </RelativeLayout>
