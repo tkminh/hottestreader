@@ -32,13 +32,49 @@
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        
         >
-        <com.google.ads.AdView
+        
+		<TableLayout 
+		    android:id="@+id/tblMenuIntro"
+		    android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/footer"
+	        android:layout_alignParentBottom="true">
+		    <TableRow 
+		        android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+		        >
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_introduce"
+			        android:layout_weight="0.25"
+			        />
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_setting"
+			        android:layout_weight="0.25"
+			        />
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_theme"
+			        android:layout_weight="0.25"
+			        />
+		        <ImageView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/f_mn_bookstore"
+			        android:layout_weight="0.25"
+			        />
+		    </TableRow>
+		</TableLayout>
+		<com.google.ads.AdView
 	        android:id="@+id/adViewMainIntro"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentTop="true"
+	        android:layout_above="@id/tblMenuIntro"
 	        ads:adSize="BANNER"
 	        ads:adUnitId="a1512d725538489"
 	        ads:loadAdOnCreate="true" >
