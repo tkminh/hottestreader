@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="none">#000000ff</color>
+    <color name="link">#3ca8ff</color>
 </resources>
