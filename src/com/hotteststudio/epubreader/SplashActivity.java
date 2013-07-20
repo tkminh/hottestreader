@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.hotteststudio.model.UserSettings;
 import com.hotteststudio.model.XMLHandler;
@@ -45,7 +46,12 @@ public class SplashActivity extends Activity {
 				xmlHandler = new XMLHandler();
 				UserSettings settings;
 				String xmlContent = MainActivity.getXMLSettings();
-				if (xmlContent.length()>1) {
+				if (xmlContent==null) {
+					Toast.makeText(getApplicationContext(), "Please insert sdcard !!", Toast.LENGTH_LONG).show();
+					finish();
+					return;
+				}
+ 				if (xmlContent.length()>1) {
 					settings = loadXML(xmlContent);
 				} else {
 					settings = new UserSettings(); 

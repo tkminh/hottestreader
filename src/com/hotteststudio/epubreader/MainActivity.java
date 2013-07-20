@@ -345,7 +345,6 @@ public class MainActivity extends Activity {
 			settings = loadXML(xmlContent);
 		} 
 		
-		Log.d("aaa","resume activity 33 " + settings.arrRecentEpub.size());
 		
 		runOnUiThread(new Runnable() {
 			
@@ -360,7 +359,6 @@ public class MainActivity extends Activity {
 					listBook.invalidateViews();
 					
 				}
-				Log.d("aaa","lalalalalalalallala" + settings.arrRecentEpub.size());
 			}
 		});
 		
