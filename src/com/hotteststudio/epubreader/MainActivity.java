@@ -70,11 +70,15 @@ public class MainActivity extends Activity {
 		
 		XCommon.strictmodePolicy();
 		
+//		Intent openMainActivity= new Intent(getApplicationContext(), MainActivity.class);
+//		openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//		startActivityForResult(openMainActivity, _readerResult);
+
+		
 		loadXMLSetting();
 		
-		
 		initGui();
-		//loadRecentEpub(); 
+
 	}
 
 	public static void loadXMLSetting() {
@@ -134,10 +138,7 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		Intent openMainActivity= new Intent(getApplicationContext(), MainActivity.class);
-		openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		startActivityForResult(openMainActivity, _readerResult);
-
+		
 		
 //		adView = (AdView) findViewById(R.id.adViewMain);
 //    	XAds xads = new XAds(adView);

@@ -26,13 +26,22 @@ public class TabLayoutActivity extends TabActivity {
         
         TabHost tabHost = getTabHost();
         
+        
         // Tab for Intro
         TabSpec photospec = tabHost.newTabSpec("Intro");
         // setting Title and Icon for the Tab
         photospec.setIndicator("", getResources().getDrawable(R.drawable.icon_introduce_tab));
         Intent photosIntent = new Intent(this, IntroActivity.class);
         photospec.setContent(photosIntent);
-         
+        
+        // Tab for Main
+        TabSpec mainspec = tabHost.newTabSpec("Main");
+        // setting Title and Icon for the Tab
+        mainspec.setIndicator("", getResources().getDrawable(R.drawable.icon_introduce_tab));
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        mainspec.setContent(mainIntent);
+        //MainActivity.loadXMLSetting();
+        
         // Tab for Setting
         TabSpec songspec = tabHost.newTabSpec("Setting");       
         songspec.setIndicator("", getResources().getDrawable(R.drawable.icon_setting_tab));
@@ -52,17 +61,20 @@ public class TabLayoutActivity extends TabActivity {
         bookstorespec.setContent(bookstoreIntent);
          
         // Adding all TabSpec to TabHost
-        tabHost.addTab(photospec); 
+        tabHost.getTabWidget().setBackgroundResource(R.drawable.footer);
+        tabHost.addTab(photospec);
+        tabHost.addTab(mainspec); 
         tabHost.addTab(songspec); 
         tabHost.addTab(videospec);
         tabHost.addTab(bookstorespec);
+
         
         adView = (AdView) findViewById(R.id.adViewTab);
     	XAds xads = new XAds(adView);
     	xads.loadAds();
         
         UserSettings settings = MainActivity.settings;
-        if (settings.isFirst) {
+        if (settings!=null && settings.isFirst) {
         	settings.isFirst = false;
         	XMLHandler xmlHandler = new XMLHandler();
 			String strXML = xmlHandler.xstream.toXML(settings);

@@ -43,7 +43,7 @@ public class SplashActivity extends Activity {
 					return;
 				}
 				
-				MainActivity.loadXMLSetting();
+				//MainActivity.loadXMLSetting();
 				
 //				xmlHandler = new XMLHandler();
 //				UserSettings settings;

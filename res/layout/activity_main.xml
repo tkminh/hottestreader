@@ -33,65 +33,7 @@
         android:layout_height="wrap_content"
         
         >
-        <TableLayout 
-		    android:id="@+id/tblMenuMainA"
-		    android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:background="@drawable/footer"
-	        android:stretchColumns="*"
-	       >
-	       	
-		        <com.google.ads.AdView
-			        android:id="@+id/adViewMain"
-			        android:layout_width="fill_parent"
-			        android:layout_height="wrap_content"
-			        ads:adSize="BANNER"
-			        ads:adUnitId="a1512d725538489"
-			        ads:loadAdOnCreate="true" >
-				    
-				</com.google.ads.AdView>
-		    
-		    <TableRow 
-		        android:layout_width="fill_parent"
-	        	android:layout_height="wrap_content"
-	        	android:layout_gravity="center_horizontal"
-	        	
-		        >
-		        <ImageButton 
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:scaleType="fitCenter"
-			        android:layout_gravity="center"
-			        android:background="@drawable/btnintroduce"
-			        android:onClick="openIntroduce"
-			        />
-		        <ImageButton
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:scaleType="fitCenter"
-			        android:layout_gravity="center"
-			        android:background="@drawable/btnsetting"
-			        android:onClick="openSetting"
-			        />
-		        <ImageButton 
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:scaleType="fitCenter"
-			        android:layout_gravity="center"
-			        android:background="@drawable/btntheme"
-			        android:onClick="openTheme"
-			        />
-		        <ImageButton 
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:scaleType="fitCenter"
-			        android:layout_gravity="center"
-			        android:background="@drawable/btnbookstore"
-			        android:onClick="openBookstore"
-			        />
-		    </TableRow>
-		    
-		</TableLayout>
+        
         
     </RelativeLayout>
     
