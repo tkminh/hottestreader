@@ -204,6 +204,7 @@ public class Settings extends Activity {
 	}
 	
 	public void loadCurrentSetting() {
+		if (settings == null) return;
 		// setting font size
 		if (settings.fontSize<10) {
 			settings.fontSize=10;

@@ -46,16 +46,17 @@ public class ThemeSettings extends Activity {
 	}
 	
 	public void loadCurrentSetting() {
+		if (settings == null) return;
 		ImageView vv = (ImageView)findViewById(R.id.imgClassicLight);
 		
-		if (settings.theme==R.drawable.classic_light_active) {
+		if (settings.theme==Theme.classic_light) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_light_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_light));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgClassicPaper);
-		if (settings.theme==R.drawable.classic_paper_active) {
+		if (settings.theme==Theme.classic_paper) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_paper_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_paper));
@@ -63,7 +64,7 @@ public class ThemeSettings extends Activity {
 		
 		
 		vv = (ImageView)findViewById(R.id.imgClassicWood);
-		if (settings.theme==R.drawable.classic_wood_active) {
+		if (settings.theme==Theme.classic_wood) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_wood_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_wood));
@@ -71,7 +72,7 @@ public class ThemeSettings extends Activity {
 		
 		
 		vv = (ImageView)findViewById(R.id.dmabstract);
-		if (settings.theme==R.drawable.dmabstract_active) {
+		if (settings.theme==Theme.dmabstract) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.dmabstract_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.dmabstract));
@@ -79,63 +80,63 @@ public class ThemeSettings extends Activity {
 		
 		
 		vv = (ImageView)findViewById(R.id.imgGreenCity);
-		if (settings.theme==R.drawable.green_city_active) {
+		if (settings.theme==Theme.green_city) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.green_city_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.green_city));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgAquarium);
-		if (settings.theme==R.drawable.aquarium_active) {
+		if (settings.theme==Theme.aquarium) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.aquarium_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.aquarium));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgBeachVacation);
-		if (settings.theme==R.drawable.beach_vacation_active) {
+		if (settings.theme==Theme.beach_vacation) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.beach_vacation_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.beach_vacation));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgBlueSky);
-		if (settings.theme==R.drawable.blue_sky_active) {
+		if (settings.theme==Theme.blue_sky) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.blue_sky_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.blue_sky));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgClassicDark);
-		if (settings.theme==R.drawable.classic_dark_active) {
+		if (settings.theme==Theme.classic_dark) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_dark_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.classic_dark));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgDailyNews);
-		if (settings.theme==R.drawable.daily_news_active) {
+		if (settings.theme==Theme.daily_news) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.daily_news_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.daily_news));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgGhostHouse);
-		if (settings.theme==R.drawable.ghost_house_active) {
+		if (settings.theme==Theme.ghost_house) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.ghost_house_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.ghost_house));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgOldFashioned);
-		if (settings.theme==R.drawable.old_fashioned_active) {
+		if (settings.theme==Theme.old_fashioned) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.old_fashioned_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.old_fashioned));
 		}
 		
 		vv = (ImageView)findViewById(R.id.imgSnowMountain);
-		if (settings.theme==R.drawable.snow_mountain_active) {
+		if (settings.theme==Theme.snow_mountain) {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.snow_mountain_active));
 		} else {
 			vv.setImageDrawable(getResources().getDrawable(R.drawable.snow_mountain));

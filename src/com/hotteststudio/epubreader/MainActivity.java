@@ -70,6 +70,14 @@ public class MainActivity extends Activity {
 		
 		XCommon.strictmodePolicy();
 		
+		loadXMLSetting();
+		
+		
+		initGui();
+		//loadRecentEpub(); 
+	}
+
+	public static void loadXMLSetting() {
 		// xu li loading xml
 		xmlHandler = new XMLHandler();
 		xmlContent = getXMLSettings();
@@ -79,10 +87,6 @@ public class MainActivity extends Activity {
 		} else {
 			settings = new UserSettings(); 
 		}
-		
-		
-		initGui();
-		//loadRecentEpub(); 
 	}
 
 	public void test() {
@@ -135,9 +139,9 @@ public class MainActivity extends Activity {
 		startActivityForResult(openMainActivity, _readerResult);
 
 		
-		adView = (AdView) findViewById(R.id.adViewMain);
-    	XAds xads = new XAds(adView);
-    	xads.loadAds();
+//		adView = (AdView) findViewById(R.id.adViewMain);
+//    	XAds xads = new XAds(adView);
+//    	xads.loadAds();
 	}
 	
 	public float calculateAspectRatio() {
@@ -313,7 +317,7 @@ public class MainActivity extends Activity {
         return null;
     }
 	
-	public UserSettings loadXML(String xml) {
+	public static UserSettings loadXML(String xml) {
 		try {
 			return (UserSettings)xmlHandler.xstream.fromXML(xml);
 		} catch (Exception e) {

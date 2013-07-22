@@ -43,30 +43,33 @@ public class SplashActivity extends Activity {
 					return;
 				}
 				
-				xmlHandler = new XMLHandler();
-				UserSettings settings;
-				String xmlContent = MainActivity.getXMLSettings();
-				if (xmlContent==null) {
-					Toast.makeText(getApplicationContext(), "Please insert sdcard !!", Toast.LENGTH_LONG).show();
-					finish();
-					return;
-				}
- 				if (xmlContent.length()>1) {
-					settings = loadXML(xmlContent);
-				} else {
-					settings = new UserSettings(); 
-				}
+				MainActivity.loadXMLSetting();
 				
-				if (settings.isFirst) {
-					settings.isFirst = false;
-					String strXML = xmlHandler.xstream.toXML(settings);
-					XCommon.saveTextToFile(XCommon.XML_FILE, strXML, false);
-					
-					startActivity(new Intent(getActivityContext(), IntroActivity.class));
-					finish();
-					return;
-				}
-				startActivity(new Intent(getActivityContext(), MainActivity.class));
+//				xmlHandler = new XMLHandler();
+//				UserSettings settings;
+//				String xmlContent = MainActivity.getXMLSettings();
+//				if (xmlContent==null) {
+//					Toast.makeText(getApplicationContext(), "Please insert sdcard !!", Toast.LENGTH_LONG).show();
+//					finish();
+//					return;
+//				}
+// 				if (xmlContent.length()>1) {
+//					settings = loadXML(xmlContent);
+//				} else {
+//					settings = new UserSettings(); 
+//				}
+//				
+//				if (settings.isFirst) {
+//					settings.isFirst = false;
+//					String strXML = xmlHandler.xstream.toXML(settings);
+//					XCommon.saveTextToFile(XCommon.XML_FILE, strXML, false);
+//					
+//					startActivity(new Intent(getActivityContext(), IntroActivity.class));
+//					finish();
+//					return;
+//				}
+				//startActivity(new Intent(getActivityContext(), MainActivity.class));
+				startActivity(new Intent(getActivityContext(), TabLayoutActivity.class));
 				finish();
 			}
 		}, 3000);

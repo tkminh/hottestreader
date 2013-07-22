@@ -23,10 +23,6 @@ public class IntroActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		if (MainActivity.settings.isFirst) {
-			startActivity(new Intent(getApplicationContext(), MainActivity.class));
-			finish();
-		}
 		super.onBackPressed();
 	}
 	
