@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 	
 	public int height; 
 	public int width;
-	
+	//public static int load = 0;
 	
 	private static final int _ReqChooseFile = 0;
 	public static boolean isShowBookDetail = false;
@@ -70,9 +70,12 @@ public class MainActivity extends Activity {
 		
 		XCommon.strictmodePolicy();
 		
-//		Intent openMainActivity= new Intent(getApplicationContext(), MainActivity.class);
-//		openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//		startActivityForResult(openMainActivity, _readerResult);
+//		if (load==0) {
+//			Intent openMainActivity= new Intent(getApplicationContext(), MainActivity.class);
+//			openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//			startActivityForResult(openMainActivity, _readerResult);
+//			load++;
+//		}
 
 		
 		loadXMLSetting();
@@ -290,6 +293,10 @@ public class MainActivity extends Activity {
             		e.printStackTrace();
             	}
             break;
+            default:
+            	reloadListBook();
+        		Log.d("Reload sach","Reload");
+        		break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

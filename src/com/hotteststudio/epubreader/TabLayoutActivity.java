@@ -25,7 +25,7 @@ public class TabLayoutActivity extends TabActivity {
         XCommon.strictmodePolicy();
         
         TabHost tabHost = getTabHost();
-        
+       
         
         // Tab for Intro
         TabSpec photospec = tabHost.newTabSpec("Intro");
@@ -68,6 +68,7 @@ public class TabLayoutActivity extends TabActivity {
         tabHost.addTab(videospec);
         tabHost.addTab(bookstorespec);
 
+        
         
         adView = (AdView) findViewById(R.id.adViewTab);
     	XAds xads = new XAds(adView);
