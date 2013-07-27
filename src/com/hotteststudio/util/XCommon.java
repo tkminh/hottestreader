@@ -91,7 +91,7 @@ public class XCommon {
 	
 	public static void openBrowser(Context c, String url) {
 		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(Default.URL_BOOK));
+		i.setData(Uri.parse(url));
 		c.startActivity(i);
 	}
 	
