@@ -37,7 +37,7 @@ public class TabLayoutActivity extends TabActivity {
         // Tab for Main
         TabSpec mainspec = tabHost.newTabSpec("Main");
         // setting Title and Icon for the Tab
-        mainspec.setIndicator("", getResources().getDrawable(R.drawable.icon_introduce_tab));
+        mainspec.setIndicator("", getResources().getDrawable(R.drawable.icon_library_tab));
         Intent mainIntent = new Intent(this, MainActivity.class);
         mainspec.setContent(mainIntent);
         //MainActivity.loadXMLSetting();

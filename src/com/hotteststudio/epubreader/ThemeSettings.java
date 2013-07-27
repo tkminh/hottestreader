@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,7 +43,7 @@ public class ThemeSettings extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		save();
+		//save();
 		super.onBackPressed();
 	}
 	
@@ -150,9 +152,29 @@ public class ThemeSettings extends Activity {
 		height = metrics.heightPixels;
 		width = metrics.widthPixels;
 		
-//		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerThemeSetting);
-//		scaleViewR(headerThemeSetting,R.drawable.header);
-//		
+		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerThemeSetting);
+		scaleViewR(headerThemeSetting,R.drawable.header);
+		
+		final ImageView btnBrowse = (ImageView)findViewById(R.id.btnThemeSetting);
+		btnBrowse.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                switch (arg1.getAction()) {
+	                case MotionEvent.ACTION_DOWN: {
+	                	btnBrowse.setImageDrawable(getResources().getDrawable(R.drawable.btn_save_select));
+	                    break;
+	                }
+	                case MotionEvent.ACTION_UP:{
+	                	btnBrowse.setImageDrawable(getResources().getDrawable(R.drawable.btn_save));
+	                	save();
+	                    break;
+	                }
+	                
+                }
+                return true;
+            }
+        });
+		
 //		ImageView advThemeSetting = (ImageView)findViewById(R.id.imgAdvThemeSetting);
 //		scaleViewR(advThemeSetting,R.drawable.adv1);
 //		
@@ -355,5 +377,9 @@ public class ThemeSettings extends Activity {
 	
 	public void backToMainActivity(View v) {
 		finish();
+	}
+	
+	public void savethis(View v) {
+		save();
 	}
 }

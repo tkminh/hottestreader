@@ -5,8 +5,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -98,6 +100,26 @@ public class Settings extends Activity {
 		
 		rb_screenPortrait = (RadioButton)findViewById(R.id.screenPortrait);
 		rb_screenLandscape = (RadioButton)findViewById(R.id.screenLandscape);
+		
+		final ImageView btnBrowse = (ImageView)findViewById(R.id.btnSaveSetting);
+		btnBrowse.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                switch (arg1.getAction()) {
+	                case MotionEvent.ACTION_DOWN: {
+	                	btnBrowse.setImageDrawable(getResources().getDrawable(R.drawable.btn_save_select));
+	                    break;
+	                }
+	                case MotionEvent.ACTION_UP:{
+	                	btnBrowse.setImageDrawable(getResources().getDrawable(R.drawable.btn_save));
+	                	save();
+	                    break;
+	                }
+	                
+                }
+                return true;
+            }
+        });
 	}
 	
 	public void setUpMultiScreen() {
@@ -107,9 +129,9 @@ public class Settings extends Activity {
 		height = metrics.heightPixels;
 		width = metrics.widthPixels;
 		
-//		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerSetting);
-//		scaleViewR(headerThemeSetting,R.drawable.header);
-//		
+		ImageView headerThemeSetting = (ImageView)findViewById(R.id.headerSetting);
+		scaleViewR(headerThemeSetting,R.drawable.header);
+		
 //		ImageView imgAdvSetting = (ImageView)findViewById(R.id.imgAdvSetting);
 //		scaleViewR(imgAdvSetting,R.drawable.adv2);
 //		
@@ -271,7 +293,7 @@ public class Settings extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		save();
+		//save();
 		super.onBackPressed();
 	}
 	
@@ -294,5 +316,9 @@ public class Settings extends Activity {
 	
 	public void backToMainActivity(View v) {
 		finish();
+	}
+	
+	public void savethis(View v) {
+		save();
 	}
 }

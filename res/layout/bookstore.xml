@@ -15,10 +15,10 @@
         >
 
         <ImageView
-            android:id="@+id/headerMainIntro"
+            android:id="@+id/headerMBookstore"
             android:layout_alignParentTop="true"
             android:adjustViewBounds="true"
-            android:background="@drawable/sub_header"
+            android:background="@drawable/header"
             android:scaleType="fitXY"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
