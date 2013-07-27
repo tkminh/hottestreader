@@ -2,7 +2,9 @@ package com.hotteststudio.epubreader;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -24,7 +26,7 @@ public class TabLayoutActivity extends TabActivity {
         
         XCommon.strictmodePolicy();
         
-        TabHost tabHost = getTabHost();
+        final TabHost tabHost = getTabHost();
        
         
         // Tab for Intro
@@ -67,6 +69,18 @@ public class TabLayoutActivity extends TabActivity {
         tabHost.addTab(songspec); 
         tabHost.addTab(videospec);
         tabHost.addTab(bookstorespec);
+        
+//        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener(){
+//    	  @Override
+//    	  public void onTabChanged(String tabId) {
+//    	    int tab = tabHost.getCurrentTab();
+//    	    tabHost.getTabWidget().getChildAt(tab).setBackgroundColor(Color.CYAN);
+//    	  }
+//    	});
+        
+        for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+        	tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#000000ff"));
+        }
 
         
         

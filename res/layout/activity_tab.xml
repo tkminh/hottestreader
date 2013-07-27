@@ -2,6 +2,7 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:id="@android:id/tabhost"
+    
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <RelativeLayout
@@ -10,6 +11,7 @@
         
         <TabWidget
             android:id="@android:id/tabs"
+            android:background="@drawable/footer"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" 
             android:layout_alignParentBottom="true"/>
